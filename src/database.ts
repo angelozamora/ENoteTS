@@ -11,7 +11,7 @@ export async function startConnection(){
   console.log(
     `
       **************************************
-      ║          MongoDB connect           ║
+      ║          MongoDB-ATLAS connect           ║
       **************************************
       `
   )
