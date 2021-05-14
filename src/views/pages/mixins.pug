@@ -1,0 +1,4 @@
+mixin errors(errors , field)
+  if( errors && errors[field])
+    span.input-error-text=errors[field].message
+  

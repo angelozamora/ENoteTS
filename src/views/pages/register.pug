@@ -1,0 +1,39 @@
+extends  ../layout/layout
+
+block main 
+  include mixins
+  div#register-div.row.mx-0
+    div#register-container.col-10.col-xl-8.px-0
+      div.row.mx-0
+        div#register-add.col-lg-6  
+            h1 Image
+        div#register-content.col-12.col-lg-6
+          h1 Sign Up
+          form( action="/register"  method="POST"  id="form-register" class ="row mx-0 ")
+            div.mb-4.px-0
+              label(for="fullname") FULL NAME
+              input(type="text" name="fullname" id="fullname" placeholder="Enter your fullname" class=errors && errors.fullname ? "input-error" : "").input-text 
+
+              +errors(errors , "fullname")
+
+            div.mb-4.px-0
+              label(for="email") EMAIL
+              input(type="text" name="email" id="email"  placeholder="Enter your email" 
+              class=errors && errors.email ? "input-error" : "").input-text
+              +errors(errors , "email")
+
+            div.mb-4.px-0
+              label(for="password") PASSWORD
+              input(type="password" name="password" id="password"  placeholder="Enter your password" class=errors && errors.password ? "input-error" : "").input-text 
+              +errors(errors , "password")
+
+            div.mb-4.px-0
+              label(for="check-option"  id="check-cont" class="c-plomo") I agree all statemens in 
+                  a(href="" )  terms of service 
+                  input(type="checkbox" id="check-option") 
+                  span.checkmark 
+                  
+            div.mb-2.px-0#register-option
+              a(href="/login" class="my-2"): span I'm already member
+              button(type="submit" class="btn my-2")  Sign Up
+        

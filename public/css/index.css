@@ -1,0 +1,363 @@
+* {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #67dbca;
+    --primary-color-dark: #63bdaf;
+    --text-color: #ffffff;
+    --text-color-dark: #0f0f0f;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* FORM INPUT */
+
+.input-text {
+    display: block;
+    width: 100%;
+    padding: .375rem .4rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgb(167, 167, 167);
+    height: 32px;
+}
+
+.input-error {
+    border-bottom: 1px solid rgb(240, 43, 43);
+}
+
+.input-error-text {
+    font-size: 0.9rem;
+    color: rgb(240, 43, 43);
+}
+
+.input-text::placeholder {
+    color: rgb(167, 167, 167);
+}
+
+.input-text:focus {
+    outline: none;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+
+/* FORM CHECK*/
+
+#check-cont {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.c-plomo {
+    color: rgb(167, 167, 167)
+}
+
+
+/*ocultamos el input por defecto*/
+
+#check-option {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 4px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/* Al pasar el mouse encima, lo ponemos gris  */
+
+#check-cont:hover input~.checkmark {
+    background-color: #67dbca93;
+}
+
+
+/* Cuando el checkbox esta checkd, los ponemos rosa */
+
+#check-cont input:checked~.checkmark {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+
+/* mostramos el marcador al seleccionar */
+
+#check-cont input:checked~.checkmark::after {
+    display: block;
+}
+
+
+/********* HEADER *******/
+
+header {
+    background-color: #1C2833;
+    position: sticky;
+    height: 60px;
+}
+
+.a-link {
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.a-link:hover {
+    color: var(--primary-color)
+}
+
+
+/************ VISTA LOGIN ***************/
+
+.login-add-container {
+    background-color: aqua;
+}
+
+.login-container {
+    min-height: 100vh;
+    background-color: #1C2833;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-content {
+    width: 76%;
+    min-width: 250px;
+}
+
+#title-login {
+    color: var(--text-color);
+}
+
+#form-login {
+    margin-top: 40px;
+    color: var(--text-color);
+}
+
+.span-error {
+    background-color: #eb192a;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px 5px;
+    border-radius: 10px;
+}
+
+#form-login label {
+    font-size: 0.9rem;
+}
+
+#forg-pass {
+    font-size: 0.9rem;
+    text-align: end;
+    color: var(--text-color);
+}
+
+#forg-pass:hover {
+    color: var(--primary-color);
+}
+
+#login-option {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#login-option button {
+    background-color: var(--primary-color);
+    padding: 0.55rem 1.8rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+#login-option button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+#login-create {
+    padding: 0;
+    margin-top: 40px;
+}
+
+#login-create li {
+    font-size: 0.9rem;
+}
+
+#login-create li a {
+    text-align: center;
+    margin: 8px 0;
+    color: var(--primary-color);
+}
+
+#login-create li a:hover {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+
+/************ VISTA REGISTER ***************/
+
+#register-div {
+    /* background-color: #F6F9FC; */
+    background-color: #8260d8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+#register-container {
+    background-color: brown;
+}
+
+#register-add {
+    background-color: var(--primary-color);
+}
+
+#register-content {
+    background-color: #1C2833;
+    padding: 50px 55px;
+}
+
+#register-content h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+#form-register {
+    margin-top: 35px;
+    color: var(--text-color);
+}
+
+#form-register label {
+    font-size: 0.9rem;
+}
+
+#check-cont a {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--primary-color);
+    opacity: 0.7;
+}
+
+#check-cont a:hover {
+    opacity: 1;
+}
+
+#register-option {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#register-option a {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+#register-option a span {
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+#register-option a:hover {
+    opacity: 1;
+}
+
+#register-option button {
+    background-color: var(--primary-color);
+    padding: 0.55rem 1.8rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+#register-option button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+
+/************* VISTA HOME **************/
+
+main {
+    min-height: calc(100vh - 60px);
+    background-color: #67dbca;
+}
+
+#div-home {
+    padding: 20px;
+}
+
+#div-carpetas {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    background-color: #63bdaf;
+    justify-content: center;
+}
+
+.carpeta {
+    width: 150px;
+    height: 90px;
+    background-color: #8260d8;
+    margin: 10px 15px;
+}

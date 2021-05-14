@@ -1,0 +1,35 @@
+extends ../layout/layout
+block main 
+  div#login-div 
+    div.row.mx-0
+      div.col-12.col-md-6.col-xl-8.login-add-container
+      div.col-12.col-md-6.col-xl-4.login-container
+        div#login-content
+          h1.text-center#title-login Login 
+          
+          form(action="/login"  method="POST" id="form-login")
+            if messages.errors
+              span.span-error=messages.errors
+            div.mb-4   
+              label EMAIL 
+              input(type="text" class=" input-text" name="email" placeholder="Enter your email")
+
+            div.mb-4   
+              label PASSWORD
+              input(type="password" class=" input-text" name="password" placeholder="Enter your password")
+
+
+            div.mb-3.px-0.row.mx-0
+              label(for="check-option"  id="check-cont" class="col-6") Rember Me 
+                  input(type="checkbox" id="check-option") 
+                  span.checkmark 
+
+              a(href="/password" class="col-6" id="forg-pass")   Forgot password?   
+            
+            div.mb-3#login-option 
+              button(class="btn btn-primary " type="submit") Sign In 
+
+            ul.mb-3#login-create 
+              li Don't have an account? 
+                a(href="/register")  Creat your account
+            
