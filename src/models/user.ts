@@ -39,25 +39,6 @@ const UserSchema  = new Schema<IUser>({
 
 })
 
-UserSchema.statics.authenticate = async function( email , password) : Promise<any>{
-  try{
-    const user  = await model<IUser>("User").findOne({email : email});
-
-    if(user){
-      const res = await bcrypt.compareSync(password, user.password);
-  
-      if(res){
-        return user;
-      }
-    }else{
-      return null;
-    }
-    
-  }catch(err){
-    return err;
-  }
-  
-}
 
 UserSchema.methods.comparePassword = async function(password : string ) : Promise<Boolean>{  
   const hash = Buffer.from(encodeURIComponent(password)).toString('base64');

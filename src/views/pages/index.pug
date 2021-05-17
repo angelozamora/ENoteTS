@@ -7,19 +7,20 @@ block  footer
   include ../templates/footer 
 
 block main 
-  .container-lg#div-home.bg-danger 
-    h1.text-center.mt-3 Welcome Angelo 
-    .row 
-      .col-10.mx-auto.d-flex.justify-content.end 
-        button(class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") + NEW
-      .col-10#div-carpetas 
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
+  .container-lg#home-container 
+    h1.home-titulo Welcome Angelo 
+    .row.my-4.mx-0 
+      .col-11.mx-auto.d-flex.justify-content-end 
+        button(class="btn btn-estandar " type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> NEW
+      .col-11#carpeta-container
+        a(class="carpeta" href="#")
+          span.carpeta-titulo MONGO DB
+        a(class="carpeta" href="#")
+        a(class="carpeta" href="#")
+        a(class="carpeta" href="#")
+        a(class="carpeta" href="#")
+        a(class="carpeta" href="#")
+        a(class="carpeta" href="#")
 
   
     <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

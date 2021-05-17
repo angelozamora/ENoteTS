@@ -6,9 +6,11 @@ const router = Router();
 
 
 router.get('/', [getUser , isLoged] ,  (req : any , res : any ) => {
-   console.log('INDEX')
    res.render('pages/index') 
 })
+
+
+
 
 
 export default router;

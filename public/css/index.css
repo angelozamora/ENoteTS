@@ -8,6 +8,7 @@
 :root {
     --primary-color: #67dbca;
     --primary-color-dark: #63bdaf;
+    --secondary-color: #1C2833;
     --text-color: #ffffff;
     --text-color-dark: #0f0f0f;
 }
@@ -21,8 +22,20 @@ a {
     text-decoration: none;
 }
 
+.btn-estandar {
+    background-color: var(--primary-color);
+    padding: .38rem .85rem;
+    color: white;
+    font-weight: 600;
+}
 
-/* FORM INPUT */
+.btn-estandar:hover {
+    background-color: var(--primary-color-dark);
+    color: white;
+}
+
+
+/************************ FORM INPUT ************************/
 
 .input-text {
     display: block;
@@ -57,7 +70,7 @@ a {
 }
 
 
-/* FORM CHECK*/
+/************************ FORM CHECK ************************/
 
 #check-cont {
     display: block;
@@ -139,12 +152,32 @@ a {
 }
 
 
-/********* HEADER *******/
+/************************  HEADER ************************/
 
 header {
-    background-color: #1C2833;
+    background-color: var(--secondary-color);
     position: sticky;
-    height: 60px;
+    height: 63px;
+    border-bottom: 1px solid rgba(172, 172, 172, 0.685);
+    top: 0;
+    /* box-shadow: 0 1px 4px rgba(172, 172, 172, 0.685); */
+}
+
+.name-app {
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.name-app2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.navbar {
+    background-color: var(--secondary-color);
+    /* border-bottom: 1px solid rgba(172, 172, 172, 0.685); */
 }
 
 .a-link {
@@ -160,7 +193,29 @@ header {
 }
 
 
-/************ VISTA LOGIN ***************/
+/************************* FOOTER ****************************/
+
+footer {
+    background-color: #1C2833;
+    border-top: 1px solid rgba(172, 172, 172, 0.685);
+    height: 40px;
+}
+
+.footer-container {
+    height: 100%;
+    padding: 10px;
+}
+
+.footer-info {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+
+/************************ VISTA LOGIN ************************/
 
 .login-add-container {
     background-color: aqua;
@@ -168,7 +223,7 @@ header {
 
 .login-container {
     min-height: 100vh;
-    background-color: #1C2833;
+    background-color: var(--secondary-color);
     padding: 15px;
     display: flex;
     align-items: center;
@@ -250,7 +305,7 @@ header {
 }
 
 
-/************ VISTA REGISTER ***************/
+/************************ VISTA REGISTER ***************************/
 
 #register-div {
     /* background-color: #F6F9FC; */
@@ -339,25 +394,48 @@ header {
 /************* VISTA HOME **************/
 
 main {
-    min-height: calc(100vh - 60px);
-    background-color: #67dbca;
+    min-height: calc(100vh - 103px);
+    background-color: var(--secondary-color);
 }
 
-#div-home {
+#home-container {
     padding: 20px;
 }
 
-#div-carpetas {
+.home-titulo {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+    font-size: 3.2rem;
+}
+
+#carpeta-container {
     display: flex;
     flex-wrap: wrap;
     margin: auto;
-    background-color: #63bdaf;
+    /* background-color: #63bdaf; */
     justify-content: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .carpeta {
-    width: 150px;
-    height: 90px;
+    width: 160px;
+    height: 100px;
     background-color: #8260d8;
     margin: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carpeta-titulo {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0 10px;
+    font-weight: bold;
+    color: white;
 }
