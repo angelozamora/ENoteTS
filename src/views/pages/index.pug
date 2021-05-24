@@ -13,14 +13,10 @@ block main
       .col-11.mx-auto.d-flex.justify-content-end 
         button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
       .col-11#carpeta-container
-        a(class="carpeta" href="#")
-          span.carpeta-titulo MONGO DB
-        a(class="carpeta" href="#")
-        a(class="carpeta" href="#")
-        a(class="carpeta" href="#")
-        a(class="carpeta" href="#")
-        a(class="carpeta" href="#")
-        a(class="carpeta" href="#")
+        each folder in folders
+          a(class="carpeta" href="#")
+            span.carpeta-titulo= folder.name
+
 
   
     <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,11 +26,11 @@ block main
             <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
             <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body px-4">
             form(action="/note/create/folder" method="POST") 
               div.mb-4  
                 label(for="name" class="form-label text-white") Folder name:
-                input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control")
+                input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control" required)
               .mb-3.d-flex.justify-content-end 
                 <button type="submit" class="button button-primary">Save </button>
 

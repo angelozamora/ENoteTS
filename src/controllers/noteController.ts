@@ -18,19 +18,17 @@ class NoteController{
       res.redirect('/')
 
     }catch(err){
-      req.flash('success' , 'Sorry, an error happened')
+      if(err.name === "ValidationError"){
+        req.flash('success' , 'Email '+err.errors.name.message)
+      }else{
+        req.flash('success' , 'Sorry, an error happened')
+      }
       res.redirect('back')
     }
     
   }
 
-  public getAllFolder = async function (req : Request, res:Response , next:NextFunction){
-    try{
 
-    }catch(err){
-      
-    }
-  } 
 
 }
 
