@@ -8,7 +8,8 @@
 :root {
     --primary-color: #67dbca;
     --primary-color-dark: #63bdaf;
-    --secondary-color: #1C2833;
+    --secondary-color: #181818;
+    --secondary-color-dark: #181818;
     --text-color: #ffffff;
     --text-color-dark: #0f0f0f;
 }
@@ -22,16 +23,58 @@ a {
     text-decoration: none;
 }
 
-.btn-estandar {
-    background-color: var(--primary-color);
+
+/********** BUTTON ***************/
+
+.button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    line-height: 1.5;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    border-radius: .25rem;
     padding: .38rem .85rem;
-    color: white;
     font-weight: 600;
 }
 
-.btn-estandar:hover {
+.button-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.button-primary:hover {
     background-color: var(--primary-color-dark);
     color: white;
+}
+
+.button-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.button-secondary:hover {
+    background-color: var(--secondary-color-dark);
+    color: white;
+}
+
+
+/******* MODAL *******/
+
+.modal-dark {
+    background-color: var(--secondary-color);
+}
+
+.btn-close-dark {
+    border-radius: 100%;
+    background-color: #90909083;
+    padding: 50px;
+    /* background-color: #90909083 !important; */
+}
+
+.btn-close-dark:hover {
+    background-color: #b3b3b383;
 }
 
 
@@ -196,7 +239,7 @@ header {
 /************************* FOOTER ****************************/
 
 footer {
-    background-color: #1C2833;
+    background-color: var(--secondary-color);
     border-top: 1px solid rgba(172, 172, 172, 0.685);
     height: 40px;
 }
@@ -327,7 +370,7 @@ footer {
 }
 
 #register-content {
-    background-color: #1C2833;
+    background-color: var(--secondary-color);
     padding: 50px 55px;
 }
 
@@ -438,4 +481,12 @@ main {
     padding: 0 10px;
     font-weight: bold;
     color: white;
+}
+
+@media (max-width: 991px) {
+    /************* VISTA HOME **************/
+    .carpeta {
+        width: 195px;
+        height: 130px;
+    }
 }

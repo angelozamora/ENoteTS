@@ -1,7 +1,7 @@
 extends  ../layout/layout
 
 block main 
-  include mixins
+  include ../pages/mixins
   div#register-div.row.mx-0
     div#register-container.col-10.col-xl-8.px-0
       div.row.mx-0
@@ -9,7 +9,7 @@ block main
             h1 Image
         div#register-content.col-12.col-lg-6
           h1 Sign Up
-          form( action="/register"  method="POST"  id="form-register" class ="row mx-0 ")
+          form( action="/auth/register"  method="POST"  id="form-register" class ="row mx-0 ")
             div.mb-4.px-0
               label(for="fullname") FULL NAME
               input(type="text" name="fullname" id="fullname" placeholder="Enter your fullname" class=errors && errors.fullname ? "input-error" : "").input-text 
@@ -34,6 +34,6 @@ block main
                   span.checkmark 
                   
             div.mb-2.px-0#register-option
-              a(href="/login" class="my-2"): span I'm already member
-              button(type="submit" class="btn my-2")  Sign Up
+              a(href="/auth/login" class="my-2"): span I'm already member
+              button(type="submit" class="button my-2")  Sign Up
         

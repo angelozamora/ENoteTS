@@ -7,7 +7,7 @@ block main
         div#login-content
           h1.text-center#title-login Login 
           
-          form(action="/login"  method="POST" id="form-login")
+          form(action="/auth/login"  method="POST" id="form-login")
             if messages.errors
               span.span-error=messages.errors
             div.mb-4   
@@ -24,12 +24,12 @@ block main
                   input(type="checkbox" id="check-option" name="remember") 
                   span.checkmark 
 
-              a(href="/password" class="col-6" id="forg-pass")   Forgot password?   
+              a(href="/auth/recover/password" class="col-6" id="forg-pass")   Forgot password?   
             
             div.mb-3#login-option 
-              button(class="btn btn-primary " type="submit") Sign In 
+              button(class="button button-primary " type="submit") Sign In 
 
             ul.mb-3#login-create 
               li Don't have an account? 
-                a(href="/register")  Creat your account
+                a(href="/auth/register")  Creat your account
             

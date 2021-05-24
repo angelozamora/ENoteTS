@@ -25,8 +25,6 @@ const UserSchema  = new Schema<IUser>({
       },
       message : "is already taken"
     }
-
-
   },
   password : {
     type : String,
@@ -37,7 +35,7 @@ const UserSchema  = new Schema<IUser>({
     required : [true , 'is required']
   }
 
-})
+},{ timestamps: true})
 
 
 UserSchema.methods.comparePassword = async function(password : string ) : Promise<Boolean>{  

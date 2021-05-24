@@ -11,7 +11,7 @@ block main
     h1.home-titulo Welcome Angelo 
     .row.my-4.mx-0 
       .col-11.mx-auto.d-flex.justify-content-end 
-        button(class="btn btn-estandar " type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> NEW
+        button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
       .col-11#carpeta-container
         a(class="carpeta" href="#")
           span.carpeta-titulo MONGO DB
@@ -25,18 +25,21 @@ block main
   
     <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content modal-dark">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+            <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-          
+            form(action="/note/create/folder" method="POST") 
+              div.mb-4  
+                label(for="name" class="form-label text-white") Folder name:
+                input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control")
+              .mb-3.d-flex.justify-content-end 
+                <button type="submit" class="button button-primary">Save </button>
+
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+            
         </div>
       </div>
     </div>

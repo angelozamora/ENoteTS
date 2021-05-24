@@ -56,7 +56,7 @@ class AuthController{
         fullname : req.body.fullname
       })
       
-      res.redirect('/login');
+      res.redirect('/auth/login');
   
   
     }catch(err){
@@ -74,7 +74,7 @@ class AuthController{
     res.clearCookie('express:sess.sig')
     res.clearCookie('express:sess')
       
-    res.redirect('/login')
+    res.redirect('/auth/login')
   }
 }
 

@@ -6,13 +6,17 @@ import { isLoged } from '../midleware/isLoged';
 
 const router = Router();
 
-router.get('/login' , AuthController.getLogin)
-router.post('/login' ,[ isEmail], AuthController.postLogin);
+router.get('/auth/login' , AuthController.getLogin)
+router.post('/auth/login' ,[ isEmail], AuthController.postLogin);
 
-router.get('/register', AuthController.getRegister)
-router.post('/register' , AuthController.postRegister)
+router.get('/auth/register', AuthController.getRegister)
+router.post('/auth/register' , AuthController.postRegister)
 
-router.get('/logout' ,[getUser , isLoged], AuthController.postLogout)
+// router.get('/auth/recover/passwordt' )
+
+router.get('/auth/logout' ,[getUser , isLoged], AuthController.postLogout)
+
+
 
 
 

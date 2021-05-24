@@ -3,6 +3,7 @@ import path from "path";
 import { resolve } from "path";
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
+import noteRouter from './routes/note'
 import * as dotenv from "dotenv";
 import cookieSession from 'cookie-session';
 import flash from 'express-flash';
@@ -35,6 +36,7 @@ export async function startServer(){
   /**********ROUTER***********/
   app.use('/' , authRouter)
   app.use('/' , indexRouter)
+  app.use('/' , noteRouter)
 
   app.listen(app.get('PORT') , ()=>{
     console.log(
