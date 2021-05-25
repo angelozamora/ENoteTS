@@ -11,7 +11,7 @@ const router:Router = Router();
 router.post('/note/create/folder',[getUser , isLoged], NoteController.postFolder)
 
 
-router.get('/note/all-notes/:id', )
+router.get('/note/all-notes/:id', NoteController.getAllNotes)
 router.get('/note/detail/:id', )
 router.get('/note/create', )
 router.post('/note/create', )

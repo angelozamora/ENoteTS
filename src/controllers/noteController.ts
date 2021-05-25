@@ -27,6 +27,18 @@ class NoteController{
     }
     
   }
+  
+  public getAllNotes = async function(req : Request, res:Response , next:NextFunction){
+    try{
+
+      const folderId = req.params.id;
+      const notes = await FolderModel.find({folder_id : folderId})
+      res.render('pages/allNotes' , {notes})
+    }catch(err){
+      next()
+    }
+
+  }
 
 
 
