@@ -1,5 +1,3 @@
-let menuResOp = document.querySelectorAll('.menu-responsive-option');
-
 function menuResponsive() {
 
     let sidebar = document.getElementById('sidebar')

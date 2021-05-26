@@ -10,7 +10,8 @@
     --primary-color-dark: #63bdaf;
     --secondary-color: #181818;
     --secondary-color-dark: #181818;
-    --text-color: #ffffff;
+    --terciary-color: #8260d8;
+    --text-color: #dbdbdb;
     --text-color-dark: #0f0f0f;
 }
 
@@ -179,6 +180,29 @@ main {
 }
 
 
+/************* TABLE ***************/
+
+.table-tr-hover:hover {
+    cursor: pointer;
+    background-color: rgba(168, 168, 168, 0.13);
+    color: var(--text-color) !important;
+}
+
+.table-th,
+.table-td {
+    padding: 12px 0 !important;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ebebeb70;
+}
+
+.table-td-icon {
+    margin-left: 15px;
+    margin-right: 10px;
+    color: var(--terciary-color);
+    font-size: 1.2rem;
+}
+
+
 /************************ FORM INPUT ************************/
 
 .input-text {
@@ -329,7 +353,7 @@ header {
     display: block;
     padding: .5rem 1rem;
     text-decoration: none;
-    color: white;
+    /* color: white; */
     font-weight: 600;
 }
 
@@ -543,13 +567,20 @@ footer {
 }
 
 .content-title {
-    border-bottom: 1px solid #F1F3F4;
+    border-bottom: 1px solid #ebebeb8a;
+    padding-bottom: 8px;
 }
 
 .content-title-text {
     color: white;
     margin-top: 10px;
-    font-size: 1.3rem;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+#button-new {
+    display: flex;
+    justify-content: flex-end;
 }
 
 #carpeta-container {
@@ -586,6 +617,17 @@ footer {
 }
 
 @media (max-width: 991px) {
+    #content {
+        width: calc(100%);
+    }
+    /************** TABLE ****************/
+    .table-th-web,
+    .table-td-web {
+        display: none;
+    }
+    .table-th-action {
+        width: 50px;
+    }
     /************** MENU RES ****************/
     #menures,
     #menures-sidebar {
@@ -593,7 +635,7 @@ footer {
     }
     /************** SIDEBAR ****************/
     #sidebar {
-        /* width: 280px; */
+        padding: 15px 10px;
         position: absolute;
         left: -280px;
         z-index: 100;
@@ -606,14 +648,15 @@ footer {
         margin-top: 10px;
     }
     /************* VISTA HOME **************/
-    #content {
-        width: calc(100%);
-    }
     #home-container {
         padding: 20px 10px;
     }
+    #button-new {
+        display: none;
+    }
     #carpeta-container {
         max-height: calc(100vh - 300px);
+        margin-top: 0px;
     }
     .carpeta {
         width: 195px;

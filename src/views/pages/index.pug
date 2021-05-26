@@ -12,16 +12,16 @@ block script
 block main 
   main 
     div.row.mx-0.main-container 
-      div#sidebar-back
+      div#sidebar-back(onclick="menuResponsive()")
       div#sidebar 
         div#menures-sidebar
           <i class="fas fa-bars menures-option" onclick="menuResponsive()"></i>
         ul.sidebar-ul
           li
-            a(href="").sidebar-link.sidebar-link-active
+            a(href="/").sidebar-link.sidebar-link-active
               <i class="far fa-folder-open me-3"></i> My unit
           li
-            a(href="").sidebar-link
+            a(href="/").sidebar-link
               <i class="fas fa-user-friends me-3"></i>Shared with me
           li
             a(href="").sidebar-link
@@ -45,38 +45,40 @@ block main
             div.content-title
               h1.content-title-text My unit
             .row.mt-4.mb-2.mx-0 
-              .col-11.mx-auto.d-flex.justify-content-end 
+              .col-12.px-0#button-new
                 button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
-              .col-11#carpeta-container
+              .col-12.px-0#carpeta-container
                 //- each folder in folders
                 //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
                 //-     span.carpeta-titulo= folder.name
-
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Propietario</th>
-                      <th scope="col">Fecha de Creacion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    each folder in folders
-                      <tr>
-                        th(scope="row")= folder.name
-                        td Yo
-                        td 17-05-2021
-                      </tr>
+                table.table.table-responsive
+                  thead
+                    tr
+                      th(scope="col" class="table-th text-color") Nombre
+                      th(scope="col" class="table-th table-th-web text-color") Propietario
+                      th(scope="col" class="table-th table-th-web text-color") Fecha de Creacion
+                      th(scope="col" class="table-th table-th-action text-color") Action
                     
-                  </tbody>
-                </table>
-                
+                  
+                  tbody
+                    if(folders)
+                      each folder in folders
+                        tr.text-color.table-tr-hover
+                          td.table-td(onclick=`goToFolder('${folder._id}')`)
+                            div.d-flex.justify-content-start
+                              <i class="fas fa-folder table-td-icon"></i>
+                              span= folder.name
+                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
+                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
+                          td.table-td
+                            <i class="fas fa-ellipsis-v table-td-icon"></i>
+                        
+                    else 
+                      tr 
+                        td(colspan="3" class="border-bottom-0") 
+                          h4(class="text-color text-center border-none mt-4") No se encontraron folders
 
 
-
-
-
-          
             <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content modal-dark">
@@ -91,10 +93,16 @@ block main
                       .mb-1.d-flex.justify-content-between 
                         <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
                         <button type="submit" class="button button-primary">Create </button>
-
                   </div>
                     
                 </div>
               </div>
             </div>
+
+    
+  script. 
+    function goToFolder(id){
+      console.log('click')
+      return window.location.href = '/note/all-notes/' + id;
+    }
     
