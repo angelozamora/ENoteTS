@@ -6,62 +6,95 @@ block  header
 block  footer 
   //- include ../templates/footer 
 
+block script
+  script(src="/public/js/menuResponsive-function.js") 
+
 block main 
-
-  div.row.mx-0.h-100 
-
-    div#sidebar 
-      ul.sidebar-ul
-        li
-            a(href="").sidebar-link
+  main 
+    div.row.mx-0.main-container 
+      div#sidebar-back
+      div#sidebar 
+        div#menures-sidebar
+          <i class="fas fa-bars menures-option" onclick="menuResponsive()"></i>
+        ul.sidebar-ul
+          li
+            a(href="").sidebar-link.sidebar-link-active
               <i class="far fa-folder-open me-3"></i> My unit
-        li
+          li
             a(href="").sidebar-link
               <i class="fas fa-user-friends me-3"></i>Shared with me
-        li
+          li
             a(href="").sidebar-link
               <i class="far fa-clock me-3"></i>Recent
-        li
+          li
             a(href="").sidebar-link
               <i class="far fa-star me-3"></i>Highlights
-        li
+          li
             a(href="").sidebar-link
               <i class="far fa-trash-alt me-3"></i>Paper bin
 
-        
-    div#content 
-      block content
-        .container-lg#home-container.bg-danger 
-          div.content-title
-            h1.content-title-text My unit
-          .row.mt-4.mb-2.mx-0 
-            .col-11.mx-auto.d-flex.justify-content-end 
-              button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
-            .col-11#carpeta-container
-              each folder in folders
-                a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
-                  span.carpeta-titulo= folder.name
+          
+      div#content 
+        div#menures
+          //- span.menu-responsive-option 
+          <i class="fas fa-bars menures-option menures-option-width" onclick="menuResponsive()"></i>
+          input(type="text" class="form-control menures-search")
+
+        block content
+          .container-lg#home-container
+            div.content-title
+              h1.content-title-text My unit
+            .row.mt-4.mb-2.mx-0 
+              .col-11.mx-auto.d-flex.justify-content-end 
+                button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
+              .col-11#carpeta-container
+                //- each folder in folders
+                //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
+                //-     span.carpeta-titulo= folder.name
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Propietario</th>
+                      <th scope="col">Fecha de Creacion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    each folder in folders
+                      <tr>
+                        th(scope="row")= folder.name
+                        td Yo
+                        td 17-05-2021
+                      </tr>
+                    
+                  </tbody>
+                </table>
+                
 
 
-        
-          <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content modal-dark">
-                <div class="modal-header">
-                  <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
-                  <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+
+          
+            <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-dark">
+                  <div class="modal-body p-4">
+                    div.d-flex.justify-content-between
+                      <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+                      <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                    form(action="/note/create/folder" method="POST").mt-4 
+                      div.mb-4  
+                        //- label(for="name" class="form-label text-white") Folder name:
+                        input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control" required)
+                      .mb-1.d-flex.justify-content-between 
+                        <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
+                        <button type="submit" class="button button-primary">Create </button>
+
+                  </div>
+                    
                 </div>
-                <div class="modal-body px-4">
-                  form(action="/note/create/folder" method="POST") 
-                    div.mb-4  
-                      label(for="name" class="form-label text-white") Folder name:
-                      input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control" required)
-                    .mb-3.d-flex.justify-content-end 
-                      <button type="submit" class="button button-primary">Save </button>
-
-                </div>
-                  
               </div>
             </div>
-          </div>
     

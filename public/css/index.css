@@ -23,6 +23,29 @@ a {
     text-decoration: none;
 }
 
+.text-color {
+    color: var(--text-color);
+}
+
+
+/************ INDEX ************/
+
+main {
+    /* min-height: calc(100vh - 103px); */
+    height: calc(100vh - 63px);
+    background-color: var(--secondary-color);
+}
+
+.main-container {
+    position: relative;
+    height: 100%;
+}
+
+#content {
+    width: calc(100% - 280px);
+    /* background-color: blanchedalmond; */
+}
+
 
 /********** BUTTON ***************/
 
@@ -59,8 +82,83 @@ a {
     color: white;
 }
 
+.button-transparent {
+    background-color: transparent;
+    color: white;
+}
 
-/******* MODAL *******/
+.button-transparent:hover {
+    color: white;
+    box-shadow: 0px 2px 4px black;
+}
+
+
+/************ MENU RESPONSIVE**************/
+
+#menures-sidebar {
+    display: none;
+    justify-content: flex-start;
+}
+
+#menures {
+    display: none;
+    justify-content: space-between;
+    /* background-color: #8260d8; */
+    margin-top: 15px;
+}
+
+.menures-option {
+    font-size: 24px;
+    padding: 6.5px 5px 6.5px 0;
+    color: white;
+}
+
+.menures-option-width {
+    width: 50px;
+}
+
+
+/************** SIDEBAR *****************/
+
+#sidebar-back {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.747);
+}
+
+#sidebar {
+    width: 280px;
+    background-color: var(--secondary-color);
+    height: 100%;
+    padding: 20px 10px;
+    transition: all 0.5s ease;
+}
+
+.sidebar-ul {
+    padding: 0;
+    margin-top: 50px;
+}
+
+.sidebar-link {
+    display: block;
+    /* background-color: brown; */
+    padding: 10px 20px;
+    color: var(--text-color);
+}
+
+.sidebar-link:hover,
+.sidebar-link-active {
+    background-color: #67dbca3f;
+    color: var(--primary-color);
+}
+
+
+/*************** MODAL ******************/
 
 .modal-dark {
     background-color: var(--secondary-color);
@@ -69,7 +167,10 @@ a {
 .btn-close-dark {
     border-radius: 100%;
     background-color: #90909083;
-    padding: 50px;
+    padding: 7px;
+    /* position: absolute;
+    top: 16px;
+    right: 23px; */
     /* background-color: #90909083 !important; */
 }
 
@@ -203,6 +304,7 @@ header {
     height: 63px;
     border-bottom: 1px solid rgba(172, 172, 172, 0.685);
     top: 0;
+    z-index: 100;
     /* box-shadow: 0 1px 4px rgba(172, 172, 172, 0.685); */
 }
 
@@ -436,51 +538,12 @@ footer {
 
 /************* VISTA HOME **************/
 
-main {
-    /* min-height: calc(100vh - 103px); */
-    height: calc(100vh - 63px);
-    background-color: var(--secondary-color);
-}
-
-#sidebar {
-    width: 280px;
-    /* background-color: #8260d8; */
-    height: 100%;
-    padding: 20px 10px;
-}
-
-.sidebar-ul {
-    padding: 0;
-    margin-top: 40px;
-}
-
-.sidebar-link {
-    display: block;
-    /* background-color: brown; */
-    padding: 10px 20px;
-    color: var(--text-color);
-}
-
-.sidebar-link-active {
-    background-color: #67dbca3f;
-}
-
-.sidebar-link:hover {
-    background-color: #67dbca3f;
-    color: var(--primary-color);
-}
-
-#content {
-    width: calc(100% - 280px);
-    background-color: blanchedalmond;
-}
-
 #home-container {
     padding: 20px;
 }
 
 .content-title {
-    border-bottom: 1px solid rgb(182, 182, 182);
+    border-bottom: 1px solid #F1F3F4;
 }
 
 .content-title-text {
@@ -493,12 +556,13 @@ main {
     display: flex;
     flex-wrap: wrap;
     margin: auto;
-    background-color: #63bdaf;
+    /* background-color: #63bdaf; */
     max-height: 400px;
     justify-content: center;
     margin-top: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
+    overflow-y: auto;
 }
 
 .carpeta {
@@ -522,7 +586,35 @@ main {
 }
 
 @media (max-width: 991px) {
+    /************** MENU RES ****************/
+    #menures,
+    #menures-sidebar {
+        display: flex;
+    }
+    /************** SIDEBAR ****************/
+    #sidebar {
+        /* width: 280px; */
+        position: absolute;
+        left: -280px;
+        z-index: 100;
+    }
+    #sidebar.sidebar-active {
+        left: 0;
+    }
+    .sidebar-ul {
+        margin: auto;
+        margin-top: 10px;
+    }
     /************* VISTA HOME **************/
+    #content {
+        width: calc(100%);
+    }
+    #home-container {
+        padding: 20px 10px;
+    }
+    #carpeta-container {
+        max-height: calc(100vh - 300px);
+    }
     .carpeta {
         width: 195px;
         height: 130px;
