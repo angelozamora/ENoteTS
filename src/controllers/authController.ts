@@ -3,15 +3,16 @@ import { NextFunction, Request , Response} from 'express';
 
 
 
-class UserController{
+class AuthController{
   
 
   public getLogin = function ( req:Request , res :Response ){
-    res.render('pages/login')
+    res.render('auth/login')
   }
+
   public postLogin = async  function( req : Request , res :  Response, next : any){
     try{
-      const {email, password} = req.body;
+      const {email, password , remember} = req.body;
 
       const user =await  UserModel.findOne({email : email}) ;
       if(user){
@@ -19,8 +20,8 @@ class UserController{
         if(isMatch){
           if(req.session){
             req.session.userId = user._id;
+            
             // req!.session!.user = user;
-            res.cookie('prueba', "prueba123")
             req.flash('succes', 'Usuario correcto');
             res.redirect('/')
           }
@@ -41,8 +42,9 @@ class UserController{
   }
   
   public getRegister =  function ( req : Request , res : Response ){
-    res.render('pages/register')
+    res.render('auth/register')
   }
+  
   public postRegister = async function( req : Request , res : Response , next:any){
     try{
       
@@ -54,7 +56,7 @@ class UserController{
         fullname : req.body.fullname
       })
       
-      res.redirect('/login');
+      res.redirect('/auth/login');
   
   
     }catch(err){
@@ -72,13 +74,13 @@ class UserController{
     res.clearCookie('express:sess.sig')
     res.clearCookie('express:sess')
       
-    res.redirect('/login')
+    res.redirect('/auth/login')
   }
 }
 
 
-const userController = new UserController();
-export default userController;
+const authController = new AuthController();
+export default authController;
 
 
 

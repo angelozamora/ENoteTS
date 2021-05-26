@@ -1,15 +1,14 @@
 import  { Schema, model, Document} from 'mongoose'
-import {IUser} from './user'
+import {IFolder} from './Folder'
 
-export interface INota extends Document{
+export interface INote extends Document{
   title : string,
   body : string,
   image : string,
-  timestamp : Date,
-  user_id : IUser['_id']
+  folder_id : IFolder['_id']
 }
 
-const notaSchema = new Schema<INota>({
+const noteSchema = new Schema<INote>({
   title : {
     type : String , 
     required : [true , 'is requred']
@@ -21,14 +20,10 @@ const notaSchema = new Schema<INota>({
   image : {
     type : String
   },
-  timestamp : { 
-    type : Date,
-    default : new Date
-  },
-  user_id : {
+  folder_id : {
     type : Schema.Types.ObjectId,
-    ref  : 'User'
+    ref  : 'Folder'
   }
-})
+},{ timestamps: true})
 
-export default model<INota>('Nota' , notaSchema)
+export default model<INote>('Note' , noteSchema)

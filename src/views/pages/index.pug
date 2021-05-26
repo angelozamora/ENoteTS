@@ -4,39 +4,105 @@ block  header
   include ../templates/header
 
 block  footer 
-  include ../templates/footer 
+  //- include ../templates/footer 
+
+block script
+  script(src="/public/js/menuResponsive-function.js") 
 
 block main 
-  .container-lg#div-home.bg-danger 
-    h1.text-center.mt-3 Welcome Angelo 
-    .row 
-      .col-10.mx-auto.d-flex.justify-content.end 
-        button(class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") + NEW
-      .col-10#div-carpetas 
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
-        div.carpeta
+  main 
+    div.row.mx-0.main-container 
+      div#sidebar-back(onclick="menuResponsive()")
+      div#sidebar 
+        div#menures-sidebar
+          <i class="fas fa-bars menures-option" onclick="menuResponsive()"></i>
+        ul.sidebar-ul
+          li
+            a(href="/").sidebar-link.sidebar-link-active
+              <i class="far fa-folder-open me-3"></i> My unit
+          li
+            a(href="/").sidebar-link
+              <i class="fas fa-user-friends me-3"></i>Shared with me
+          li
+            a(href="").sidebar-link
+              <i class="far fa-clock me-3"></i>Recent
+          li
+            a(href="").sidebar-link
+              <i class="far fa-star me-3"></i>Highlights
+          li
+            a(href="").sidebar-link
+              <i class="far fa-trash-alt me-3"></i>Paper bin
 
-  
-    <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
           
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+      div#content 
+        div#menures
+          //- span.menu-responsive-option 
+          <i class="fas fa-bars menures-option menures-option-width" onclick="menuResponsive()"></i>
+          input(type="text" class="form-control menures-search")
+
+        block content
+          .container-lg#home-container
+            div.content-title
+              h1.content-title-text My unit
+            .row.mt-4.mb-2.mx-0 
+              .col-12.px-0#button-new
+                button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
+              .col-12.px-0#carpeta-container
+                //- each folder in folders
+                //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
+                //-     span.carpeta-titulo= folder.name
+                table.table.table-responsive
+                  thead
+                    tr
+                      th(scope="col" class="table-th text-color") Name
+                      th(scope="col" class="table-th table-th-web text-color") Owner
+                      th(scope="col" class="table-th table-th-web text-color") Creation date
+                      th(scope="col" class="table-th table-th-action text-color") Action
+                    
+                  
+                  tbody
+                    if(folders)
+                      each folder in folders
+                        tr.text-color.table-tr-hover
+                          td.table-td(onclick=`goToFolder('${folder._id}')`)
+                            div.d-flex.justify-content-start
+                              <i class="fas fa-folder table-td-icon"></i>
+                              span= folder.name
+                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
+                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
+                          td.table-td
+                            <i class="fas fa-ellipsis-v table-td-icon"></i>
+                        
+                    else 
+                      tr 
+                        td(colspan="3" class="border-bottom-0") 
+                          h4(class="text-color text-center border-none mt-4") No folders found
+
+
+            <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-dark">
+                  <div class="modal-body p-4">
+                    div.d-flex.justify-content-between
+                      <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+                      <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                    form(action="/note/create/folder" method="POST").mt-4 
+                      div.mb-4  
+                        //- label(for="name" class="form-label text-white") Folder name:
+                        input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control" required)
+                      .mb-1.d-flex.justify-content-between 
+                        <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
+                        <button type="submit" class="button button-primary">Create </button>
+                  </div>
+                    
+                </div>
+              </div>
+            </div>
+
+    
+  script. 
+    function goToFolder(id){
+      console.log('click')
+      return window.location.href = '/note/all-notes/' + id;
+    }
     
