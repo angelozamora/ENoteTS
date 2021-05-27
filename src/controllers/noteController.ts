@@ -1,6 +1,7 @@
 import FolderModel from '../models/Folder';
 import  NoteModel  from '../models/Note';
 import { NextFunction, Request , Response} from 'express';
+import Folder from '../models/Folder';
 
 class NoteController{
   
@@ -32,10 +33,17 @@ class NoteController{
     try{
 
       const folderId = req.params.id;
-      const notes = await FolderModel.find({folder_id : folderId})
-      res.render('pages/allNotes' , {notes})
+      const folder = await Folder.findOne({ _id : folderId})
+      if(folder){
+        const notes = await NoteModel.find({folder_id : folderId})
+        res.render('pages/allNotes' , {notes , folder})
+      }else{
+        console.log('no existe folder')
+        return res.redirect('back')
+      }
+      
     }catch(err){
-      next()
+      next(err)
     }
 
   }

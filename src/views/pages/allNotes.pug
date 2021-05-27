@@ -4,9 +4,10 @@ block content
   .container-lg#home-container
     div.content-title
       h1.content-title-text= folder.name
-    .row.mt-4.mb-2.mx-0 
+    .row.mt-4.mb-2.mx-0
       .col-12.px-0#button-new
-        button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
+        a(href=`/note/create/${folder._id}` class="button  button-primary" type="button" ) 
+          <i class="fas fa-plus"></i> New Note
       .col-12.px-0#carpeta-container
         table.table.table-responsive
           thead
@@ -16,7 +17,6 @@ block content
               th(scope="col" class="table-th table-th-web text-color") Creation date
               th(scope="col" class="table-th table-th-action text-color") Action
             
-          
           tbody
             if(folders)
               each file in files
@@ -29,7 +29,7 @@ block content
                   td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
                   td.table-td
                     <i class="fas fa-ellipsis-v table-td-icon"></i>
-                
+
             else 
               tr 
                 td(colspan="3" class="border-bottom-0") 

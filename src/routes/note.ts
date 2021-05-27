@@ -11,7 +11,7 @@ export default (router : Router)=>{
 
   router.get('/note/all-notes/:id', NoteController.getAllNotes)
   router.get('/note/detail/:id', )
-  router.get('/note/create', )
+  router.get('/note/create/:id', )
   router.post('/note/create', )
   
 }
