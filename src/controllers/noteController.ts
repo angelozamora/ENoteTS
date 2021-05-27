@@ -32,7 +32,7 @@ class NoteController{
   public getAllNotes = async function(req : Request, res:Response , next:NextFunction){
     try{
 
-      const folderId = req.params.id;
+      const folderId = req.params.folderId;
       const folder = await Folder.findOne({ _id : folderId})
       if(folder){
         const notes = await NoteModel.find({folder_id : folderId})
@@ -46,6 +46,23 @@ class NoteController{
       next(err)
     }
 
+  }
+
+
+  public getCreateNote = async function(req : Request, res:Response , next:NextFunction){
+    try{
+      const folderId = req.params.folderId;
+      const folder = await Folder.findOne({ _id : folderId})
+      if(folder){
+        res.render('pages/createNote' , {folder})
+      }else{
+        res.redirect('back')
+      }
+
+    }catch(err){
+      next(err)
+    }
+    
   }
 
 

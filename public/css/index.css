@@ -47,6 +47,10 @@ main {
     /* background-color: blanchedalmond; */
 }
 
+#div-container {
+    padding: 20px;
+}
+
 
 /********** BUTTON ***************/
 
@@ -562,10 +566,6 @@ footer {
 
 /************* VISTA HOME **************/
 
-#home-container {
-    padding: 20px;
-}
-
 .content-title {
     border-bottom: 1px solid #ebebeb8a;
     padding-bottom: 8px;
@@ -616,9 +616,24 @@ footer {
     color: white;
 }
 
+
+/*************** VISTA CREATE NOTE*********************/
+
+#form-createNote {
+    margin-top: 35px;
+    color: var(--text-color);
+}
+
+#form-createNote label {
+    font-size: 0.9rem;
+}
+
 @media (max-width: 991px) {
     #content {
         width: calc(100%);
+    }
+    #div-container {
+        padding: 20px 10px;
     }
     /************** TABLE ****************/
     .table-th-web,
@@ -648,9 +663,6 @@ footer {
         margin-top: 10px;
     }
     /************* VISTA HOME **************/
-    #home-container {
-        padding: 20px 10px;
-    }
     #button-new {
         display: none;
     }

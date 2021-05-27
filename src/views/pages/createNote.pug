@@ -1,0 +1,20 @@
+extends ./index
+
+block content 
+  .container-lg#div-container
+    div.row.mx-0
+      form(action="" id="form-createNote").col-12.col-lg-10.mx-auto
+        div.row
+          div.mb-4.col-12.col-lg-6
+            label(for="title" class="form-label") Title
+            input(type="text"  name="title" id="title" placeholder="Enter title" value="NEW NOTE" required
+            class=errors && errors.title ? 'input-error' : '').input-text
+            
+
+          div.mb-3.col-12
+            label(for="" class="form-label") Description 
+            input(type="text" ).input-text
+        
+        div.mb-3
+          
+    
