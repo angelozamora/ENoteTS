@@ -1,9 +1,7 @@
 import express from "express";
 import path from "path";
 import { resolve } from "path";
-import indexRouter from './routes/index';
-import authRouter from './routes/auth';
-import noteRouter from './routes/note'
+import router from "./routes"
 import * as dotenv from "dotenv";
 import cookieSession from 'cookie-session';
 import flash from 'express-flash';
@@ -32,11 +30,8 @@ export async function startServer(){
   }))
 
 
-
   /**********ROUTER***********/
-  app.use('/' , authRouter)
-  app.use('/' , indexRouter)
-  app.use('/' , noteRouter)
+  app.use('/' , router())
 
   app.listen(app.get('PORT') , ()=>{
     console.log(
