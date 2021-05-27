@@ -1,20 +1,26 @@
 extends ./index
 
 block content 
+  include ./mixins
   .container-lg#div-container
     div.row.mx-0
-      form(action="" id="form-createNote").col-12.col-lg-10.mx-auto
+      form(action="/note/create" method="POST" id="form-createNote").col-12.col-lg-10.mx-auto
+        input(type="hidden" name="folderId" value=folder._id)
         div.row
           div.mb-4.col-12.col-lg-6
             label(for="title" class="form-label") Title
             input(type="text"  name="title" id="title" placeholder="Enter title" value="NEW NOTE" required
             class=errors && errors.title ? 'input-error' : '').input-text
+            +errors(errors , "title")
             
 
-          div.mb-3.col-12
-            label(for="" class="form-label") Description 
-            input(type="text" ).input-text
+          div.mb-5.col-12
+            label(for="body" class="form-label") Description 
+            input(type="text" name="body" id="body" required).input-text
         
-        div.mb-3
+          div.mb-3.col-12
+            .d-flex.justify-content-between   
+              a(class="button button-transparent" href="") Cancel
+              button(class="button button-primary" type="submit") Create
           
     

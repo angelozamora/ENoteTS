@@ -65,6 +65,32 @@ class NoteController{
     
   }
 
+  public postCreateNote = async function(req : Request, res:Response , next:NextFunction){
+    try{
+      const folderId = req.body.folderId;
+      const folder = await FolderModel.findOne({_id : folderId})
+      if(folder){
+        const note = {
+          title : req.body.title,
+          body : req.body.body,
+          folder_id : folderId
+        }
+
+        const newNote = new NoteModel(note);
+        await newNote.save()
+      }else{
+        res.redirect('back')
+      }
+
+
+    }catch(err){
+      if(err.name == "ValidationError"){
+        res.render('pages/createNote' , {errors : err.errors})
+      }
+
+    }
+  }
+
 
 
 }
