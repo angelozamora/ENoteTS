@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('INGRESO A LA LLAMADA')
-
     let message = JSON.parse(document.getElementById('message').getAttribute('data'));
     console.log(message.res[0].type)
     if (message.res) {

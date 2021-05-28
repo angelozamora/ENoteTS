@@ -11,7 +11,7 @@ export interface INote extends Document{
 const noteSchema = new Schema<INote>({
   title : {
     type : String , 
-    required : [true , 'is requred']
+    required : [true , 'is required']
   },
   body : {
     type : String,

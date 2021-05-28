@@ -78,6 +78,7 @@ class NoteController{
 
         const newNote = new NoteModel(note);
         await newNote.save()
+        req.flash("res" , {type : 'success' ,  msg: `A note was created successfully` })
         res.redirect(`/note/all-notes/${folderId}`)
       }else{
         res.redirect('back')
@@ -85,11 +86,13 @@ class NoteController{
 
 
     }catch(err){
-      req.flash("res" , {type : 'error' ,  msg: `sucedio un error` })
+      
       if(err.name == "ValidationError"){
+        req.flash("res" , {type : 'error' ,  msg: `You must enter all the data` })
         res.render('pages/createNote' , {errors : err.errors , folderId : req.params.folderId})
       }
       else{
+        req.flash("res" , {type : 'error' ,  msg: `An error occurred, please try again` })
         res.redirect('back')
         return next(err)
       }
