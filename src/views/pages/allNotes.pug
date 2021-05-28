@@ -18,13 +18,13 @@ block content
               th(scope="col" class="table-th table-th-action text-color") Action
             
           tbody
-            if(folders)
-              each file in files
+            if(notes)
+              each note in notes
                 tr.text-color.table-tr-hover
                   td.table-td(onclick=`goToFolder('${folder._id}')`)
                     div.d-flex.justify-content-start
                       <i class="fas fa-folder table-td-icon"></i>
-                      span= folder.name
+                      span= note.title
                   td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
                   td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
                   td.table-td

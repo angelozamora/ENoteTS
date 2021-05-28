@@ -54,7 +54,7 @@ class NoteController{
       const folderId = req.params.folderId;
       const folder = await Folder.findOne({ _id : folderId})
       if(folder){
-        res.render('pages/createNote' , {folder})
+        res.render('pages/createNote' , {folderId})
       }else{
         res.redirect('back')
       }
@@ -67,7 +67,7 @@ class NoteController{
 
   public postCreateNote = async function(req : Request, res:Response , next:NextFunction){
     try{
-      const folderId = req.body.folderId;
+      const folderId = req.params.folderId;
       const folder = await FolderModel.findOne({_id : folderId})
       if(folder){
         const note = {
@@ -78,6 +78,7 @@ class NoteController{
 
         const newNote = new NoteModel(note);
         await newNote.save()
+        res.redirect(`/note/all-notes/${folderId}`)
       }else{
         res.redirect('back')
       }
@@ -85,8 +86,14 @@ class NoteController{
 
     }catch(err){
       if(err.name == "ValidationError"){
-        res.render('pages/createNote' , {errors : err.errors})
+        res.render('pages/createNote' , {errors : err.errors , folderId : req.params.folderId})
       }
+      else{
+        res.redirect('back')
+        return next(err)
+      }
+      
+
 
     }
   }
