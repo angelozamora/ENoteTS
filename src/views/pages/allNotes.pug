@@ -21,12 +21,12 @@ block content
             if(notes)
               each note in notes
                 tr.text-color.table-tr-hover
-                  td.table-td(onclick=`goToFolder('${folder._id}')`)
+                  td.table-td(onclick=`goToDetail('${note._id}')`)
                     div.d-flex.justify-content-start
-                      <i class="fas fa-folder table-td-icon"></i>
+                      <i class="fas fa-file-alt table-td-icon"></i>
                       span= note.title
-                  td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
-                  td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
+                  td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
+                  td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) 17-05-2021
                   td.table-td
                     <i class="fas fa-ellipsis-v table-td-icon"></i>
 
@@ -34,3 +34,9 @@ block content
               tr 
                 td(colspan="3" class="border-bottom-0") 
                   h4(class="text-color text-center border-none mt-4") No files found
+
+
+  script. 
+    function goToDetail(id){
+      return window.location.href = '/note/detail/' + id;
+    }

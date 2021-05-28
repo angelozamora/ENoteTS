@@ -16,7 +16,7 @@ class NoteController{
       const newFolder = new FolderModel(folder);
       await newFolder.save();
       req.flash('success' , 'Folder created successfully')
-      res.redirect('/')
+      return res.redirect('back')
 
     }catch(err){
       if(err.name === "ValidationError"){
@@ -36,14 +36,14 @@ class NoteController{
       const folder = await Folder.findOne({ _id : folderId})
       if(folder){
         const notes = await NoteModel.find({folder_id : folderId})
-        res.render('pages/allNotes' , {notes , folder})
-      }else{
-        console.log('no existe folder')
-        return res.redirect('back')
+        return res.render('pages/allNotes' , {notes , folder})
       }
       
+      return res.redirect('back')
+      
     }catch(err){
-      next(err)
+      res.redirect('back')
+      return next(err)
     }
 
   }
@@ -54,10 +54,11 @@ class NoteController{
       const folderId = req.params.folderId;
       const folder = await Folder.findOne({ _id : folderId})
       if(folder){
-        res.render('pages/createNote' , {folderId})
-      }else{
-        res.redirect('back')
+        return res.render('pages/createNote' , {folderId})
       }
+      
+      return res.redirect('back')
+      
 
     }catch(err){
       next(err)
@@ -78,12 +79,12 @@ class NoteController{
 
         const newNote = new NoteModel(note);
         await newNote.save()
+
         req.flash("res" , {type : 'success' ,  msg: `A note was created successfully` })
-        res.redirect(`/note/all-notes/${folderId}`)
-      }else{
-        res.redirect('back')
+        return res.redirect(`/note/all-notes/${folderId}`)
       }
 
+      return res.redirect('back')
 
     }catch(err){
       
@@ -99,6 +100,22 @@ class NoteController{
       
 
 
+    }
+  }
+
+  public getNoteDetail = async function(req:any , res:Response ,  next : NextFunction){
+    try{
+      const noteId = req.params.id
+      const note = await NoteModel.findOne({_id : noteId});
+      if(note){
+        return res.render('pages/noteDetail' , {note})
+      }
+      
+      return res.redirect('back')
+    }catch(err){
+      
+      res.redirect('back')
+      return next(err)
     }
   }
 

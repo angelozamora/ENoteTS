@@ -10,7 +10,7 @@ export default (router : Router)=>{
 
 
   router.get('/note/all-notes/:folderId', NoteController.getAllNotes)
-  router.get('/note/detail/:id', )
+  router.get('/note/detail/:id', NoteController.getNoteDetail)
   router.get('/note/create/:folderId',NoteController.getCreateNote )
   router.post('/note/create/:folderId',NoteController.postCreateNote )
   
