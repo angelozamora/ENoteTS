@@ -25,7 +25,11 @@ a {
 }
 
 .text-color {
-    color: var(--text-color);
+    color: var(--text-color) !important;
+}
+
+.btn-primary {
+    background-color: #eb192a !important;
 }
 
 

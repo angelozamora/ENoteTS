@@ -65,7 +65,7 @@ class NoteController{
     
   }
 
-  public postCreateNote = async function(req : Request, res:Response , next:NextFunction){
+  public postCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{
       const folderId = req.params.folderId;
       const folder = await FolderModel.findOne({_id : folderId})
@@ -85,6 +85,7 @@ class NoteController{
 
 
     }catch(err){
+      req.flash("res" , {type : 'error' ,  msg: `sucedio un error` })
       if(err.name == "ValidationError"){
         res.render('pages/createNote' , {errors : err.errors , folderId : req.params.folderId})
       }
