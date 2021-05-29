@@ -10,6 +10,8 @@ block content
         = note.body
     
       div.notaDetail-options
+        a(href=`/note/all-notes/${note.folder_id}` class="notaDetail-option-button")
+          <i class="far fa-arrow-alt-circle-left  notaDetail-icon"></i>
         a(href=`/note/update/${note._id}` class="notaDetail-option-button")
           <i class="fas fa-edit  notaDetail-icon"></i>
         a(href=`/note/delete/${note._id}` class="notaDetail-option-button") 
@@ -53,57 +55,61 @@ block content
 
     
     .notaDetail-option-button {
-        display: block;
-        background-color: rgb(41, 41, 41);
-        border-radius: 100%;
-        padding: 10px 0px;
+      height: 45px;
+      width: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-color: rgb(41, 41, 41);
+      border-radius: 100%;
     }
 
 
-    .notaDetail-option-button:nth-child(2) {
+    .notaDetail-option-button:nth-child(n+2) {
       margin-top: 12px;
     }
 
     
     .notaDetail-option-button:hover {
-        background-color: var(--terciary-color);
+      background-color: var(--terciary-color);
     }
 
 
     .notaDetail-option-button:hover .notaDetail-icon {
-        color: var(--text-color);
+      color: var(--text-color);
     }
 
     .notaDetail-icon {
-        margin-left: 15px;
-        margin-right: 10px;
-        color: var(--terciary-color);
-        font-size: 1.2rem;
+
+      color: var(--terciary-color);
+      font-size: 1.2rem;
     }
     
 
     
     @media (max-width: 991px) {
-        .notaDetail{
-          padding : 50px 5px 5px 5px;
-          margin-top : 0;
-        }
+      .notaDetail{
+        padding : 50px 5px 5px 5px;
+        margin-top : 0;
+      }
 
-        .notaDetail-body{
-          height : calc(100vh - 290px);
-        }
-        .notaDetail-options {
-            top: 0;
-            //- bottom: 5px;
-            right: -8px;
-            //- background-color : black;
-            display : flex;
-        }
+      .notaDetail-body{
+        height : calc(100vh - 290px);
+      }
+      .notaDetail-options {
+          top: 0;
+          //- bottom: 5px;
+          right: -8px;
+          //- background-color : black;
+          display : flex;
+      }
 
-        .notaDetail-option-button:nth-child(2) {
-          margin-top: 0;
-          margin-left : 12px;
-        }
+      .notaDetail-option-button:nth-child(n+2) {
+        margin-top: 0;
+        margin-left : 12px;
+      }
+
     }
 
 
