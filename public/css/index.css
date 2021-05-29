@@ -33,7 +33,7 @@ a {
 
 main {
     /* min-height: calc(100vh - 103px); */
-    height: calc(100vh - 63px);
+    min-height: calc(100vh - 63px);
     background-color: var(--secondary-color);
 }
 
