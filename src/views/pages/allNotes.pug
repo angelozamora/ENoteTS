@@ -18,7 +18,7 @@ block content
               th(scope="col" class="table-th table-th-action text-color") Action
             
           tbody
-            if(notes)
+            if(notes && notes.length)
               each note in notes
                 tr.text-color.table-tr-hover
                   td.table-td(onclick=`goToDetail('${note._id}')`)

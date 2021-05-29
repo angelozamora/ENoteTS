@@ -10,13 +10,13 @@ block content
           div.mb-4.col-12.col-lg-6
             label(for="title" class="form-label") Title
             input(type="text"  name="title" id="title" placeholder="Enter title"  
-            class=errors && errors.title ? 'input-error' : '').input-text
+            class=errors && errors.title ? 'input-error' : '').input-text.input-text-medium
             +errors(errors , "title")
             
 
           div.mb-5.col-12
             label(for="body" class="form-label") Description 
-            input(type="text" name="body" id="body" required).input-text
+            input(type="text" name="body" id="body" required).input-text.input-text-medium
             +errors(errors , "body")
         
           div.mb-3.col-12

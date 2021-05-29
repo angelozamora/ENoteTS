@@ -9,11 +9,11 @@ export default (router : Router)=>{
   router.post('/note/create/folder',[getUser , isLoged], NoteController.postFolder)
 
 
-  router.get('/note/all-notes/:folderId', NoteController.getAllNotes)
-  router.get('/note/create/:folderId',NoteController.getCreateNote )
-  router.post('/note/create/:folderId',NoteController.postCreateNote )
-  router.get('/note/detail/:id', NoteController.getNoteDetail)
-  router.get('/note/update/:id', NoteController.getUpdateNote)
-  router.get('/note/delete/:id', NoteController.getDeleteNote)
+  router.get('/note/all-notes/:folderId',[getUser , isLoged], NoteController.getAllNotes)
+  router.get('/note/create/:folderId',[getUser , isLoged],NoteController.getCreateNote )
+  router.post('/note/create/:folderId',[getUser , isLoged],NoteController.postCreateNote )
+  router.get('/note/detail/:id', [getUser , isLoged],NoteController.getNoteDetail)
+  router.get('/note/update/:id', [getUser , isLoged],NoteController.getUpdateNote)
+  router.get('/note/delete/:id', [getUser , isLoged],NoteController.getDeleteNote)
   
 }
