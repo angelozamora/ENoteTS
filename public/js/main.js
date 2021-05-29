@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     let message = JSON.parse(document.getElementById('message').getAttribute('data'));
-    console.log(message.res[0].type)
     if (message.res) {
         if (message.res[0].type == "error") {
             swalMessage(message.res[0].type, message.res[0].msg, )
