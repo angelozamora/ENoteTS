@@ -5,7 +5,7 @@ block main
       div.col-12.col-md-6.col-xl-8.login-add-container
       div.col-12.col-md-6.col-xl-4.login-container
         div#login-content
-          div
+          div.w-100
             h1.text-center#title-login Login 
           
             form(action="/auth/login"  method="POST" id="form-login")
@@ -30,7 +30,7 @@ block main
               div.mb-3#login-option 
                 button(class="button button-primary " type="submit") Sign In 
 
-            ul.mb-3#login-create 
-              li Don't have an account? 
-                a(href="/auth/register")  Creat your account
+          ul.mb-3#login-create.w-100 
+            li Don't have an account? 
+              a(href="/auth/register")  Creat your account
             

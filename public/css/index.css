@@ -410,6 +410,11 @@ footer {
 #login-content {
     width: 76%;
     min-width: 250px;
+    justify-content: center;
+    display: flex;
+    min-height: 60%;
+    align-content: space-around;
+    flex-wrap: wrap;
 }
 
 #title-login {
@@ -469,6 +474,7 @@ footer {
 
 #login-create li {
     font-size: 0.9rem;
+    color: var(--text-color);
 }
 
 #login-create li a {
@@ -630,6 +636,18 @@ footer {
 
 #form-createNote label {
     font-size: 0.9rem;
+}
+
+@media (min-height: 1000px) {
+    #login-content {
+        min-height: 50%;
+    }
+}
+
+@media (min-height: 1400px) {
+    #login-content {
+        min-height: 40%;
+    }
 }
 
 @media (max-width: 991px) {
