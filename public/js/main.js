@@ -31,9 +31,23 @@ function loadForm() {
         title: 'Loaded..',
         text: 'Performing the process, please wait!',
         icon: 'info',
-        allowOutsideClick: 'false',
-        allowEscapeKey: 'false',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         background: '#181818',
+        customClass: {
+            title: 'text-color',
+        }
+    })
+}
+
+function confirmMessage(msg) {
+    Swal.fire({
+        title: msg,
+        icon: 'success',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        background: '#181818',
+        showConfirmButton: false,
         customClass: {
             title: 'text-color',
         }

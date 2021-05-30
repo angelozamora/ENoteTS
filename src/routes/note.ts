@@ -14,6 +14,7 @@ export default (router : Router)=>{
   router.post('/note/create/:folderId',[getUser , isLoged],NoteController.postCreateNote )
   router.get('/note/detail/:id', [getUser , isLoged],NoteController.getNoteDetail)
   router.get('/note/update/:id', [getUser , isLoged],NoteController.getUpdateNote)
-  router.get('/note/delete/:id', [getUser , isLoged],NoteController.getDeleteNote)
+  router.delete('/note/delete/:id', [getUser , isLoged],NoteController.getDeleteNote)
+  
   
 }

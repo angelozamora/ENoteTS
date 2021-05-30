@@ -150,9 +150,19 @@ class NoteController{
 
   public getDeleteNote = async function(req:any , res:Response , next : NextFunction){
     try{
+      const note = await NoteModel.findOne({_id : req.params.id});
+      if(note){
+        const folderId = note.folder_id;
+        await note.delete();
+        return res.json({flag : true, msg : 'Note deleted successfully'});
+      }
       
+      
+      return res.json({flag : false, msg : 'Note not found'});
+
     }catch(error){
-    
+      res.json({ flag : false, msg : 'An error occurred, please try again!'});
+      return next(error)
     }
 
   }

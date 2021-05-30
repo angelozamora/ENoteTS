@@ -14,7 +14,7 @@ block content
           <i class="far fa-arrow-alt-circle-left  notaDetail-icon"></i>
         a(href=`/note/update/${note._id}` class="notaDetail-option-button")
           <i class="fas fa-edit  notaDetail-icon"></i>
-        a(href=`/note/delete/${note._id}` class="notaDetail-option-button") 
+        a(onclick=`deleteNote('${note._id}' , '${note.folder_id}')` class="notaDetail-option-button") 
           <i class="far fa-trash-alt  notaDetail-icon"></i>
 
 
@@ -110,6 +110,45 @@ block content
         margin-left : 12px;
       }
 
+    }
+
+  script. 
+      
+    function deleteNote(noteId , folderId){
+      Swal.fire({
+        title: '¿Are you sure you want to delete the note?',
+        icon: 'error',
+
+        showCancelButton: true,
+        confirmButtonColor:  '#E74C3C',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText : 'No',
+        confirmButtonText: 'Yes, delete!',
+        reverseButtons: true,
+        background: '#181818',
+        customClass: {
+            title: 'text-color',
+        }
+      }).then((result) => {
+          if (result.isConfirmed) {
+            loadForm();
+            fetch(`/note/delete/${noteId}`, {
+              method: "DELETE"
+            }).then(res => {
+              return res.json();
+            })
+            .then( data => {
+              if(data.flag){
+                confirmMessage(data.msg)
+                setTimeout( function(){
+                  window.location= `/note/all-notes/${folderId}`
+                },3000)
+              }else{
+                swalMessage('error',data.msg)
+              }
+            });
+          } 
+      })
     }
 
 
