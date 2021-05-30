@@ -3,7 +3,8 @@ import {IUser} from './user'
 
 export interface IFolder extends Document{
   name : string,
-  user_id : IUser['_id']
+  user_id : IUser['_id'],
+  truncateName :  () => Promise<string>
 }
 
 const folderSchema = new Schema<IFolder>({
@@ -17,5 +18,15 @@ const folderSchema = new Schema<IFolder>({
   },
 
 },{ timestamps: true})
+
+
+folderSchema.methods.truncateName = function() {
+  if (this.name && this.name.length > 75) {
+      return this.name.substring(0, 70) + "...";
+  }
+
+  return this.name;
+}
+
 
 export default model<IFolder>('Folder' ,folderSchema)

@@ -1,15 +1,15 @@
 import {Router} from 'express'
-import HomeController from '../controllers/homeController'
-import { getUser } from '../midleware/getUser';
-import { isLoged } from '../midleware/isLoged';
-
-const router = Router();
+import home from './home';
+import auth from './auth';
+import note from './note'
 
 
-router.get('/', [getUser , isLoged] ,  HomeController.getAllFolders)
+export default ()=>{
 
-
-
-
-
-export default router;
+  const router = Router();
+  home(router);
+  auth(router);
+  note(router);
+  
+  return router
+}

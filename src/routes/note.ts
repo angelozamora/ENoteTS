@@ -5,15 +5,17 @@ import { isLoged } from '../midleware/isLoged';
 
 
 
-const router:Router = Router();
+export default (router : Router)=>{
+  router.post('/note/create/folder',[getUser , isLoged], NoteController.postFolder)
 
 
-router.post('/note/create/folder',[getUser , isLoged], NoteController.postFolder)
-
-
-router.get('/note/all-notes/:id', NoteController.getAllNotes)
-router.get('/note/detail/:id', )
-router.get('/note/create', )
-router.post('/note/create', )
-
-export default router;
+  router.get('/note/all-notes/:folderId',[getUser , isLoged], NoteController.getAllNotes)
+  router.get('/note/create/:folderId',[getUser , isLoged],NoteController.getCreateNote )
+  router.post('/note/create/:folderId',[getUser , isLoged],NoteController.postCreateNote )
+  router.get('/note/detail/:id', [getUser , isLoged],NoteController.getNoteDetail)
+  router.get('/note/update/:id', [getUser , isLoged],NoteController.getUpdateNote)
+  router.post('/note/update/:id', [getUser , isLoged],NoteController.postUpdateNote)
+  router.delete('/note/delete/:id', [getUser , isLoged],NoteController.getDeleteNote)
+  
+  
+}

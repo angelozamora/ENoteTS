@@ -10,7 +10,7 @@ class AuthController{
     res.render('auth/login')
   }
 
-  public postLogin = async  function( req : Request , res :  Response, next : any){
+  public postLogin = async  function( req : any , res :  Response, next : any){
     try{
       const {email, password , remember} = req.body;
 
@@ -22,21 +22,23 @@ class AuthController{
             req.session.userId = user._id;
             
             // req!.session!.user = user;
-            req.flash('succes', 'Usuario correcto');
-            res.redirect('/')
+            req.flash('res' , { type : 'success' , msg:`Welcome  ${user.fullname}`})
+            return res.redirect('/')
           }
         }else{
-          req.flash('errors', ' Password is invalid');
-          res.redirect('back')
+          req.flash('res' , { type : 'error' , msg:`Password is invalid , try again!`})
+          return res.redirect('back')
         }
       }
       else{
-        req.flash('errors', 'User not found , try again!');
-        res.redirect('back')
+        req.flash('res' , { type : 'error' , msg:'User not found , try again!'})
+        return res.redirect('back')
       }
   
-    }catch(err){
-      return next(err); 
+    }catch(error){
+      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+      res.redirect('back')
+      return next(error); 
     }
   
   }
@@ -45,7 +47,7 @@ class AuthController{
     res.render('auth/register')
   }
   
-  public postRegister = async function( req : Request , res : Response , next:any){
+  public postRegister = async function( req : any , res : Response , next:any){
     try{
       
       // const {email , password }=req.body;
@@ -56,14 +58,18 @@ class AuthController{
         fullname : req.body.fullname
       })
       
-      res.redirect('/auth/login');
+      req.flash('res' , { type : 'success' , msg:'You registered a user successfully'})
+      return res.redirect('/auth/login');
   
   
-    }catch(err){
-      if(err.name == "ValidationError"){
-        res.render('pages/register' , {errors : err.errors})
+    }catch(error){
+      if(error.name == "ValidationError"){
+        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
+        res.render('pages/register' , {errors : error.errors})
       }
-      return next(err);
+
+      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+      return next(error);
     }
   
   }

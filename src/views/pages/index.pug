@@ -1,7 +1,7 @@
 extends  ../layout/layout
 
 block  header 
-  include ../templates/header
+  include ../partials/header
 
 block  footer 
   //- include ../templates/footer 
@@ -41,7 +41,7 @@ block main
           input(type="text" class="form-control menures-search")
 
         block content
-          .container-lg#home-container
+          .container-lg#div-container
             div.content-title
               h1.content-title-text My unit
             .row.mt-4.mb-2.mx-0 
@@ -67,7 +67,7 @@ block main
                           td.table-td(onclick=`goToFolder('${folder._id}')`)
                             div.d-flex.justify-content-start
                               <i class="fas fa-folder table-td-icon"></i>
-                              span= folder.name
+                              span= folder.truncateName()
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
                           td.table-td
@@ -89,7 +89,7 @@ block main
                     form(action="/note/create/folder" method="POST").mt-4 
                       div.mb-4  
                         //- label(for="name" class="form-label text-white") Folder name:
-                        input(type="text" id="name" name="name" placeholder="Enter folder name" class="form-control" required)
+                        input(type="text" id="name" name="name" placeholder="Enter folder name" class="input-text input-text-medium " required)
                       .mb-1.d-flex.justify-content-between 
                         <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
                         <button type="submit" class="button button-primary">Create </button>
@@ -102,7 +102,6 @@ block main
     
   script. 
     function goToFolder(id){
-      console.log('click')
       return window.location.href = '/note/all-notes/' + id;
     }
     
