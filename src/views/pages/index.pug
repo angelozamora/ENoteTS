@@ -67,7 +67,7 @@ block main
                           td.table-td(onclick=`goToFolder('${folder._id}')`)
                             div.d-flex.justify-content-start
                               <i class="fas fa-folder table-td-icon"></i>
-                              span= folder.name
+                              span= folder.truncateName()
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
                           td.table-td

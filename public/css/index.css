@@ -45,6 +45,7 @@ main {
 #content {
     width: calc(100% - 280px);
     /* background-color: blanchedalmond; */
+    min-height: calc( 100vh - 63px);
 }
 
 #div-container {
@@ -109,7 +110,10 @@ main {
     display: none;
     justify-content: space-between;
     /* background-color: #8260d8; */
-    margin-top: 15px;
+    padding: 12px 0 12px 0;
+    position: sticky;
+    background-color: var(--secondary-color);
+    top: 63px;
 }
 
 .menures-option {
@@ -139,9 +143,11 @@ main {
 #sidebar {
     width: 280px;
     background-color: var(--secondary-color);
-    height: 100%;
     padding: 20px 10px;
     transition: all 0.5s ease;
+    height: calc( 100vh - 63px);
+    position: sticky;
+    top: 63px;
 }
 
 .sidebar-ul {
@@ -194,13 +200,17 @@ main {
 
 .table-th,
 .table-td {
-    padding: 12px 0 !important;
+    /* padding: 12px 0; */
     font-size: 0.9rem;
     border-bottom: 1px solid #ebebeb70;
 }
 
+.table-th:nth-child(1) {
+    width: 50%;
+}
+
 .table-td-icon {
-    margin-left: 15px;
+    margin-left: 10px;
     margin-right: 10px;
     color: var(--terciary-color);
     font-size: 1.2rem;
@@ -598,7 +608,7 @@ footer {
     flex-wrap: wrap;
     margin: auto;
     /* background-color: #63bdaf; */
-    max-height: 400px;
+    max-height: calc(100vh - 250px);
     justify-content: center;
     margin-top: 20px;
     padding-top: 10px;
@@ -657,10 +667,16 @@ footer {
     #div-container {
         padding: 20px 10px;
     }
+    .content-title-text {
+        margin-top: 0;
+    }
     /************** TABLE ****************/
     .table-th-web,
     .table-td-web {
         display: none;
+    }
+    .table-th:nth-child(1) {
+        width: auto;
     }
     .table-th-action {
         width: 50px;
@@ -673,9 +689,10 @@ footer {
     /************** SIDEBAR ****************/
     #sidebar {
         padding: 15px 10px;
-        position: absolute;
         left: -280px;
         z-index: 100;
+        position: fixed;
+        top: 63px;
     }
     #sidebar.sidebar-active {
         left: 0;

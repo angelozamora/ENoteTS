@@ -24,7 +24,7 @@ block content
                   td.table-td(onclick=`goToDetail('${note._id}')`)
                     div.d-flex.justify-content-start
                       <i class="fas fa-file-alt table-td-icon"></i>
-                      span= note.title
+                      span= note.truncateTitle()
                   td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
                   td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) 17-05-2021
                   td.table-td
