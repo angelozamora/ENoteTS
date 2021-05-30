@@ -148,6 +148,33 @@ class NoteController{
   }
 
 
+  public postUpdateNote = async function(req:any , res:Response , next : NextFunction){
+    try{
+      const {title , body}  =req.body;
+      const noteId = req.params.id;
+      const note = await NoteModel.findOne({ _id : noteId})
+      
+      if(note){
+        note.title = title;
+        note.body = body;
+        note.save();
+
+        req.flash('res' , { type : 'success' , msg:'Note updated successfully'})
+        return res.redirect(`/note/detail/${note._id}`)
+      }
+      
+      req.flash('res' , { type : 'error' , msg:'Note not found , please try again!'})
+      return res.redirect('back')
+    
+    }catch(error){
+      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+      res.redirect('back')
+      return next(error)
+    }
+
+  }
+
+
   public getDeleteNote = async function(req:any , res:Response , next : NextFunction){
     try{
       const note = await NoteModel.findOne({_id : req.params.id});
