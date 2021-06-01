@@ -20,7 +20,6 @@ class AuthController{
         if(isMatch){
           if(req.session){
             req.session.userId = user._id;
-            
             // req!.session!.user = user;
             req.flash('res' , { type : 'success' , msg:`Welcome  ${user.fullname}`})
             return res.redirect('/')

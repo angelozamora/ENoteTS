@@ -35,6 +35,21 @@ export async function startServer(){
   /**********ROUTER***********/
   app.use('/' , router())
 
+
+
+  app.use( (err:any , req:any ,res:any , next:any)=>{
+    
+    if (res.headersSent) {
+      console.log('ERROR AFTER SENT HEADERS TO THE CLIENTE')
+      return next(err);
+    }
+    console.log('ERROR BEFORE SENT HEADERS TO THE CLIENTE')
+    res.status(500).send('SORRY, AN ERROR HAPPENED')
+
+
+  })
+
+
   app.listen(app.get('PORT') , ()=>{
     console.log(
       `
