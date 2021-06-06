@@ -75,6 +75,8 @@ class NoteController{
 
   public postCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{
+      console.log('LLEGO A LA FUNCION CREAR NOTA')
+      console.log(req.body)
       const folderId = req.params.folderId;
       const folder = await FolderModel.findOne({_id : folderId})
       if(folder){

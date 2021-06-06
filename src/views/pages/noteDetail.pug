@@ -7,7 +7,7 @@ block content
         input(type="text" class="input-text notaDetail-title-text" readonly="readonly" value=`${note.title}`)
           
       div.notaDetail-body  
-        = note.body
+        span.d-block  !{note.body}
     
       div.notaDetail-options
         a(href=`/note/all-notes/${note.folder_id}` class="notaDetail-option-button")
