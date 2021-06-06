@@ -12,11 +12,10 @@ block content
             input(type="text"  name="title" id="title" placeholder="Enter title"  
             class=errors && errors.title ? 'input-error' : '').input-text.input-text-medium
             +errors(errors , "title")
-            
-
+          
           div.mb-5.col-12
-            label(for="body" class="form-label") Description 
-            input(type="text" name="body" id="body" required).input-text.input-text-medium
+            label(for="tiny-body" class="form-label") Description
+            textarea#tiny-body(name="body", cols="30", rows="10" required).input-text.input-text-medium
             +errors(errors , "body")
         
           div.mb-3.col-12
