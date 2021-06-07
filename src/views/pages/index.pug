@@ -47,6 +47,16 @@ block main
             .row.mt-4.mb-2.mx-0 
               .col-12.px-0#button-new
                 button(class="button  button-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalNewFolder") <i class="fas fa-plus"></i> New
+
+                div#modalNew-div
+                  .modalNew-folder 
+                    h1(class="modalNew-folder-title"  data-bs-toggle="modal" data-bs-target="#modalNewFolder") 
+                      <i class="fas fa-folder me-2"></i> Folder 
+
+                  .modalNew-file
+                    a(href=`/note/create/0` class="d-block modalNew-note") 
+                      <i class="far fa-file-alt me-2"></i> Note    
+
               .col-12.px-0#carpeta-container
                 //- each folder in folders
                 //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  

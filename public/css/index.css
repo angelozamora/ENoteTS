@@ -338,6 +338,50 @@ main {
 }
 
 
+/************* BUTTON NEW***********/
+
+#button-new {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
+#modalNew-div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 18px 0;
+    border-radius: 4px;
+    width: 250px;
+    background-color: var(--secondary-color);
+    /* border: 1px solid rgba(155, 155, 155, 0.712); */
+    box-shadow: 0px 1px 4px #67dbca5e;
+}
+
+.modalNew-folder {
+    border-bottom: 1px solid rgba(155, 155, 155, 0.712);
+}
+
+.modalNew-file {
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(155, 155, 155);
+}
+
+.modalNew-folder-title,
+.modalNew-note {
+    font-size: 1rem;
+    padding: 6px 18px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.modalNew-folder-title:hover,
+.modalNew-note:hover {
+    color: var(--primary-color);
+    background-color: #67dbca3f;
+}
+
+
 /************************  HEADER ************************/
 
 header {
@@ -598,11 +642,6 @@ footer {
     font-size: 1.25rem;
 }
 
-#button-new {
-    display: flex;
-    justify-content: flex-end;
-}
-
 #carpeta-container {
     display: flex;
     flex-wrap: wrap;
@@ -703,7 +742,7 @@ footer {
     }
     /************* VISTA HOME **************/
     #button-new {
-        display: none;
+        /* display: none; */
     }
     #carpeta-container {
         max-height: calc(100vh - 300px);
