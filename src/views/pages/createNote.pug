@@ -20,7 +20,8 @@ block content
         
           div.mb-3.col-12
             .d-flex.justify-content-between   
-              a(class="button button-transparent" href=`/note/all-notes/${folderId}`) Cancel
+              //- a(class="button button-transparent" href=`/note/all-notes/${folderId}`) Cancel
+              button(class="button button-transparent" type="button" onclick=`cancel('${folderId}')`) Cancel
               button(class="button button-primary" type="submit") Create
 
           
@@ -39,9 +40,9 @@ block content
     }
 
 
-    function cancel(){
+    function cancel(folderId){
       Swal.fire({
-        title: '¿Seguro que desea cancelar la creación de la acción?',
+        title: '¿You sure want to cancel the creation of the note?',
         icon: 'warning',
         showCancelButton: false,
         showDenyButton: true,
@@ -49,11 +50,11 @@ block content
         denyButtonColor: '#E74C3C',
         
         denyButtonText : 'No',
-        confirmButtonText: 'Si, cancelar!',
+        confirmButtonText: 'Yes, cancel!',
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href= "/secciones/lista-de-acciones"
+            window.location.href= `/note/all-notes/${folderId}`
         } 
       })
     }

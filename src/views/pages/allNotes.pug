@@ -6,7 +6,7 @@ block content
       h1.content-title-text= folder.name
     .row.mt-4.mb-2.mx-0
       .col-12.px-0#button-new
-        a(href=`/note/create/${folder._id}` class="button  button-primary" type="button" ) 
+        a(href=`/note/create/${folder._id}` class="button  button-primary" type="button" target="_blank") 
           <i class="fas fa-plus"></i> New Note
       .col-12.px-0#carpeta-container
         table.table.table-responsive
@@ -38,5 +38,6 @@ block content
 
   script. 
     function goToDetail(id){
-      return window.location.href = '/note/detail/' + id;
+      //- return window.location.href = '/note/detail/' + id;
+      return window.open('/note/detail/'+ id, '_blank');
     }
