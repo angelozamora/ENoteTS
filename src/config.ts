@@ -43,6 +43,7 @@ export async function startServer(){
       console.log('ERROR AFTER SENT HEADERS TO THE CLIENTE')
       return next(err);
     }
+    console.log(err)
     console.log('ERROR BEFORE SENT HEADERS TO THE CLIENTE')
     res.status(500).send('SORRY, AN ERROR HAPPENED')
 

@@ -5,5 +5,6 @@ import { isLoged } from '../midleware/isLoged';
 
 
 export default (router : Router)=>{
-  router.get('/', [getUser , isLoged] ,  HomeController.getAllFolders)
+  router.get('/', [getUser , isLoged] ,  HomeController.getMyUnit);
+  router.get('/mydrive', [getUser , isLoged] ,  HomeController.getAllFolders)
 }
