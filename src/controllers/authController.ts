@@ -3,6 +3,7 @@ import { NextFunction, Request , Response} from 'express';
 
 
 
+
 class AuthController{
   
 
@@ -49,8 +50,6 @@ class AuthController{
   public postRegister = async function( req : any , res : Response , next:any){
     try{
       
-      // const {email , password }=req.body;
-      // console.log("EMAIL : "+email)
       const user= await UserModel.create({
         email : req.body.email,
         password : req.body.password,

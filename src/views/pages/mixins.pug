@@ -2,3 +2,25 @@ mixin errors(errors , field)
   if( errors && errors[field])
     span.input-error-text=errors[field].message
   
+
+
+mixin modalNewFolder(folderId)
+  <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-dark">
+        <div class="modal-body p-4">
+          div.d-flex.justify-content-between
+            <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+            <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+          form(action=`/note/create/folder/${folderId}` method="POST").mt-4 
+            div.mb-4  
+              //- label(for="name" class="form-label text-white") Folder name:
+              input(type="text" id="name" name="name" placeholder="Enter folder name" class="input-text input-text-medium " required)
+            .mb-1.d-flex.justify-content-between 
+              <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
+              <button type="submit" class="button button-primary">Create </button>
+        </div>
+          
+      </div>
+    </div>
+  </div>

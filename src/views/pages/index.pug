@@ -10,6 +10,7 @@ block script
   script(src="/public/js/menuResponsive-function.js") 
 
 block main 
+  include ./mixins
   main 
     div.row.mx-0.main-container 
       div#sidebar-back(onclick="menuResponsive()")
@@ -88,26 +89,26 @@ block main
                         td(colspan="3" class="border-bottom-0") 
                           h4(class="text-color text-center border-none mt-4") No folders found
 
-
-            <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal-dark">
-                  <div class="modal-body p-4">
-                    div.d-flex.justify-content-between
-                      <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
-                      <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
-                    form(action="/note/create/folder" method="POST").mt-4 
-                      div.mb-4  
-                        //- label(for="name" class="form-label text-white") Folder name:
-                        input(type="text" id="name" name="name" placeholder="Enter folder name" class="input-text input-text-medium " required)
-                      .mb-1.d-flex.justify-content-between 
-                        <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
-                        <button type="submit" class="button button-primary">Create </button>
-                  </div>
+          +modalNewFolder('0')
+            //- <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            //-   <div class="modal-dialog modal-dialog-centered">
+            //-     <div class="modal-content modal-dark">
+            //-       <div class="modal-body p-4">
+            //-         div.d-flex.justify-content-between
+            //-           <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+            //-           <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+            //-         form(action="/note/create/folder/0" method="POST").mt-4 
+            //-           div.mb-4  
+            //-             //- label(for="name" class="form-label text-white") Folder name:
+            //-             input(type="text" id="name" name="name" placeholder="Enter folder name" class="input-text input-text-medium " required)
+            //-           .mb-1.d-flex.justify-content-between 
+            //-             <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
+            //-             <button type="submit" class="button button-primary">Create </button>
+            //-       </div>
                     
-                </div>
-              </div>
-            </div>
+            //-     </div>
+            //-   </div>
+            //- </div>
 
     
   script. 

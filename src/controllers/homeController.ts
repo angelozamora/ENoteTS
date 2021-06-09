@@ -5,18 +5,18 @@ import flash from 'express-flash';
 
 class HomeController{
   
-  public getMyUnit = async function(req:any , res :Response , next : NextFunction){
+  public redirectMyDrive = async function(req:any , res :Response , next : NextFunction){
     try{
       return res.redirect('/mydrive')
     }catch(error){
       return next(error);
     }
   }
-  public getAllFolders = async function (req : any, res:Response , next:NextFunction){
+  public getMyDrive = async function (req : any, res:Response , next:NextFunction){
     try{
       console.log('entro a folders')
       const userId = res.locals.user._id;;
-      const folders = await FolderModel.find({user_id : userId}).sort({createdAt : -1});
+      const folders = await FolderModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
       return res.render('pages/index' , {folders})
     }catch(error){
       req.flash("res" , {type : 'error' ,  msg: 'An error occurred, please try again!' })

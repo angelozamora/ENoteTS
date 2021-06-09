@@ -6,7 +6,7 @@ import { isLoged } from '../midleware/isLoged';
 
 
 export default (router : Router)=>{
-  router.post('/note/create/folder',[getUser , isLoged], NoteController.postFolder)
+  router.post('/note/create/folder/:folderId',[getUser , isLoged], NoteController.postFolder)
 
 
   router.get('/note/all-notes/:folderId',[getUser , isLoged], NoteController.getAllNotes)

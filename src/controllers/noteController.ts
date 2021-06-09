@@ -1,16 +1,26 @@
 import FolderModel from '../models/Folder';
 import  NoteModel  from '../models/Note';
 import { NextFunction, Request , Response} from 'express';
-import Folder from '../models/Folder';
+import mongoose from 'mongoose';
 
 class NoteController{
   
   public postFolder = async function(req : any, res:Response , next:NextFunction){
 
     try{
+
+      var ObjectId = mongoose.Types.ObjectId; 
+      
+
+      let folderId = req.params.folderId;
+      if(folderId == '0'){
+        folderId = new ObjectId('000000000000000000000000')
+      }
       const folder = {
         name : req.body.name,
-        user_id : res.locals.user._id
+        user_id : res.locals.user._id,
+        folder_id : folderId
+
       }
       
       const newFolder = new FolderModel(folder);
@@ -36,7 +46,7 @@ class NoteController{
     try{
 
       const folderId = req.params.folderId;
-      const folder = await Folder.findOne({ _id : folderId})
+      const folder = await FolderModel.findOne({ _id : folderId})
       if(folder){
         const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
         return res.render('pages/allNotes' , {notes , folder})
@@ -56,7 +66,7 @@ class NoteController{
   public getCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{
       const folderId = req.params.folderId;
-      const folder = await Folder.findOne({ _id : folderId})
+      const folder = await FolderModel.findOne({ _id : folderId})
       if(folder){
         return res.render('pages/createNote' , {folderId})
       }
