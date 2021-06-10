@@ -1,4 +1,4 @@
-import  UserModel  from '../models/user';
+import  UserModel  from '../models/User';
 import { NextFunction, Request , Response} from 'express';
 
 

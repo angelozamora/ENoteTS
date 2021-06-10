@@ -14,7 +14,7 @@ class HomeController{
   }
   public getMyDrive = async function (req : any, res:Response , next:NextFunction){
     try{
-      console.log('entro a folders')
+      
       const userId = res.locals.user._id;
       const folders = await FolderModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
       const notes = await NoteModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});

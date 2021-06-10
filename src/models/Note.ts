@@ -1,6 +1,6 @@
 import  { Schema, model, Document} from 'mongoose'
 import {IFolder} from './Folder'
-import {IUser} from './user'
+import {IUser} from './User'
 
 export interface INote extends Document{
   title : string,

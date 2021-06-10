@@ -1,5 +1,5 @@
 import {Schema , model, Document} from 'mongoose';
-import {IUser} from './user'
+import {IUser} from './User'
 
 export interface IFolder extends Document{
   name : string,

@@ -40,14 +40,14 @@ class NoteController{
     
   }
   
-  public getAllNotes = async function(req : any, res:Response , next:NextFunction){
+  public getFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
       const folderId = req.params.folderId;
       const folder = await FolderModel.findOne({ _id : folderId})
       if(folder){
         const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
-        return res.render('pages/allNotes' , {notes , folder})
+        return res.render('pages/folder' , {notes , folder})
       }
       
       return res.redirect('back')
@@ -130,7 +130,7 @@ class NoteController{
       if(req.params.folderId == '0'){
         return res.redirect(`/mydrive`);
       }else{
-        return res.redirect(`/note/all-notes/${folderId}`);
+        return res.redirect(`/folder/${folderId}`);
       }
 
 

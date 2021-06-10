@@ -10,7 +10,7 @@ block content
         span.d-block  !{note.body}
     
       div.notaDetail-options
-        a(href=`/note/all-notes/${note.folder_id}` class="notaDetail-option-button")
+        a(href=`/folder/${note.folder_id}` class="notaDetail-option-button")
           <i class="far fa-arrow-alt-circle-left  notaDetail-icon"></i>
         a(href=`/note/update/${note._id}` class="notaDetail-option-button")
           <i class="fas fa-edit  notaDetail-icon"></i>
@@ -141,7 +141,7 @@ block content
               if(data.flag){
                 confirmMessage(data.msg)
                 setTimeout( function(){
-                  window.location= `/note/all-notes/${folderId}`
+                  window.location= `/folder/${folderId}`
                 },2500)
               }else{
                 swalMessage('error',data.msg)
