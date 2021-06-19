@@ -46,8 +46,9 @@ class NoteController{
       const folderId = req.params.folderId;
       const folder = await FolderModel.findOne({ _id : folderId})
       if(folder){
+        const folders = await FolderModel.find({folder_id : folderId}).sort({createdAt : -1})
         const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
-        return res.render('pages/folder' , {notes , folder})
+        return res.render('pages/folder' , {folders , notes , folder})
       }
       
       return res.redirect('back')

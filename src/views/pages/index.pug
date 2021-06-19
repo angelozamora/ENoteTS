@@ -72,7 +72,7 @@ block main
                     
                   
                   tbody
-                    if(folders || notes)
+                    if((folders && folders.length) || (notes && notes.length))
                       each folder in folders
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToFolder('${folder._id}')`)

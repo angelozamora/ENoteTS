@@ -6,11 +6,7 @@ import { NextFunction, Request , Response} from 'express';
 class HomeController{
   
   public redirectMyDrive = async function(req:any , res :Response , next : NextFunction){
-    try{
       return res.redirect('/mydrive')
-    }catch(error){
-      return next(error);
-    }
   }
   public getMyDrive = async function (req : any, res:Response , next:NextFunction){
     try{
