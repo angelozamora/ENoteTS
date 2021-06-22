@@ -105,8 +105,6 @@ class NoteController{
         }
       }
 
-      console.log(folderId)
-      
       const note = {
         title : req.body.title,
         body : req.body.body,
@@ -145,7 +143,13 @@ class NoteController{
       let noteId = req.params.id
       const note = await NoteModel.findOne({_id : noteId});
       if(note){
-        return res.render('pages/noteDetail' , {note})
+        let folderId
+        if(note.folder_id == '000000000000000000000000'){
+          folderId= '0';
+        }else{
+          folderId = note.folder_id;
+        }
+        return res.render('pages/noteDetail' , {note , folderId})
       }
       
       req.flash('res' , { type : 'error' , msg:'Note not found , please try again'})
@@ -174,9 +178,7 @@ class NoteController{
       res.redirect('back')
       return next(error)
     }
-
   }
-
 
   public postUpdateNote = async function(req:any , res:Response , next : NextFunction){
     try{
@@ -214,9 +216,7 @@ class NoteController{
         return res.json({flag : true, msg : 'Note deleted successfully'});
       }
       
-      
       return res.json({flag : false, msg : 'Note not found'});
-
     }catch(error){
       res.json({ flag : false, msg : 'An error occurred, please try again!'});
       return next(error)
@@ -224,11 +224,7 @@ class NoteController{
 
   }
   
-
-
 }
-
-
 
 const noteController = new NoteController();
 export default noteController;

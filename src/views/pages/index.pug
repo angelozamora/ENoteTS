@@ -78,12 +78,12 @@ block main
 
                       each note in notes
                         tr.text-color.table-tr-hover
-                          td.table-td(onclick=`goToFolder('${note._id}')`)
+                          td.table-td(onclick=`goToDetail('${note._id}')`)
                             div.d-flex.justify-content-start
                               <i class="fas fa-file-alt table-td-icon"></i>
                               span= note.truncateTitle()
-                          td.table-td.table-td-web(onclick=`goToFolder('${note._id}')`) Yo
-                          td.table-td.table-td-web(onclick=`goToFolder('${note._id}')`) 17-05-2021
+                          td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
+                          td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) 17-05-2021
                           td.table-td
                             <i class="fas fa-ellipsis-v table-td-icon"></i>
                         
@@ -97,5 +97,10 @@ block main
   script. 
     function goToFolder(id){
       return window.location.href = '/folder/' + id;
+    }
+
+    function goToDetail(id){
+      //- return window.location.href = '/note/detail/' + id;
+      return window.open('/note/detail/'+ id, '_blank');
     }
     
