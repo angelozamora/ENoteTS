@@ -1,716 +1,772 @@
 * {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --primary-color: #67dbca;
-    --primary-color-dark: #63bdaf;
-    --secondary-color: #181818;
-    --secondary-color-dark: #181818;
-    --terciary-color: #8260d8;
-    --text-color: #dbdbdb;
-    --text-color-dark: #0f0f0f;
+  --primary-color: #67dbca;
+  --primary-color-dark: #63bdaf;
+  --secondary-color: #181818;
+  --secondary-color-dark: #181818;
+  --terciary-color: #8260d8;
+  --text-color: #dbdbdb;
+  --text-color-dark: #0f0f0f;
 }
 
 ul,
 li {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .text-color {
-    color: var(--text-color) !important;
+  color: var(--text-color) !important;
 }
 
 
 /************ INDEX ************/
 
 main {
-    /* min-height: calc(100vh - 103px); */
-    min-height: calc(100vh - 63px);
-    background-color: var(--secondary-color);
+  /* min-height: calc(100vh - 103px); */
+  min-height: calc(100vh - 63px);
+  background-color: var(--secondary-color);
 }
 
 .main-container {
-    position: relative;
-    height: 100%;
+  position: relative;
+  height: 100%;
 }
 
 #content {
-    width: calc(100% - 280px);
-    /* background-color: blanchedalmond; */
-    min-height: calc( 100vh - 63px);
+  width: calc(100% - 280px);
+  /* background-color: blanchedalmond; */
+  min-height: calc( 100vh - 63px);
 }
 
 #div-container {
-    padding: 20px;
+  padding: 20px;
 }
 
 
 /********** BUTTON ***************/
 
 .button {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    line-height: 1.5;
-    border: 1px solid transparent;
-    font-size: 1rem;
-    border-radius: .25rem;
-    padding: .38rem .85rem;
-    font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  border-radius: .25rem;
+  padding: .38rem .85rem;
+  font-weight: 600;
 }
 
 .button-primary {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .button-primary:hover {
-    background-color: var(--primary-color-dark);
-    color: white;
+  background-color: var(--primary-color-dark);
+  color: white;
 }
 
 .button-secondary {
-    background-color: var(--secondary-color);
-    color: white;
+  background-color: var(--secondary-color);
+  color: white;
 }
 
 .button-secondary:hover {
-    background-color: var(--secondary-color-dark);
-    color: white;
+  background-color: var(--secondary-color-dark);
+  color: white;
 }
 
 .button-transparent {
-    background-color: transparent;
-    color: white;
+  background-color: transparent;
+  color: white;
 }
 
 .button-transparent:hover {
-    color: white;
-    box-shadow: 0px 2px 4px black;
+  color: white;
+  box-shadow: 0px 2px 4px black;
 }
 
 
 /************ MENU RESPONSIVE**************/
 
 #menures-sidebar {
-    display: none;
-    justify-content: flex-start;
+  display: none;
+  justify-content: flex-start;
 }
 
 #menures {
-    display: none;
-    justify-content: space-between;
-    /* background-color: #8260d8; */
-    padding: 12px 0 12px 0;
-    position: sticky;
-    background-color: var(--secondary-color);
-    top: 63px;
+  display: none;
+  justify-content: space-between;
+  /* background-color: #8260d8; */
+  padding: 12px 0 12px 0;
+  position: sticky;
+  background-color: var(--secondary-color);
+  top: 63px;
 }
 
 .menures-option {
-    font-size: 24px;
-    padding: 6.5px 5px 6.5px 0;
-    color: white;
+  font-size: 24px;
+  padding: 6.5px 5px 6.5px 0;
+  color: white;
 }
 
 .menures-option-width {
-    width: 50px;
+  width: 50px;
 }
 
 
 /************** SIDEBAR *****************/
 
 #sidebar-back {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.747);
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.747);
 }
 
 #sidebar {
-    width: 280px;
-    background-color: var(--secondary-color);
-    padding: 20px 10px;
-    transition: all 0.5s ease;
-    height: calc( 100vh - 63px);
-    position: sticky;
-    top: 63px;
+  width: 280px;
+  background-color: var(--secondary-color);
+  padding: 20px 10px;
+  transition: all 0.5s ease;
+  height: calc( 100vh - 63px);
+  position: sticky;
+  top: 63px;
 }
 
 .sidebar-ul {
-    padding: 0;
-    margin-top: 50px;
+  padding: 0;
+  margin-top: 10px;
 }
 
 .sidebar-link {
-    display: block;
-    /* background-color: brown; */
-    padding: 10px 20px;
-    color: var(--text-color);
+  display: block;
+  /* background-color: brown; */
+  padding: 10px 20px;
+  color: var(--text-color);
 }
 
 .sidebar-link:hover,
 .sidebar-link-active {
-    background-color: #67dbca3f;
-    color: var(--primary-color);
+  background-color: #67dbca3f;
+  color: var(--primary-color);
 }
 
 
 /*************** MODAL ******************/
 
 .modal-dark {
-    background-color: var(--secondary-color);
+  background-color: var(--secondary-color);
 }
 
 .btn-close-dark {
-    border-radius: 100%;
-    background-color: #90909083;
-    padding: 7px;
-    /* position: absolute;
+  border-radius: 100%;
+  background-color: #90909083;
+  padding: 7px;
+  /* position: absolute;
     top: 16px;
     right: 23px; */
-    /* background-color: #90909083 !important; */
+  /* background-color: #90909083 !important; */
 }
 
 .btn-close-dark:hover {
-    background-color: #b3b3b383;
+  background-color: #b3b3b383;
 }
 
 
 /************* TABLE ***************/
 
 .table-tr-hover:hover {
-    cursor: pointer;
-    background-color: rgba(168, 168, 168, 0.13);
-    color: var(--text-color) !important;
+  cursor: pointer;
+  background-color: rgba(168, 168, 168, 0.13);
+  color: var(--text-color) !important;
 }
 
 .table-th,
 .table-td {
-    /* padding: 12px 0; */
-    font-size: 0.9rem;
-    border-bottom: 1px solid #ebebeb70;
+  /* padding: 12px 0; */
+  font-size: 0.9rem;
+  border-bottom: 1px solid #ebebeb70;
 }
 
 .table-th:nth-child(1) {
-    width: 50%;
+  width: 50%;
 }
 
 .table-td-icon {
-    margin-left: 10px;
-    margin-right: 10px;
-    color: var(--terciary-color);
-    font-size: 1.2rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: var(--terciary-color);
+  font-size: 1.2rem;
 }
 
 
 /************************ FORM INPUT ************************/
 
 .input-text {
-    display: block;
-    width: 100%;
-    padding: .375rem .4rem;
-    font-size: 0.9rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--text-color);
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid rgb(167, 167, 167);
-    height: 32px;
+  display: block;
+  width: 100%;
+  padding: .375rem .4rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(167, 167, 167);
+  height: 32px;
 }
 
 .input-text-medium {
-    font-size: 1.05rem;
+  font-size: 1.05rem;
 }
 
 .input-error {
-    border-bottom: 1px solid rgb(240, 43, 43);
+  border-bottom: 1px solid rgb(240, 43, 43);
 }
 
 .input-error-text {
-    font-size: 0.9rem;
-    color: rgb(240, 43, 43);
+  font-size: 0.9rem;
+  color: rgb(240, 43, 43);
 }
 
 .input-text::placeholder {
-    color: rgb(167, 167, 167);
+  color: rgb(167, 167, 167);
 }
 
 .input-text:focus {
-    outline: none;
-    border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  border-bottom: 1px solid var(--primary-color);
 }
 
 
 /************************ FORM CHECK ************************/
 
 #check-cont {
-    display: block;
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .c-plomo {
-    color: rgb(167, 167, 167)
+  color: rgb(167, 167, 167)
 }
 
 
 /*ocultamos el input por defecto*/
 
 #check-option {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
 
 /* Create a custom checkbox */
 
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 .checkmark::after {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 6px;
-    top: 4px;
-    width: 6px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 4px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 
 /* Al pasar el mouse encima, lo ponemos gris  */
 
 #check-cont:hover input~.checkmark {
-    background-color: #67dbca93;
+  background-color: #67dbca93;
 }
 
 
 /* Cuando el checkbox esta checkd, los ponemos rosa */
 
 #check-cont input:checked~.checkmark {
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 
 /* mostramos el marcador al seleccionar */
 
 #check-cont input:checked~.checkmark::after {
-    display: block;
+  display: block;
+}
+
+
+/************* BUTTON NEW***********/
+
+.buttonDiv {
+  display: flex;
+  position: relative;
+  padding: 0 8px;
+}
+
+.buttonDiv--left {
+  justify-content: flex-start;
+}
+
+.buttonDiv_new {
+  background-color: transparent;
+  border-radius: 15px 15px 15px 15px;
+  border: 1px solid var(--primary-color);
+  color: var(--text-color);
+}
+
+.modalNew-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  padding: 0 !important;
+  border-radius: 4px;
+  max-height: 0;
+  width: 250px;
+  transform: translate3d(7px, -5px, 0) !important;
+  background-color: var(--secondary-color);
+  height: auto;
+  overflow-y: hidden;
+  transition: all 0.6s ease-in-out;
+}
+
+.modalNew-div.show {
+  /* transform: translateX( 90px) !important; */
+  max-height: 550px;
+  box-shadow: 0px 1px 4px #67dbca5e;
+}
+
+.modalNew-folder {
+  border-bottom: 1px solid rgba(155, 155, 155, 0.712);
+}
+
+.modalNew-file {
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(155, 155, 155);
+}
+
+.modalNew-folder-title,
+.modalNew-note {
+  font-size: 1rem;
+  padding: 6px 18px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.modalNew-folder-title:hover,
+.modalNew-note:hover {
+  color: var(--primary-color);
+  background-color: #67dbca3f;
 }
 
 
 /************************  HEADER ************************/
 
 header {
-    background-color: var(--secondary-color);
-    position: sticky;
-    height: 63px;
-    border-bottom: 1px solid rgba(172, 172, 172, 0.685);
-    top: 0;
-    z-index: 100;
-    /* box-shadow: 0 1px 4px rgba(172, 172, 172, 0.685); */
+  background-color: var(--secondary-color);
+  position: sticky;
+  height: 63px;
+  border-bottom: 1px solid rgba(172, 172, 172, 0.685);
+  top: 0;
+  z-index: 100;
+  /* box-shadow: 0 1px 4px rgba(172, 172, 172, 0.685); */
 }
 
 .name-app {
-    color: white !important;
-    font-size: 1.5rem;
-    font-weight: 700;
+  color: white !important;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .name-app2 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .navbar {
-    background-color: var(--secondary-color);
-    /* border-bottom: 1px solid rgba(172, 172, 172, 0.685); */
+  background-color: var(--secondary-color);
+  /* border-bottom: 1px solid rgba(172, 172, 172, 0.685); */
 }
 
 .a-link {
-    display: block;
-    padding: .5rem 1rem;
-    text-decoration: none;
-    /* color: white; */
-    font-weight: 600;
+  display: block;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .a-link:hover {
-    color: var(--primary-color)
+  color: var(--primary-color)
 }
 
 
 /************************* FOOTER ****************************/
 
 footer {
-    background-color: var(--secondary-color);
-    /* border-top: 1px solid rgba(172, 172, 172, 0.685); */
-    height: 40px;
+  background-color: var(--secondary-color);
+  /* border-top: 1px solid rgba(172, 172, 172, 0.685); */
+  height: 40px;
 }
 
 .footer-container {
-    height: 100%;
-    padding: 10px;
+  height: 100%;
+  padding: 10px;
 }
 
 .footer-info {
-    display: block;
-    text-align: center;
-    font-weight: 600;
-    color: var(--primary-color);
-    font-size: 0.95rem;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.95rem;
 }
 
 
 /************************ VISTA LOGIN ************************/
 
 .login-add-container {
-    background-color: aqua;
+  background-color: aqua;
 }
 
 .login-container {
-    min-height: 100vh;
-    background-color: var(--secondary-color);
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-height: 100vh;
+  background-color: var(--secondary-color);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #login-content {
-    width: 76%;
-    min-width: 250px;
-    justify-content: center;
-    display: flex;
-    min-height: 60%;
-    align-content: space-around;
-    flex-wrap: wrap;
+  width: 76%;
+  min-width: 250px;
+  justify-content: center;
+  display: flex;
+  min-height: 60%;
+  align-content: space-around;
+  flex-wrap: wrap;
 }
 
 #title-login {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 #form-login {
-    margin-top: 40px;
-    color: var(--text-color);
+  margin-top: 40px;
+  color: var(--text-color);
 }
 
 .span-error {
-    background-color: #eb192a;
-    display: block;
-    text-align: center;
-    margin-bottom: 15px;
-    padding: 10px 5px;
-    border-radius: 10px;
+  background-color: #eb192a;
+  display: block;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px 5px;
+  border-radius: 10px;
 }
 
 #form-login label {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 #forg-pass {
-    font-size: 0.9rem;
-    text-align: end;
-    color: var(--text-color);
+  font-size: 0.9rem;
+  text-align: end;
+  color: var(--text-color);
 }
 
 #forg-pass:hover {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 #login-option {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 #login-option button {
-    background-color: var(--primary-color);
-    padding: 0.55rem 1.8rem;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    color: var(--text-color);
+  background-color: var(--primary-color);
+  padding: 0.55rem 1.8rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 #login-option button:hover {
-    background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-dark);
 }
 
 #login-create {
-    padding: 0;
-    margin-top: 40px;
+  padding: 0;
+  margin-top: 40px;
 }
 
 #login-create li {
-    font-size: 0.9rem;
-    color: var(--text-color);
+  font-size: 0.9rem;
+  color: var(--text-color);
 }
 
 #login-create li a {
-    text-align: center;
-    margin: 8px 0;
-    color: var(--primary-color);
+  text-align: center;
+  margin: 8px 0;
+  color: var(--primary-color);
 }
 
 #login-create li a:hover {
-    border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
 }
 
 
 /************************ VISTA REGISTER ***************************/
 
 #register-div {
-    /* background-color: #F6F9FC; */
-    background-color: #8260d8;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
+  /* background-color: #F6F9FC; */
+  background-color: #8260d8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
 }
 
 #register-container {
-    background-color: brown;
+  background-color: brown;
 }
 
 #register-add {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 #register-content {
-    background-color: var(--secondary-color);
-    padding: 50px 55px;
+  background-color: var(--secondary-color);
+  padding: 50px 55px;
 }
 
 #register-content h1 {
-    font-size: 2rem;
-    color: var(--text-color);
-    font-weight: 400;
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: 400;
 }
 
 #form-register {
-    margin-top: 35px;
-    color: var(--text-color);
+  margin-top: 35px;
+  color: var(--text-color);
 }
 
 #form-register label {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 #check-cont a {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    border-bottom: 1px solid var(--primary-color);
-    opacity: 0.7;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--primary-color);
+  opacity: 0.7;
 }
 
 #check-cont a:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 #register-option {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 #register-option a {
-    color: var(--text-color);
-    opacity: 0.6;
+  color: var(--text-color);
+  opacity: 0.6;
 }
 
 #register-option a span {
-    font-size: 0.9rem;
-    border-bottom: 1px solid var(--primary-color);
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--primary-color);
 }
 
 #register-option a:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 #register-option button {
-    background-color: var(--primary-color);
-    padding: 0.55rem 1.8rem;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    color: var(--text-color);
+  background-color: var(--primary-color);
+  padding: 0.55rem 1.8rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 #register-option button:hover {
-    background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-dark);
 }
 
 
 /************* VISTA HOME **************/
 
 .content-title {
-    border-bottom: 1px solid #ebebeb8a;
-    padding-bottom: 8px;
+  border-bottom: 1px solid #ebebeb8a;
+  padding-bottom: 8px;
 }
 
 .content-title-text {
-    color: white;
-    margin-top: 10px;
-    font-weight: 500;
-    font-size: 1.25rem;
-}
-
-#button-new {
-    display: flex;
-    justify-content: flex-end;
+  color: white;
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 #carpeta-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    /* background-color: #63bdaf; */
-    max-height: calc(100vh - 250px);
-    justify-content: center;
-    margin-top: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  /* background-color: #63bdaf; */
+  max-height: calc(100vh - 250px);
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow-y: auto;
 }
 
 .carpeta {
-    width: 160px;
-    height: 100px;
-    background-color: #8260d8;
-    margin: 10px 15px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 160px;
+  height: 100px;
+  background-color: #8260d8;
+  margin: 10px 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carpeta-titulo {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 0 10px;
-    font-weight: bold;
-    color: white;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0 10px;
+  font-weight: bold;
+  color: white;
 }
 
 
 /*************** VISTA CREATE NOTE*********************/
 
 #form-createNote {
-    margin-top: 35px;
-    color: var(--text-color);
+  margin-top: 35px;
+  color: var(--text-color);
 }
 
 #form-createNote label {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 @media (min-height: 1000px) {
-    #login-content {
-        min-height: 50%;
-    }
+  #login-content {
+    min-height: 50%;
+  }
 }
 
 @media (min-height: 1400px) {
-    #login-content {
-        min-height: 40%;
-    }
+  #login-content {
+    min-height: 40%;
+  }
 }
 
 @media (max-width: 991px) {
-    #content {
-        width: calc(100%);
-    }
-    #div-container {
-        padding: 20px 10px;
-    }
-    .content-title-text {
-        margin-top: 0;
-    }
-    /************** TABLE ****************/
-    .table-th-web,
-    .table-td-web {
-        display: none;
-    }
-    .table-th:nth-child(1) {
-        width: auto;
-    }
-    .table-th-action {
-        width: 50px;
-    }
-    /************** MENU RES ****************/
-    #menures,
-    #menures-sidebar {
-        display: flex;
-    }
-    /************** SIDEBAR ****************/
-    #sidebar {
-        padding: 15px 10px;
-        left: -280px;
-        z-index: 100;
-        position: fixed;
-        top: 63px;
-    }
-    #sidebar.sidebar-active {
-        left: 0;
-    }
-    .sidebar-ul {
-        margin: auto;
-        margin-top: 10px;
-    }
-    /************* VISTA HOME **************/
-    #button-new {
-        display: none;
-    }
-    #carpeta-container {
-        max-height: calc(100vh - 300px);
-        margin-top: 0px;
-    }
-    .carpeta {
-        width: 195px;
-        height: 130px;
-    }
+  #content {
+    width: calc(100%);
+  }
+  #div-container {
+    padding: 20px 10px;
+  }
+  .content-title-text {
+    margin-top: 0;
+  }
+  /************** TABLE ****************/
+  .table-th-web,
+  .table-td-web {
+    display: none;
+  }
+  .table-th:nth-child(1) {
+    width: auto;
+  }
+  .table-th-action {
+    width: 50px;
+  }
+  /************** MENU RES ****************/
+  #menures,
+  #menures-sidebar {
+    display: flex;
+  }
+  /************** SIDEBAR ****************/
+  #sidebar {
+    padding: 15px 10px;
+    left: -280px;
+    z-index: 100;
+    position: fixed;
+    top: 63px;
+  }
+  #sidebar.sidebar-active {
+    left: 0;
+  }
+  .sidebar-ul {
+    margin: auto;
+    margin-top: 10px;
+  }
+  /************* VISTA HOME **************/
+  #carpeta-container {
+    max-height: calc(100vh - 300px);
+    margin-top: 0px;
+  }
+  .carpeta {
+    width: 195px;
+    height: 130px;
+  }
 }

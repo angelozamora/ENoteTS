@@ -1,23 +1,35 @@
 import FolderModel from '../models/Folder';
 import  NoteModel  from '../models/Note';
 import { NextFunction, Request , Response} from 'express';
-import Folder from '../models/Folder';
+import mongoose from 'mongoose';
 
 class NoteController{
   
   public postFolder = async function(req : any, res:Response , next:NextFunction){
 
     try{
+      var ObjectId = mongoose.Types.ObjectId; 
+      let folderId = req.params.folderId;
+      let folderIdAux = folderId
+      if(folderId == '0'){
+        folderIdAux = new ObjectId('000000000000000000000000')
+      }
       const folder = {
         name : req.body.name,
-        user_id : res.locals.user._id
+        user_id : res.locals.user._id,
+        folder_id : folderIdAux
       }
       
       const newFolder = new FolderModel(folder);
       await newFolder.save();
 
       req.flash('res' , { type : 'success' , msg:'Folder created successfully'})
-      return res.redirect('back')
+      if(folderId == '0'){
+        return res.redirect('/mydrive')
+      }else{
+        return res.redirect(`/folder/${folderId}`)
+      }
+      
 
     }catch(error){
       if(error.name === "ValidationError"){
@@ -25,25 +37,30 @@ class NoteController{
       }else{
         req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
       }
-
       res.redirect('back')
       return next(error)
     }
     
   }
   
-  public getAllNotes = async function(req : any, res:Response , next:NextFunction){
+  public getFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
       const folderId = req.params.folderId;
-      const folder = await Folder.findOne({ _id : folderId})
-      if(folder){
-        const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
-        return res.render('pages/allNotes' , {notes , folder})
-      }
-      
-      return res.redirect('back')
-      
+
+      if(folderId == '0'){
+        return res.redirect('/mydrive')
+      }else{
+        const folder = await FolderModel.findOne({ _id : folderId})
+        if(folder){
+          const folders = await FolderModel.find({folder_id : folderId}).sort({createdAt : -1})
+          const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
+          return res.render('pages/folder' , {folders , notes , folder})
+          
+        }else{
+          return res.redirect('back')
+        }
+      }      
     }catch(error){
       req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
       res.redirect('back')
@@ -55,16 +72,15 @@ class NoteController{
 
   public getCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{
-      const folderId = req.params.folderId;
-      const folder = await Folder.findOne({ _id : folderId})
-      if(folder){
-        return res.render('pages/createNote' , {folderId})
+      let folderId = req.params.folderId;
+      if(folderId != '0'){
+        const folder = await FolderModel.findOne({_id : folderId})
+        if(!folder){
+          req.flash('res' , { type : 'error' , msg:'Folder not found'})
+          return res.redirect('back')
+        }
       }
-      
-      req.flash('res' , { type : 'error' , msg:'Folder not found'})
-      return res.redirect('back')
-      
-
+      return res.render('pages/createNote' , {folderId})
     }catch(error){
       req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
       res.redirect('back');
@@ -75,24 +91,36 @@ class NoteController{
 
   public postCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{
-      const folderId = req.params.folderId;
-      const folder = await FolderModel.findOne({_id : folderId})
-      if(folder){
-        const note = {
-          title : req.body.title,
-          body : req.body.body,
-          folder_id : folderId
+      const userId = res.locals.user._id;
+      let folderId = req.params.folderId;
+
+      var ObjectId = mongoose.Types.ObjectId; 
+      if(folderId == '0'){
+        folderId = new ObjectId('000000000000000000000000')
+      }else{
+        const folder = await FolderModel.findOne({_id : folderId})
+        if(!folder){
+          req.flas('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+          return res.redirect('back')
         }
+      }
 
-        const newNote = new NoteModel(note);
-        await newNote.save()
-
-        req.flash("res" , {type : 'success' ,  msg: `A note was created successfully` })
-        return res.redirect(`/note/all-notes/${folderId}`)
+      const note = {
+        title : req.body.title,
+        body : req.body.body,
+        user_id : userId,
+        folder_id : folderId
       }
       
-      req.flas('res' , { type : 'error' , msg:'An error occurred, please try again!'})
-      return res.redirect('back')
+      await NoteModel.create(note);
+      req.flash("res" , {type : 'success' ,  msg: `A note was created successfully` })
+
+      if(req.params.folderId == '0'){
+        return res.redirect(`/mydrive`);
+      }else{
+        return res.redirect(`/folder/${folderId}`);
+      }
+
 
     }catch(error){
       
@@ -115,7 +143,13 @@ class NoteController{
       let noteId = req.params.id
       const note = await NoteModel.findOne({_id : noteId});
       if(note){
-        return res.render('pages/noteDetail' , {note})
+        let folderId
+        if(note.folder_id == '000000000000000000000000'){
+          folderId= '0';
+        }else{
+          folderId = note.folder_id;
+        }
+        return res.render('pages/noteDetail' , {note , folderId})
       }
       
       req.flash('res' , { type : 'error' , msg:'Note not found , please try again'})
@@ -144,9 +178,7 @@ class NoteController{
       res.redirect('back')
       return next(error)
     }
-
   }
-
 
   public postUpdateNote = async function(req:any , res:Response , next : NextFunction){
     try{
@@ -184,9 +216,7 @@ class NoteController{
         return res.json({flag : true, msg : 'Note deleted successfully'});
       }
       
-      
       return res.json({flag : false, msg : 'Note not found'});
-
     }catch(error){
       res.json({ flag : false, msg : 'An error occurred, please try again!'});
       return next(error)
@@ -194,11 +224,7 @@ class NoteController{
 
   }
   
-
-
 }
-
-
 
 const noteController = new NoteController();
 export default noteController;

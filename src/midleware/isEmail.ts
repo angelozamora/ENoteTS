@@ -1,4 +1,4 @@
-import flash from 'express-flash';
+
 export function isEmail( req : any, res:any ,next:any){
   try{
     const {email} = req.body;

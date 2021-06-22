@@ -1,5 +1,6 @@
-import  UserModel  from '../models/user'
+import  UserModel  from '../models/User';
 import { NextFunction, Request , Response} from 'express';
+
 
 
 
@@ -20,7 +21,6 @@ class AuthController{
         if(isMatch){
           if(req.session){
             req.session.userId = user._id;
-            
             // req!.session!.user = user;
             req.flash('res' , { type : 'success' , msg:`Welcome  ${user.fullname}`})
             return res.redirect('/')
@@ -50,8 +50,6 @@ class AuthController{
   public postRegister = async function( req : any , res : Response , next:any){
     try{
       
-      // const {email , password }=req.body;
-      // console.log("EMAIL : "+email)
       const user= await UserModel.create({
         email : req.body.email,
         password : req.body.password,
