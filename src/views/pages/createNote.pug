@@ -1,5 +1,8 @@
 extends ./index
 
+block buttonNew
+  +buttonNew(folderId)
+
 block content 
   include ./mixins
   .container-lg#div-container
@@ -9,8 +12,7 @@ block content
         div.row
           div.mb-4.col-12.col-lg-6
             label(for="title" class="form-label") Title
-            input(type="text"  name="title" id="title" placeholder="Enter title"  
-            class=errors && errors.title ? 'input-error' : '').input-text.input-text-medium
+            input(type="text"  name="title" id="title" placeholder="Enter title" autofocus="autofocus" onfocus="this.select()" class=errors && errors.title ? 'input-error' : '').input-text.input-text-medium
             +errors(errors , "title")
           
           div.mb-5.col-12
@@ -24,7 +26,9 @@ block content
               button(class="button button-transparent" type="button" onclick=`cancel('${folderId}')`) Cancel
               button(class="button button-primary" type="submit") Create
 
-          
+block modal
+  +modalNewFolder(folderId)
+
   script.
     function validateForm(event){
       let tiny = tinymce.get("tiny-body").getBody();  

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import NoteController from '../controllers/noteController';
+import NoteController from '../controllers/folderController';
 import { getUser } from '../midleware/getUser';
 import { isLoged } from '../midleware/isLoged';
 
