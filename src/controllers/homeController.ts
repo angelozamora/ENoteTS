@@ -12,10 +12,11 @@ class HomeController{
     try{
       
       const userId = res.locals.user._id;
+      const userName =res.locals.user.fullname;
       const folders = await FolderModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
       const notes = await NoteModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
       
-      return res.render('pages/index' , {folders , notes})
+      return res.render('pages/index' , {folders , notes , userName})
     }catch(error){
       req.flash("res" , {type : 'error' ,  msg: 'An error occurred, please try again!' })
       res.redirect('back')
