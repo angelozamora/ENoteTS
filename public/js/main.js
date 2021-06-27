@@ -12,21 +12,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })
 
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
+
+
   document.addEventListener('click', function(e) {
+    console.log('dom click')
+    console.log(e.target)
     if (!e.target.classList.contains('appMenu') && !e.target.classList.contains('dropdown-appItem')) {
-      let dropdownMenuActive = document.querySelectorAll('.dropdown-appMenu.show')
-      dropdownMenuActive.forEach(dropdownMenu => {
-        dropdownMenu.classList.remove('show');
-      })
+      console.log('funciona')
+      closeDropDown();
     }
   })
-
 
 
   let appMenus = document.querySelectorAll('.appMenu')
   appMenus.forEach(menu => {
     menu.addEventListener('click', () => {
+      console.log('menu click')
+      if (menu.classList.contains('active')) {
+        menu.classList.remove('active')
+      } else {
+        closeDropDown();
+        menu.classList.add('active')
+      }
+
       let dataMenu = menu.getAttribute('data-menu')
       let dropdownMenu = document.querySelector(`#${dataMenu}`)
       if (dropdownMenu) {
@@ -36,6 +45,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
     })
   })
 })
+
+function closeDropDown() {
+  let dropdownMenuActive = document.querySelectorAll('.dropdown-appMenu.show')
+  let appMenuActive = document.querySelectorAll('.appMenu.active')
+  dropdownMenuActive.forEach(dropdownMenu => {
+    console.log('hola')
+    dropdownMenu.classList.remove('show');
+  })
+
+  appMenuActive.forEach(appMenu => {
+    appMenu.classList.remove('active')
+  })
+}
 
 
 function swalMessage(type, msg) {
