@@ -5,13 +5,15 @@ header
         span.name-app2 NOTE
       </a>
       <div class="collapse navbar-collapse justify-content-end " >
-        div(class="headerUser " )
-          img(class="headerUser_avatar appMenu" data-menu="hola")
-          div.headerUser_modal.dropdown-appMenu#hola 
+        div.headerUser
+          img(class="headerUser_avatar appMenu" data-menu="userModal")
+          div.headerUser_modal.dropdown-appMenu#userModal 
             .headerUser_image.dropdown-appItem
               image(class="headerUser_avatar dropdown-appItem" src="")
             h1.headerUser_fullName.dropdown-appItem.text-color Angelo Zamora
             h2.headerUser_email.dropdown-appItem.dropdown-appItem.text-color  azamora@gmail.com
+            div.buttonDiv.buttonDiv--center
+              a(href="" class="button button-secondary button--center") Gestionar Perfil
       </div>
     </div>
   </nav>

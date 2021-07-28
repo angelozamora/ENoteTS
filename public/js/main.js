@@ -14,12 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-
   document.addEventListener('click', function(e) {
-    console.log('dom click')
     console.log(e.target)
     if (!e.target.classList.contains('appMenu') && !e.target.classList.contains('dropdown-appItem')) {
-      console.log('funciona')
       closeDropDown();
     }
   })
@@ -28,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let appMenus = document.querySelectorAll('.appMenu')
   appMenus.forEach(menu => {
     menu.addEventListener('click', () => {
-      console.log('menu click')
       if (menu.classList.contains('active')) {
         menu.classList.remove('active')
       } else {
