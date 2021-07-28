@@ -74,7 +74,14 @@ block main
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
                           td.table-td
-                            <i class="fas fa-ellipsis-v table-td-icon"></i>
+                            div
+                              <i class="fas fa-ellipsis-v table-td-icon appMenu" data-menu="userModal1"></i> 
+                              div.headerUser_modal.dropdown-appMenu#userModal1 
+                                div 
+                                  span Editar
+                                div 
+                                  a(onclick=`deleteFolder('${folder._id}')` class="notaDetail-option-button") 
+                                    <i class="far fa-trash-alt  notaDetail-icon"></i>
 
                       each note in notes
                         tr.text-color.table-tr-hover
@@ -104,3 +111,40 @@ block main
       return window.open('/note/detail/'+ id, '_blank');
     }
     
+      
+    function deleteFolder(folderId){
+      Swal.fire({
+        title: '¿Are you sure you want to delete the folder?',
+        icon: 'error',
+
+        showCancelButton: true,
+        confirmButtonColor:  '#E74C3C',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText : 'No',
+        confirmButtonText: 'Yes, delete!',
+        reverseButtons: true,
+        background: '#181818',
+        customClass: {
+            title: 'text-color',
+        }
+      }).then((result) => {
+          if (result.isConfirmed) {
+            loadForm();
+            fetch(`/folder/delete/${folderId}`, {
+              method: "DELETE"
+            }).then(res => {
+              return res.json();
+            })
+            .then( data => {
+              if(data.flag){
+                confirmMessage(data.msg)
+                setTimeout( function(){
+                  window.location.reload()
+                },2500)
+              }else{
+                swalMessage('error',data.msg)
+              }
+            });
+          } 
+      })
+    }

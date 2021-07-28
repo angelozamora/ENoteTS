@@ -69,6 +69,26 @@ class NoteController{
 
   }
 
+  public deleteFolder = async function(req : any, res:Response , next:NextFunction){
+    try{
+
+      const folderId = req.params.folderId;
+
+      if(folderId == '0'){
+        return res.redirect('/mydrive')
+      }else{
+        await FolderModel.deleteOne({ _id : folderId})
+        return res.json({flag : true, msg : 'Folder deleted successfully'});
+        
+      }      
+    }catch(error){
+      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+      res.redirect('back')
+      return next(error)
+    }
+
+  }
+
 
   public getCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{
@@ -223,6 +243,7 @@ class NoteController{
     }
 
   }
+
   
 }
 

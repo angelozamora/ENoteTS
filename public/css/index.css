@@ -245,6 +245,11 @@ main {
   font-size: 1.2rem;
 }
 
+.fileOption {
+  position: absolute;
+  background-color: #63bdaf;
+}
+
 
 /************************ FORM INPUT ************************/
 

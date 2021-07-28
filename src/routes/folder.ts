@@ -8,6 +8,7 @@ import { isLoged } from '../midleware/isLoged';
 export default (router : Router)=>{
   router.post('/folder/create/:folderId',[getUser , isLoged], NoteController.postFolder)
   router.get('/folder/:folderId',[getUser , isLoged], NoteController.getFolder)
+  router.delete('/folder/delete/:folderId',[getUser , isLoged], NoteController.deleteFolder)
 
 
   router.get('/note/create/:folderId',[getUser , isLoged],NoteController.getCreateNote )
