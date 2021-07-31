@@ -258,7 +258,6 @@ main {
 
 .table-th,
 .table-td {
-  /* padding: 12px 0; */
   font-size: 0.9rem;
   border-bottom: 1px solid var(--border-color);
 }
@@ -281,9 +280,10 @@ main {
   color: var(--document-color);
 }
 
-.fileOption {
+.table__options {
+  margin-left: 10px;
   position: absolute;
-  background-color: #63bdaf;
+  color: var(--text-color)
 }
 
 

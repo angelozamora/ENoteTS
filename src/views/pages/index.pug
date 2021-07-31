@@ -1,10 +1,17 @@
 extends  ../layout/layout
 
+block meta-link
+  link(rel="stylesheet", href="/public/css/droplog.css")
+
 block  header 
   include ../partials/header
 
 block  footer 
   //- include ../templates/footer  
+
+block script
+  script(src="/public/js/menuResponsive-function.js")
+  script(src="/public/js/droplog.js") 
 
 block main 
   include ./mixins
@@ -62,7 +69,7 @@ block main
                   
                   tbody
                     if((folders && folders.length) || (notes && notes.length))
-                      each folder in folders
+                      each folder,index in folders
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToFolder('${folder._id}')`)
                             div.d-flex.justify-content-start
@@ -71,16 +78,19 @@ block main
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`)= folder.getDate()
                           td.table-td
-                            div
-                              <i class="fas fa-ellipsis-v table-td-icon appMenu" data-menu="userModal1"></i> 
-                              div.headerUser_modal.dropdown-appMenu#userModal1 
-                                div 
-                                  span Editar
-                                div 
-                                  a(onclick=`deleteFolder('${folder._id}')` class="notaDetail-option-button") 
-                                    <i class="far fa-trash-alt  notaDetail-icon"></i>
+                            div.table__options
+                              .droplog
+                                button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenufolder${index}`)
+                                  i.fas.fa-ellipsis-v.table-td-icon.dropbutton-hidden
+                                div(id=`dropmenufolder${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  PRIMERO
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  PRIMERO
+                                  .dropmenu__option.dropmenu-item
+                                    a.dropmenu__url.dropmenu-item(href='') SEGUNDO
 
-                      each note in notes
+                      each note,index in notes
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToDetail('${note._id}')`)
                             div.d-flex.justify-content-start
@@ -89,7 +99,17 @@ block main
                           td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`)= note.getDate()
                           td.table-td
-                            <i class="fas fa-ellipsis-v table-td-icon"></i>
+                            div.table__options
+                              .droplog
+                                button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenunote${index}`)
+                                  i.fas.fa-ellipsis-v.table-td-icon.dropbutton-hidden
+                                div(id=`dropmenunote${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  PRIMqweERO
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  PRIqweMERO
+                                  .dropmenu__option.dropmenu-item
+                                    a.dropmenu__url.dropmenu-item(href='') SEGqweUNDO
                         
                     else 
                       tr 
@@ -98,9 +118,6 @@ block main
 
         block modal
           +modalNewFolder('0') 
-
-  block script
-    script(src="/public/js/menuResponsive-function.js")
   
   script. 
     function goToFolder(id){
