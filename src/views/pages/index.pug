@@ -4,10 +4,7 @@ block  header
   include ../partials/header
 
 block  footer 
-  //- include ../templates/footer 
-
-block script
-  script(src="/public/js/menuResponsive-function.js") 
+  //- include ../templates/footer  
 
 block main 
   include ./mixins
@@ -101,6 +98,10 @@ block main
 
         block modal
           +modalNewFolder('0') 
+
+  block script
+    script(src="/public/js/menuResponsive-function.js")
+  
   script. 
     function goToFolder(id){
       return window.location.href = '/folder/' + id;

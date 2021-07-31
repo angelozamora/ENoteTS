@@ -6,19 +6,19 @@ block buttonNew
 block content
   .container-lg#div-container
     div.notaDetail
-      div.notaDetail-title 
-        input(type="text" class="input-text notaDetail-title-text" readonly="readonly" value=`${note.title}`)
+      div.notaDetail__title 
+        input(type="text" class="input-text notaDetail__titletext" readonly="readonly" value=`${note.title}`)
           
-      div.notaDetail-body  
+      div.notaDetail__body  
         span.d-block  !{note.body}
     
-      div.notaDetail-options
-        a(href=`/folder/${note.folder_id}` class="notaDetail-option-button")
-          <i class="far fa-arrow-alt-circle-left  notaDetail-icon"></i>
-        a(href=`/note/update/${note._id}` class="notaDetail-option-button")
-          <i class="fas fa-edit  notaDetail-icon"></i>
-        a(onclick=`deleteNote('${note._id}' , '${note.folder_id}')` class="notaDetail-option-button") 
-          <i class="far fa-trash-alt  notaDetail-icon"></i>
+      div.notaDetail__options
+        a(href=`/folder/${note.folder_id}` class="notaDetail__button ")
+          <i class="far fa-arrow-alt-circle-left  notaDetail__icon"></i>
+        a(href=`/note/update/${note._id}` class="notaDetail__button ")
+          <i class="fas fa-edit  notaDetail__icon"></i>
+        a(onclick=`deleteNote('${note._id}' , '${note.folder_id}')` class="notaDetail__button ") 
+          <i class="far fa-trash-alt  notaDetail__icon"></i>
 
 block modal
   +modalNewFolder(folderId)
@@ -30,19 +30,20 @@ block modal
       padding : 5px 15px;
     }
 
-    .notaDetail-title{
+    .notaDetail__title{
       max-width : 94%;
       color : var(--text-color);
     }
 
-    .notaDetail-title-text{
+    .notaDetail__titletext{
       font-size : 1.3rem;
       font-weight : 700; 
 
     }
 
 
-    .notaDetail-body{
+    .notaDetail__body{
+      width : 94%; 
       margin-top : 27px;
       padding-right : 28px;
       height : calc(100vh - 210px);
@@ -50,14 +51,14 @@ block modal
       color  : var(--text-color)
     }
 
-    .notaDetail-options{
+    .notaDetail__options{
       position : absolute;
       top : 8px;
       right:-5px; 
     }
 
     
-    .notaDetail-option-button {
+    .notaDetail__button {
       height: 45px;
       width: 45px;
       display: flex;
@@ -65,26 +66,26 @@ block modal
       justify-content: center;
       background-color: #fff;
       border-radius: 100%;
-      box-shadow : 0px 0px 5px black;
+      box-shadow : 0px 0px 4px rgba(0, 0, 0, 0.7);
     }
 
-    .darkmode .notaDetail-option-button{
+    .darkmode .notaDetail__button {
       background-color: rgb(41, 41, 41);  
     }
 
-    .notaDetail-option-button:nth-child(n+2) {
+    .notaDetail__button:nth-child(n+2) {
       margin-top: 12px;
     }
     
-    .notaDetail-option-button:hover {
+    .notaDetail__button:hover {
       background-color: var(--icon-note-color);
     }
 
-    .notaDetail-option-button:hover .notaDetail-icon {
+    .notaDetail__button:hover .notaDetail__icon {
       color: white;
     }
 
-    .notaDetail-icon {
+    .notaDetail__icon {
       color: var(--icon-note-color);
       font-size: 1.2rem;
     }
@@ -96,28 +97,28 @@ block modal
         margin-top : 0;
       }
 
-      .notaDetail-title{
-      max-width : 100%;
+      .notaDetail__title{
+        max-width : 100%;
       }
 
-      .notaDetail-body{
+      .notaDetail__body{
+        width : 100%; 
         height : calc(100vh - 290px);
         padding-right : 0;
       }
-      .notaDetail-options {
+      .notaDetail__options {
           top: 0;
           right: -8px;
           display : flex;
       }
 
-      .notaDetail-option-button:nth-child(n+2) {
+      .notaDetail__button:nth-child(n+2) {
         margin-top: 0;
         margin-left : 12px;
       }
     }
 
-  script. 
-      
+  script.
     function deleteNote(noteId , folderId){
       Swal.fire({
         title: '¿Are you sure you want to delete the note?',
