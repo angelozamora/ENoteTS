@@ -49,7 +49,7 @@ block main
           .container-lg#div-container
             div.content-title
               h1.content-title-text My unit
-            .row.mt-4.mb-2.mx-0 
+            .row.my-2.mx-0 
               .col-12.px-0#carpeta-container
                 //- each folder in folders
                 //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
@@ -69,10 +69,10 @@ block main
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToFolder('${folder._id}')`)
                             div.d-flex.justify-content-start
-                              <i class="fas fa-folder table-td-icon"></i>
+                              <i class="fas fa-folder table__icon table__icon--folder"></i>
                               span= folder.truncateName()
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
-                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
+                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`)= folder.getDate()
                           td.table-td
                             div
                               <i class="fas fa-ellipsis-v table-td-icon appMenu" data-menu="userModal1"></i> 
@@ -87,10 +87,10 @@ block main
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToDetail('${note._id}')`)
                             div.d-flex.justify-content-start
-                              <i class="fas fa-file-alt table-td-icon"></i>
+                              <i class="fas fa-file-alt table__icon table__icon--document"></i>
                               span= note.truncateTitle()
                           td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
-                          td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) 17-05-2021
+                          td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`)= note.getDate()
                           td.table-td
                             <i class="fas fa-ellipsis-v table-td-icon"></i>
                         

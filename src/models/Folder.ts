@@ -1,11 +1,13 @@
 import {Schema , model, Document} from 'mongoose';
-import {IUser} from './User'
+import {IUser} from './user'
 
 export interface IFolder extends Document{
   name : string,
   user_id : IUser['_id'],
   folder_id : IFolder['_id'],
-  truncateName :  () => Promise<string>
+  updatedAt : Date,
+  truncateName :  () => Promise<string>,
+  getDate : ()=>Promise<string>
   
 }
 
@@ -35,6 +37,13 @@ folderSchema.methods.truncateName = function() {
   }
 
   return this.name;
+}
+
+folderSchema.methods.getDate = function(){
+  let fecha = this.updatedAt.toISOString()
+  fecha = fecha.substring(0,10)
+  let fechaArray = fecha.substring(0,10).split('-')
+  return fecha
 }
 
 

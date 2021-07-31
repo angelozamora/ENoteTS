@@ -1,18 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
-  font-size: 16px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
 }
 
-:root {
+.body {
+  --primary-color: #346aff;
+  --primary-color-dark: #1f5ed1;
+  --secondary-color: #181818;
+  --secondary-color-dark: #181818;
+  --folder-color: #fcd93d;
+  --document-color: #346aff;
+  --icon-note-color: #346aff;
+  --text-color: #5f6368;
+  --text-color-dark: #0f0f0f;
+  --background-color: #fff;
+  --border-color: #DADCE0
+}
+
+.body.darkmode {
   --primary-color: #67dbca;
   --primary-color-dark: #63bdaf;
   --secondary-color: #181818;
   --secondary-color-dark: #181818;
-  --terciary-color: #8260d8;
+  --folder-color: #8260d8;
+  --document-color: #8260d8;
+  --icon-note-color: #8260d8;
   --text-color: #dbdbdb;
   --text-color-dark: #0f0f0f;
+  --background-color: #181818;
+  --border-color: #ebebeb8a;
 }
 
 ul,
@@ -39,13 +59,17 @@ a {
   display: block;
 }
 
+.dropdown-menu {
+  border: none;
+}
+
 
 /************ INDEX ************/
 
 main {
   /* min-height: calc(100vh - 103px); */
-  min-height: calc(100vh - 63px);
-  background-color: var(--secondary-color);
+  min-height: calc(100vh - 55px);
+  background-color: var(--background-color);
 }
 
 .main-container {
@@ -54,13 +78,13 @@ main {
 }
 
 #content {
-  width: calc(100% - 280px);
+  width: calc(100% - 220px);
   /* background-color: blanchedalmond; */
   min-height: calc( 100vh - 63px);
 }
 
 #div-container {
-  padding: 20px;
+  padding: 20px 10px;
 }
 
 
@@ -141,7 +165,7 @@ main {
   /* background-color: #8260d8; */
   padding: 12px 0 12px 0;
   position: sticky;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   top: 63px;
 }
 
@@ -170,13 +194,13 @@ main {
 }
 
 #sidebar {
-  width: 280px;
-  background-color: var(--secondary-color);
+  width: 220px;
+  background-color: var(--background-color);
   padding: 20px 10px;
   transition: all 0.5s ease;
-  height: calc( 100vh - 63px);
+  height: calc( 100vh - 55px);
   position: sticky;
-  top: 63px;
+  top: 55px;
 }
 
 .sidebar-ul {
@@ -187,7 +211,7 @@ main {
 .sidebar-link {
   display: block;
   /* background-color: brown; */
-  padding: 10px 20px;
+  padding: 10px 15px;
   color: var(--text-color);
 }
 
@@ -201,7 +225,7 @@ main {
 /*************** MODAL ******************/
 
 .modal-dark {
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
 }
 
 .btn-close-dark {
@@ -231,18 +255,25 @@ main {
 .table-td {
   /* padding: 12px 0; */
   font-size: 0.9rem;
-  border-bottom: 1px solid #ebebeb70;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .table-th:nth-child(1) {
   width: 50%;
 }
 
-.table-td-icon {
+.table__icon {
   margin-left: 10px;
   margin-right: 10px;
-  color: var(--terciary-color);
   font-size: 1.2rem;
+}
+
+.table__icon--folder {
+  color: var(--folder-color);
+}
+
+.table__icon--document {
+  color: var(--document-color);
 }
 
 .fileOption {
@@ -391,7 +422,7 @@ main {
   max-height: 0;
   width: 250px;
   transform: translate3d(7px, -5px, 0) !important;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   height: auto;
   overflow-y: hidden;
   transition: all 0.6s ease-in-out;
@@ -430,17 +461,25 @@ main {
 /************************  HEADER ************************/
 
 header {
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   position: sticky;
-  height: 63px;
-  border-bottom: 1px solid rgba(172, 172, 172, 0.685);
+  height: 55px;
+  display: flex;
+  align-items: center;
+  /* border-bottom: 1px solid rgba(172, 172, 172, 0.685); */
+  border-bottom: 1px solid var(--border-color);
   top: 0;
   z-index: 100;
   /* box-shadow: 0 1px 4px rgba(172, 172, 172, 0.685); */
 }
 
+.navbar {
+  padding: 0.2rem 0;
+  width: 100%;
+}
+
 .name-app {
-  color: white !important;
+  color: var(--primary-color) !important;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -452,7 +491,7 @@ header {
 }
 
 .navbar {
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   /* border-bottom: 1px solid rgba(172, 172, 172, 0.685); */
 }
 
@@ -520,7 +559,7 @@ header {
 /************************* FOOTER ****************************/
 
 footer {
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   /* border-top: 1px solid rgba(172, 172, 172, 0.685); */
   height: 40px;
 }
@@ -725,15 +764,14 @@ footer {
 /************* VISTA HOME **************/
 
 .content-title {
-  border-bottom: 1px solid #ebebeb8a;
-  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .content-title-text {
-  color: white;
+  color: var(--text-color);
   margin-top: 10px;
-  font-weight: 500;
-  font-size: 1.25rem;
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
 #carpeta-container {
@@ -743,7 +781,6 @@ footer {
   /* background-color: #63bdaf; */
   max-height: calc(100vh - 250px);
   justify-content: center;
-  margin-top: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
   overflow-y: auto;
@@ -825,7 +862,6 @@ footer {
     left: -280px;
     z-index: 100;
     position: fixed;
-    top: 63px;
   }
   #sidebar.sidebar-active {
     left: 0;

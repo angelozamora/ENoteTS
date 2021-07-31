@@ -27,11 +27,11 @@ block modal
     .notaDetail{
       position : relative;
       margin-top : 10px;
-      padding : 5px 35px;
+      padding : 5px 15px;
     }
 
     .notaDetail-title{
-      max-width : 80%;
+      max-width : 94%;
       color : var(--text-color);
     }
 
@@ -44,16 +44,16 @@ block modal
 
     .notaDetail-body{
       margin-top : 27px;
+      padding-right : 28px;
       height : calc(100vh - 210px);
       overflow-y : auto;
       color  : var(--text-color)
-
     }
 
     .notaDetail-options{
       position : absolute;
       top : 8px;
-      right:-15px; 
+      right:-5px; 
     }
 
     
@@ -63,33 +63,32 @@ block modal
       display: flex;
       align-items: center;
       justify-content: center;
-
-      background-color: rgb(41, 41, 41);
+      background-color: #fff;
       border-radius: 100%;
+      box-shadow : 0px 0px 5px black;
     }
 
+    .darkmode .notaDetail-option-button{
+      background-color: rgb(41, 41, 41);  
+    }
 
     .notaDetail-option-button:nth-child(n+2) {
       margin-top: 12px;
     }
-
     
     .notaDetail-option-button:hover {
-      background-color: var(--terciary-color);
+      background-color: var(--icon-note-color);
     }
 
-
     .notaDetail-option-button:hover .notaDetail-icon {
-      color: var(--text-color);
+      color: white;
     }
 
     .notaDetail-icon {
-
-      color: var(--terciary-color);
+      color: var(--icon-note-color);
       font-size: 1.2rem;
     }
     
-
     
     @media (max-width: 991px) {
       .notaDetail{
@@ -97,14 +96,17 @@ block modal
         margin-top : 0;
       }
 
+      .notaDetail-title{
+      max-width : 100%;
+      }
+
       .notaDetail-body{
         height : calc(100vh - 290px);
+        padding-right : 0;
       }
       .notaDetail-options {
           top: 0;
-          //- bottom: 5px;
           right: -8px;
-          //- background-color : black;
           display : flex;
       }
 
@@ -112,7 +114,6 @@ block modal
         margin-top: 0;
         margin-left : 12px;
       }
-
     }
 
   script. 

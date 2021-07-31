@@ -1,5 +1,5 @@
 
-import UserModel from '../models/User'
+import UserModel from '../models/user'
 export   async function getUser (req : any , res:any , next : any){
   console.log('GETUSER')
   const userId=req.session.userId;
