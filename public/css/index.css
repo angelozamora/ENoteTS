@@ -19,6 +19,7 @@
   --text-color-dark: #0f0f0f;
   --background-color: #fff;
   --border-color: #DADCE0;
+  --hover-color: #67dbca3f;
 }
 
 .body.darkmode {
@@ -33,6 +34,7 @@
   --text-color-dark: #0f0f0f;
   --background-color: #181818;
   --border-color: #ebebeb8a;
+  --hover-color: #67dbca3f;
 }
 
 ul,
@@ -46,6 +48,18 @@ a {
 
 .text-color {
   color: var(--text-color) !important;
+}
+
+.icon--standar {
+  width: 20px;
+  text-align: center;
+}
+
+
+/************** DROP MENU*******************/
+
+.dropmenu--user {
+  width: 270px;
 }
 
 
@@ -215,14 +229,13 @@ main {
 
 .sidebar-link {
   display: block;
-  /* background-color: brown; */
   padding: 10px 15px;
   color: var(--text-color);
 }
 
 .sidebar-link:hover,
 .sidebar-link-active {
-  background-color: #67dbca3f;
+  background-color: var(--hover-color);
   color: var(--primary-color);
 }
 
@@ -514,7 +527,7 @@ header {
   background-color: #67dbca;
 }
 
-.headerUser_modal {
+.headerUser__modal {
   width: 230px;
   background-color: #8260d8;
   padding: 10px;

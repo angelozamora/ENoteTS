@@ -29,8 +29,8 @@
 }
 
 .dropmenu__option {
-  padding: 5px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.301);
+  padding: 5px 10px;
+  /* border-top: 1px solid rgba(0, 0, 0, 0.301); */
   cursor: pointer;
 }
 
@@ -39,7 +39,8 @@
 }
 
 .dropmenu__option:hover {
-  background-color: aqua;
+  background-color: var(--hover-color);
+  color: var(--primary-color);
 }
 
 .dropmenu__text {

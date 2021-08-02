@@ -73,7 +73,7 @@ block main
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToFolder('${folder._id}')`)
                             div.d-flex.justify-content-start
-                              <i class="fas fa-folder table__icon table__icon--folder"></i>
+                              <i class="fas fa-folder table__icon table__icon--folder icon--standar"></i>
                               span= folder.truncateName()
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`)= folder.getDate()
@@ -84,17 +84,20 @@ block main
                                   i.fas.fa-ellipsis-v.table-td-icon.dropbutton-hidden
                                 div(id=`dropmenufolder${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
                                   .dropmenu__option.dropmenu-item
-                                    span.dropmenu__text.dropmenu-item  PRIMERO
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="far fa-folder-open icon--standar me-1"></i> Move to
                                   .dropmenu__option.dropmenu-item
-                                    span.dropmenu__text.dropmenu-item  PRIMERO
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
                                   .dropmenu__option.dropmenu-item
-                                    a.dropmenu__url.dropmenu-item(href='') SEGUNDO
+                                    span.dropmenu_-text.dropmenu-item 
+                                      <i class="far fa-trash-alt icon--standar me-1"></i> Delete
 
                       each note,index in notes
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToDetail('${note._id}')`)
                             div.d-flex.justify-content-start
-                              <i class="fas fa-file-alt table__icon table__icon--document"></i>
+                              <i class="fas fa-file-alt table__icon table__icon--document icon--standar"></i>
                               span= note.truncateTitle()
                           td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
                           td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`)= note.getDate()
@@ -103,13 +106,16 @@ block main
                               .droplog
                                 button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenunote${index}`)
                                   i.fas.fa-ellipsis-v.table-td-icon.dropbutton-hidden
-                                div(id=`dropmenunote${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                                div(id=`dropmenunote${index}`).dropmenu.dropmenu--enote.dropmenu--t.dropmenu--r100.dropmenu--bradius
                                   .dropmenu__option.dropmenu-item
-                                    span.dropmenu__text.dropmenu-item  PRIMqweERO
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="far fa-folder-open icon--standar me-1"></i> Move to
                                   .dropmenu__option.dropmenu-item
-                                    span.dropmenu__text.dropmenu-item  PRIqweMERO
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
                                   .dropmenu__option.dropmenu-item
-                                    a.dropmenu__url.dropmenu-item(href='') SEGqweUNDO
+                                    span.dropmenu_-text.dropmenu-item 
+                                      <i class="far fa-trash-alt icon--standar me-1"></i> Delete
                         
                     else 
                       tr 
