@@ -23,7 +23,7 @@ mixin modalNewFolder(folderId)
       <div class="modal-content modal-dark">
         <div class="modal-body p-4">
           div.d-flex.justify-content-between
-            <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+            <h5 class="modal-title" id="exampleModalLabel">New Folder</h5>
             <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
           form(action=`/folder/create/${folderId}` method="POST" autocomplete="off").mt-4 
             div.mb-4  

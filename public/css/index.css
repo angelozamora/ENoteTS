@@ -244,6 +244,7 @@ main {
 
 .modal-dark {
   background-color: var(--background-color);
+  border-radius: 0.5rem;
 }
 
 .btn-close-dark {
@@ -524,12 +525,10 @@ header {
   height: 35px;
   width: 35px;
   position: relative;
-  background-color: #67dbca;
 }
 
 .headerUser__modal {
-  width: 230px;
-  background-color: #8260d8;
+  width: 250px;
   padding: 10px;
   position: absolute;
   top: 40px;
