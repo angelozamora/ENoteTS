@@ -173,7 +173,7 @@ class NoteController{
       }
       
       req.flash('res' , { type : 'error' , msg:'Note not found , please try again'})
-      return res.redirect('back')
+      return res.redirect('/')
     }catch(error){
       req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
       res.redirect('back')
@@ -191,7 +191,7 @@ class NoteController{
       }
       
       req.flash('res' , { type : 'error' , msg:'Note not found , please try again!'})
-      return res.redirect('back')
+      return res.redirect('/')
     
     }catch(error){
       req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
@@ -216,7 +216,7 @@ class NoteController{
       }
       
       req.flash('res' , { type : 'error' , msg:'Note not found , please try again!'})
-      return res.redirect('back')
+      return res.redirect('/')
     
     }catch(error){
       req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
@@ -241,9 +241,7 @@ class NoteController{
       res.json({ flag : false, msg : 'An error occurred, please try again!'});
       return next(error)
     }
-
   }
-
   
 }
 

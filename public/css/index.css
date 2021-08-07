@@ -19,7 +19,7 @@
   --icon-note-color: #346aff;
   /* TEXT-COLOR */
   --text-color: #5f6368;
-  --text-second-color: #0f0f0f;
+  --text-second-color: #000000;
   /* BACKGROUND COLOR */
   --background-color: #fff;
   --background-second-color: rgb(247, 247, 247);
@@ -40,10 +40,10 @@
   --icon-note-color: #8260d8;
   /* TEXT-COLOR */
   --text-color: #dbdbdb;
-  --text-second-color: #0f0f0f;
+  --text-second-color: #ffffff;
   /* BACKGROUND COLOR */
   --background-color: #181818;
-  --background-second-color: rgb(247, 247, 247);
+  --background-second-color: rgb(59, 59, 59);
   /* ADITIONAL COLORS */
   --border-color: #ebebeb8a;
   --hover-color: #67dbca3f;
@@ -106,7 +106,7 @@ main {
 #content {
   width: calc(100% - 220px);
   /* background-color: blanchedalmond; */
-  min-height: calc( 100vh - 63px);
+  min-height: calc( 100vh - 55px);
 }
 
 #div-container {
@@ -193,7 +193,7 @@ main {
   padding: 12px 0 12px 0;
   position: sticky;
   background-color: var(--background-color);
-  top: 63px;
+  top: 55px;
 }
 
 .menures-option {
@@ -221,7 +221,7 @@ main {
   z-index: 10;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.747);
+  background-color: rgba(0, 0, 0, 0.45);
 }
 
 #sidebar {
@@ -249,6 +249,7 @@ main {
 .sidebar-link-active {
   background-color: var(--hover-color);
   color: var(--primary-color);
+  font-weight: 600;
 }
 
 
@@ -304,6 +305,10 @@ main {
 
 .table__icon--document {
   color: var(--document-color);
+}
+
+.table-td-button {
+  color: var(--text-color)
 }
 
 .table__options {
@@ -529,7 +534,7 @@ header {
 }
 
 .headerUser__modal {
-  width: 250px;
+  width: 270px;
   padding: 10px;
   position: absolute;
   top: 40px;
@@ -561,13 +566,29 @@ header {
 }
 
 .headerUser_fullName {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   margin-bottom: 0px;
+  color: var(--text-second-color)
 }
 
 .headerUser_email {
   font-size: 0.85rem;
+}
+
+.headerUser_buttonperfil {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 18px;
+  padding: 5px 18px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  min-width: 70%;
+}
+
+.headerUser_buttonperfil:hover {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .a-link:hover {
@@ -787,10 +808,10 @@ footer {
 }
 
 .content-title-text {
-  color: var(--text-color);
+  color: var(--text-second-color);
   margin-top: 10px;
   font-weight: 400;
-  font-size: 1.2rem;
+  font-size: 1.08rem;
 }
 
 #carpeta-container {

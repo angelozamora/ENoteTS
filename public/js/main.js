@@ -1,4 +1,13 @@
+let backgroundColor = "#fff";
+
 document.addEventListener('DOMContentLoaded', function() {
+
+  let body = document.querySelector('body')
+  if (body.classList.contains('darkmode')) {
+    console.log('holaaaaaaaaaa qweqwe')
+    backgroundColor = "#181818"
+  }
+
   let message = JSON.parse(document.getElementById('message').getAttribute('data'));
   if (message.res) {
     if (message.res[0].type == "error") {
@@ -19,7 +28,7 @@ function swalMessage(type, msg) {
     icon: type,
     confirmButtonText: 'OK',
     timer: 3500,
-    background: '#181818',
+    background: backgroundColor,
     customClass: {
       title: 'text-color',
     }
@@ -33,7 +42,8 @@ function loadForm() {
     icon: 'info',
     allowOutsideClick: false,
     allowEscapeKey: false,
-    background: '#181818',
+    showConfirmButton: false,
+    background: backgroundColor,
     customClass: {
       title: 'text-color',
     }
@@ -46,7 +56,7 @@ function confirmMessage(msg) {
     icon: 'success',
     allowOutsideClick: false,
     allowEscapeKey: false,
-    background: '#181818',
+    background: backgroundColor,
     showConfirmButton: false,
     customClass: {
       title: 'text-color',

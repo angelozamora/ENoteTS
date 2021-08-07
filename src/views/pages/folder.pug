@@ -20,29 +20,53 @@ block content
             
           tbody
             if((folders && folders.length) || (notes && notes.length))
-
-              each folder in folders
+              each folder,index in folders
                 tr.text-color.table-tr-hover
                   td.table-td(onclick=`goToFolder('${folder._id}')`)
                     div.d-flex.justify-content-start
-                      <i class="fas fa-folder table__icon table__icon--folder"></i>
+                      <i class="fas fa-folder table__icon table__icon--folder icon--standar"></i>
                       span= folder.truncateName()
                   td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
-                  td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
+                  td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`)= folder.getDate()
                   td.table-td
-                    <i class="fas fa-ellipsis-v table__icon"></i>
+                    div.table__options
+                      .droplog
+                        button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenufolder${index}`)
+                          i.fas.fa-ellipsis-v.table-td-button.dropbutton-hidden
+                        div(id=`dropmenufolder${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                          .dropmenu__option.dropmenu-item
+                            span.dropmenu__text.dropmenu-item  
+                              <i class="far fa-folder-open icon--standar me-1"></i> Move to
+                          .dropmenu__option.dropmenu-item
+                            span.dropmenu__text.dropmenu-item  
+                              <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
+                          .dropmenu__option.dropmenu-item
+                            span.dropmenu_-text.dropmenu-item(onclick=`deleteFolder('${folder._id}')`)
+                              <i class="far fa-trash-alt icon--standar me-1"></i> Delete
 
-              each note in notes
+              each note,index in notes
                 tr.text-color.table-tr-hover
                   td.table-td(onclick=`goToDetail('${note._id}')`)
                     div.d-flex.justify-content-start
-                      <i class="fas fa-file-alt table__icon table__icon--document"></i>
+                      <i class="fas fa-file-alt table__icon table__icon--document icon--standar"></i>
                       span= note.truncateTitle()
                   td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
-                  td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) 17-05-2021
+                  td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`)= note.getDate()
                   td.table-td
-                    <i class="fas fa-ellipsis-v table__icon"></i>
-
+                    div.table__options
+                      .droplog
+                        button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenunote${index}`)
+                          i.fas.fa-ellipsis-v.table-td-button.dropbutton-hidden
+                        div(id=`dropmenunote${index}`).dropmenu.dropmenu--enote.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                          .dropmenu__option.dropmenu-item
+                            span.dropmenu__text.dropmenu-item  
+                              <i class="far fa-folder-open icon--standar me-1"></i> Move to
+                          .dropmenu__option.dropmenu-item
+                            span.dropmenu__text.dropmenu-item  
+                              <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
+                          .dropmenu__option.dropmenu-item
+                            span.dropmenu_-text.dropmenu-item(onclick=`deleteNote('${note._id}')`) 
+                              <i class="far fa-trash-alt icon--standar me-1"></i> Delete
             else 
               tr 
                 td(colspan="3" class="border-bottom-0") 
@@ -50,9 +74,3 @@ block content
 
 block modal
   +modalNewFolder(folder._id)
-
-  script. 
-    function goToDetail(id){
-      //- return window.location.href = '/note/detail/' + id;
-      return window.open('/note/detail/'+ id, '_blank');
-    }

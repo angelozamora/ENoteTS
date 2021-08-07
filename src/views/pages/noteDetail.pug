@@ -3,6 +3,10 @@ extends  ./index
 block buttonNew
   +buttonNew(folderId)
 
+
+block modal
+  +modalNewFolder(folderId)
+
 block content
   .container-lg#div-container
     div.notaDetail
@@ -20,8 +24,6 @@ block content
         a(onclick=`deleteNote('${note._id}' , '${note.folder_id}')` class="notaDetail__button ") 
           <i class="far fa-trash-alt  notaDetail__icon"></i>
 
-block modal
-  +modalNewFolder(folderId)
 
   style.
     .notaDetail{
@@ -32,13 +34,12 @@ block modal
 
     .notaDetail__title{
       max-width : 94%;
-      color : var(--text-color);
     }
 
     .notaDetail__titletext{
       font-size : 1.3rem;
-      font-weight : 700; 
-
+      font-weight : 600; 
+      color : var(--text-second-color);
     }
 
 
@@ -130,7 +131,7 @@ block modal
         cancelButtonText : 'No',
         confirmButtonText: 'Yes, delete!',
         reverseButtons: true,
-        background: '#181818',
+        background: backgroundColor,
         customClass: {
             title: 'text-color',
         }

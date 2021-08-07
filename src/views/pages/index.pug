@@ -81,7 +81,7 @@ block main
                             div.table__options
                               .droplog
                                 button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenufolder${index}`)
-                                  i.fas.fa-ellipsis-v.table-td-icon.dropbutton-hidden
+                                  i.fas.fa-ellipsis-v.table-td-button.dropbutton-hidden
                                 div(id=`dropmenufolder${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
                                   .dropmenu__option.dropmenu-item
                                     span.dropmenu__text.dropmenu-item  
@@ -90,7 +90,7 @@ block main
                                     span.dropmenu__text.dropmenu-item  
                                       <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
                                   .dropmenu__option.dropmenu-item
-                                    span.dropmenu_-text.dropmenu-item 
+                                    span.dropmenu_-text.dropmenu-item(onclick=`deleteFolder('${folder._id}')`)
                                       <i class="far fa-trash-alt icon--standar me-1"></i> Delete
 
                       each note,index in notes
@@ -105,7 +105,7 @@ block main
                             div.table__options
                               .droplog
                                 button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenunote${index}`)
-                                  i.fas.fa-ellipsis-v.table-td-icon.dropbutton-hidden
+                                  i.fas.fa-ellipsis-v.table-td-button.dropbutton-hidden
                                 div(id=`dropmenunote${index}`).dropmenu.dropmenu--enote.dropmenu--t.dropmenu--r100.dropmenu--bradius
                                   .dropmenu__option.dropmenu-item
                                     span.dropmenu__text.dropmenu-item  
@@ -114,7 +114,7 @@ block main
                                     span.dropmenu__text.dropmenu-item  
                                       <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
                                   .dropmenu__option.dropmenu-item
-                                    span.dropmenu_-text.dropmenu-item 
+                                    span.dropmenu_-text.dropmenu-item(onclick=`deleteNote('${note._id}')`) 
                                       <i class="far fa-trash-alt icon--standar me-1"></i> Delete
                         
                     else 
@@ -147,7 +147,7 @@ block main
         cancelButtonText : 'No',
         confirmButtonText: 'Yes, delete!',
         reverseButtons: true,
-        background: '#181818',
+        background: backgroundColor,
         customClass: {
             title: 'text-color',
         }
@@ -162,12 +162,50 @@ block main
             .then( data => {
               if(data.flag){
                 confirmMessage(data.msg)
-                setTimeout( function(){
-                  window.location.reload()
-                },2500)
               }else{
                 swalMessage('error',data.msg)
               }
+              setTimeout( function(){
+                  window.location.reload()
+                },2500)
+            });
+          } 
+      })
+    }
+
+
+    function deleteNote(noteId){
+      Swal.fire({
+        title: '¿Are you sure you want to delete the note?',
+        icon: 'error',
+
+        showCancelButton: true,
+        confirmButtonColor:  '#E74C3C',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText : 'No',
+        confirmButtonText: 'Yes, delete!',
+        reverseButtons: true,
+        background: backgroundColor,
+        customClass: {
+            title: 'text-color',
+        }
+      }).then((result) => {
+          if (result.isConfirmed) {
+            loadForm();
+            fetch(`/note/delete/${noteId}`, {
+              method: "DELETE"
+            }).then(res => {
+              return res.json();
+            })
+            .then( data => {
+              if(data.flag){
+                confirmMessage(data.msg)
+              }else{
+                swalMessage('error',data.msg)
+              }
+              setTimeout( function(){
+                  window.location.reload()
+                },2500)
             });
           } 
       })
