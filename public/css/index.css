@@ -8,31 +8,43 @@
 }
 
 .body {
+  /* BASIC COLORS */
   --primary-color: #346aff;
   --primary-color-dark: #1f5ed1;
   --secondary-color: #181818;
   --secondary-color-dark: #181818;
+  /* ICON COLOR */
   --folder-color: #fcd93d;
   --document-color: #346aff;
   --icon-note-color: #346aff;
+  /* TEXT-COLOR */
   --text-color: #5f6368;
-  --text-color-dark: #0f0f0f;
+  --text-second-color: #0f0f0f;
+  /* BACKGROUND COLOR */
   --background-color: #fff;
+  --background-second-color: rgb(247, 247, 247);
+  /* ADITIONAL COLORS */
   --border-color: #DADCE0;
   --hover-color: #67dbca3f;
 }
 
 .body.darkmode {
+  /* BASIC COLORS */
   --primary-color: #67dbca;
   --primary-color-dark: #63bdaf;
   --secondary-color: #181818;
   --secondary-color-dark: #181818;
+  /* ICON COLOR */
   --folder-color: #8260d8;
   --document-color: #8260d8;
   --icon-note-color: #8260d8;
+  /* TEXT-COLOR */
   --text-color: #dbdbdb;
-  --text-color-dark: #0f0f0f;
+  --text-second-color: #0f0f0f;
+  /* BACKGROUND COLOR */
   --background-color: #181818;
+  --background-second-color: rgb(247, 247, 247);
+  /* ADITIONAL COLORS */
   --border-color: #ebebeb8a;
   --hover-color: #67dbca3f;
 }
@@ -425,32 +437,21 @@ main {
 /************* BUTTON NEW***********/
 
 .buttonDiv_new {
-  background-color: transparent;
-  border-radius: 12px;
-  border: 1px solid var(--primary-color);
-  color: var(--text-color);
+  background-color: var(--background-second-color);
+  border-radius: 18px;
+  padding: 8px 18px;
+  color: var(--text-second-color);
+  font-weight: normal;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.192);
+}
+
+.buttonDiv_new:hover {
+  color: white;
+  background-color: var(--primary-color);
 }
 
 .modalNew-div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  padding: 0 !important;
-  border-radius: 4px;
-  max-height: 0;
-  width: 250px;
-  transform: translate3d(7px, -5px, 0) !important;
-  background-color: var(--background-color);
-  height: auto;
-  overflow-y: hidden;
-  transition: all 0.6s ease-in-out;
-}
-
-.modalNew-div.show {
-  /* transform: translateX( 90px) !important; */
-  max-height: 550px;
-  box-shadow: 0px 1px 4px #67dbca5e;
+  width: 230px;
 }
 
 .modalNew-folder {
@@ -465,16 +466,16 @@ main {
 .modalNew-folder-title,
 .modalNew-note {
   font-size: 1rem;
-  padding: 6px 18px;
-  color: var(--text-color);
+  /* color: var(--text-color); */
   cursor: pointer;
 }
 
-.modalNew-folder-title:hover,
+
+/* .modalNew-folder-title:hover,
 .modalNew-note:hover {
   color: var(--primary-color);
   background-color: #67dbca3f;
-}
+} */
 
 
 /************************  HEADER ************************/
@@ -551,6 +552,7 @@ header {
   object-fit: cover;
   border-radius: 100%;
   background-color: #eb192a;
+  cursor: pointer;
 }
 
 .headerUser_fullName,

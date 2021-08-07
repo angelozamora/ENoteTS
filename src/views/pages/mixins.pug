@@ -4,18 +4,16 @@ mixin errors(errors , field)
   
 
 mixin buttonNew(folderId)
-  div.buttonDiv.buttonDiv--left
-    button(type="button" id="asda" class="button buttonDiv_new " data-bs-toggle="dropdown" aria-expanded="false") 
-      <i class="fas fa-plus me-2"></i>  New  
-
-    div(id="modalNew-div" class="dropdown-menu modalNew-div" aria-labelledby="asda" )
-        .modalNew-folder 
-          h1(class="modalNew-folder-title"  data-bs-toggle="modal" data-bs-target="#modalNewFolder") 
-            <i class="fas fa-folder me-2"></i> Folder 
-
-        .modalNew-file
-          a(href=`/note/create/${folderId}` class="d-block modalNew-note" target="_blank") 
-            <i class="far fa-file-alt me-2"></i> Note 
+  .droplog.buttonDiv.buttonDiv--left
+    button(type="button"  class="button buttonDiv_new dropbutton-action" data-dropmenu="dropmenuButtonNew") 
+      <i class="fas fa-plus me-2 dropbutton-hidden"></i>  New 
+    div(id="dropmenuButtonNew").dropmenu.dropmenu--animated.dropmenu--t.dropmenu--l.dropmenu--bradius.modalNew-div
+      .dropmenu__option.dropmenu-item(data-bs-toggle="modal" data-bs-target="#modalNewFolder")
+        span.dropmenu__text.dropmenu-item.modalNew-folder-title  
+          <i class="fas fa-folder icon--standar me-1"></i> Folder
+      .dropmenu__option.dropmenu-item
+        a(href=`/note/create/${folderId}` class="dropmenu__url dropmenu-item modalNew-note" target="_blank") 
+          <i class="far fa-file-alt icon--standar me-1"></i> Note
 
 mixin modalNewFolder(folderId)
   <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

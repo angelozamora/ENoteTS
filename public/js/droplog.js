@@ -46,6 +46,7 @@ async function closeDropLog() {
   let dropButtonsActive = document.querySelectorAll('.dropbutton-action.active')
   dropMenusShow.forEach(dropMenu => {
     dropMenu.classList.remove('show');
+    dropMenu.classList.remove('dropmenu-item');
   })
 
   dropButtonsActive.forEach(dropButton => {
