@@ -86,7 +86,7 @@ block main
                                   .dropmenu__option.dropmenu-item
                                     span.dropmenu__text.dropmenu-item  
                                       <i class="far fa-folder-open icon--standar me-1"></i> Move to
-                                  .dropmenu__option.dropmenu-item
+                                  .dropmenu__option.dropmenu-item(data-bs-toggle="modal" data-bs-target=`#modalChangeFolder${index}`)
                                     span.dropmenu__text.dropmenu-item  
                                       <i class="far fa-edit icon--standar me-1"></i> Change name 
                                   .dropmenu__option.dropmenu-item
@@ -95,7 +95,7 @@ block main
                                   .dropmenu__option.dropmenu-item
                                     span.dropmenu_-text.dropmenu-item(onclick=`deleteFolder('${folder._id}')`)
                                       <i class="far fa-trash-alt icon--standar me-1"></i> Delete
-
+                            +modalChangeName(folder._id , folder.name,'folder' , `modalChangeFolder${index}`)
                       each note,index in notes
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToDetail('${note._id}')`)
@@ -113,7 +113,7 @@ block main
                                   .dropmenu__option.dropmenu-item
                                     span.dropmenu__text.dropmenu-item  
                                       <i class="far fa-folder-open icon--standar me-1"></i> Move to
-                                  .dropmenu__option.dropmenu-item
+                                  .dropmenu__option.dropmenu-item(data-bs-toggle="modal" data-bs-target=`#modalChangeNote${index}`)
                                     span.dropmenu__text.dropmenu-item  
                                       <i class="far fa-edit icon--standar me-1"></i> Change name 
                                   .dropmenu__option.dropmenu-item
@@ -122,7 +122,7 @@ block main
                                   .dropmenu__option.dropmenu-item
                                     span.dropmenu_-text.dropmenu-item(onclick=`deleteNote('${note._id}')`) 
                                       <i class="far fa-trash-alt icon--standar me-1"></i> Delete
-                        
+                            +modalChangeName(note._id , note.title ,'note' , `modalChangeNote${index}`)
                     else 
                       tr 
                         td(colspan="3" class="border-bottom-0") 

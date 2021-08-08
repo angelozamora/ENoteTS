@@ -42,7 +42,24 @@ class NoteController{
     }
     
   }
-  
+  public postUpdateFolderName = async function(req : any, res:Response , next:NextFunction){
+
+    try{
+      let folderId = req.params.folderId;
+      await FolderModel.findByIdAndUpdate(folderId , { name : req.body.newName})
+      req.flash('res' , { type : 'success' , msg:'Folder update successfully'})
+      return res.redirect('back')
+      
+    }catch(error){
+      if(error.name === "ValidationError"){
+        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
+      }else{
+        req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+      }
+      res.redirect('back')
+      return next(error)
+    }
+  }
   public getFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
@@ -157,7 +174,7 @@ class NoteController{
       return next(error)
     }
   }
-
+  
   public getNoteDetail = async function(req:any , res:Response ,  next : NextFunction){
     try{
       let noteId = req.params.id
@@ -225,7 +242,25 @@ class NoteController{
     }
 
   }
+  
+  public postUpdateNoteName = async function(req : any, res:Response , next:NextFunction){
 
+    try{
+      let noteId = req.params.id;
+      await NoteModel.findByIdAndUpdate(noteId , { title : req.body.newName})
+      req.flash('res' , { type : 'success' , msg:'Note update successfully'})
+      return res.redirect('back')
+      
+    }catch(error){
+      if(error.name === "ValidationError"){
+        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
+      }else{
+        req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+      }
+      res.redirect('back')
+      return next(error)
+    }
+  }
 
   public getDeleteNote = async function(req:any , res:Response , next : NextFunction){
     try{
