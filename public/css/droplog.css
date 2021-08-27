@@ -8,6 +8,7 @@
   border: none;
   background-color: transparent;
   min-width: 10px;
+  padding: 0 7px;
 }
 
 .dropbutton-hidden {

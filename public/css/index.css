@@ -817,7 +817,6 @@ footer {
 #carpeta-container {
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
   /* background-color: #63bdaf; */
   max-height: calc(100vh - 250px);
   justify-content: center;

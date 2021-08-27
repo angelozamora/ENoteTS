@@ -53,8 +53,17 @@ block main
           .container-lg#div-container
             div.content-title
               h1.content-title-text My unit
+
+            if(recentNotes)
+              h1.content-title-text Sugerida
+              .row 
+                each note in recentNotes
+                  div.col-2 
+                    h3=note.title
+
+
             .row.my-2.mx-0 
-              .col-12.px-0#carpeta-container
+              .col-12.col-lg-11.px-0#carpeta-container
                 //- each folder in folders
                 //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
                 //-     span.carpeta-titulo= folder.name
@@ -63,7 +72,7 @@ block main
                     tr
                       th(scope="col" class="table-th text-color") Name
                       th(scope="col" class="table-th table-th-web text-color") Owner
-                      th(scope="col" class="table-th table-th-web text-color") Creation date
+                      th(scope="col" class="table-th table-th-web text-color") Last modification
                       th(scope="col" class="table-th table-th-action text-color") Action
                     
                   
