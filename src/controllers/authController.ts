@@ -14,7 +14,6 @@ class AuthController{
   public postLogin = async  function( req : any , res :  Response, next : any){
     try{
       const {email, password , remember} = req.body;
-
       const user =await  UserModel.findOne({email : email}) ;
       if(user){
         const isMatch = await user.comparePassword(password);
@@ -49,7 +48,6 @@ class AuthController{
   
   public postRegister = async function( req : any , res : Response , next:any){
     try{
-      
       const user= await UserModel.create({
         email : req.body.email,
         password : req.body.password,
@@ -64,8 +62,8 @@ class AuthController{
         return res.render('auth/register' , {errors : error.errors})
       }
       
-      console.log('holaa')
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
+      res.redirect('back')
       return next(error);
     }
   
