@@ -69,20 +69,19 @@ class NoteController{
         return res.redirect('/mydrive')
       }else{
         const folder = await FolderModel.findOne({ _id : folderId})
-        if(folder){
-          const folders = await FolderModel.find({folder_id : folderId}).sort({createdAt : -1})
-          const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
-          return res.render('pages/folder' , {folders , notes , folder})
-          
-        }else{
+        if(!folder){
           req.session['message'] = {res : { type : 'error' , msg:`Folder not found`}}
-          return res.redirect('back')
+          return res.redirect('/mydrive')
         }
+
+        const folders = await FolderModel.find({folder_id : folderId}).sort({createdAt : -1})
+        const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
+        return res.render('pages/folder' , {folders , notes , folder})
       }      
     }catch(error){
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      res.redirect('back')
-      return next(error)
+      res.redirect('/mydrive') //redirecciona a la pagina
+      return next(error) // envia el error al midleware, aqui se puede hacer algo o reenviar a otro lado, revisar
     }
 
   }
@@ -120,8 +119,9 @@ class NoteController{
       }
       return res.render('pages/createNote' , {folderId})
     }catch(error){
+      console.log('holaaa123')
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      res.redirect('back');
+      res.redirect('mydrive');
       return next(error);
     }
     
