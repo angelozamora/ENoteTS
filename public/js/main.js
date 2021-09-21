@@ -9,13 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   let message = JSON.parse(document.getElementById('message').getAttribute('data'));
+  console.log(message)
   if (message.res) {
-    if (message.res[0].type == "error") {
-      swalMessage(message.res[0].type, message.res[0].msg, )
-    } else if (message.res[0].type == "success") {
-      swalMessage(message.res[0].type, message.res[0].msg, )
-    } else if (message.res[0].type == "info") {
-      swalMessage(message.res[0].type, message.res[0].msg, )
+    if (message.res.type == "error") {
+      swalMessage(message.res.type, message.res.msg, )
+    } else if (message.res.type == "success") {
+      swalMessage(message.res.type, message.res.msg, )
+    } else if (message.res.type == "info") {
+      swalMessage(message.res.type, message.res.msg, )
     }
   }
 

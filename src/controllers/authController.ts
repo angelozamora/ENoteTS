@@ -22,21 +22,21 @@ class AuthController{
           if(req.session){
             req.session.userId = user._id;
             // req!.session!.user = user;
-            req.flash('res' , { type : 'success' , msg:`Welcome  ${user.fullname}`})
-            return res.redirect('/')
+            req.session['message'] = {res : { type : 'success' , msg:`Welcome  ${user.fullname}`}} 
+            return res.redirect('/mydrive')
           }
         }else{
-          req.flash('res' , { type : 'error' , msg:`Password is invalid , try again!`})
+          req.session['message'] = {res : { type : 'error' , msg:`Password is invalid , try again!`}} 
           return res.redirect('back')
         }
       }
       else{
-        req.flash('res' , { type : 'error' , msg:'User not found , try again!'})
+        req.session['message'] = {res : { type : 'error' , msg:`User not found , try again!`}}
         return res.redirect('back')
       }
   
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
       res.redirect('back')
       return next(error); 
     }
@@ -56,17 +56,16 @@ class AuthController{
         fullname : req.body.fullname
       })
       
-      req.flash('res' , { type : 'success' , msg:'You registered a user successfully'})
+      req.session['message'] = {res : { type : 'success' , msg:`You registered a user successfully`}}
       return res.redirect('/auth/login');
   
-  
-    }catch(error){
+    }catch(error:any){
       if(error.name == "ValidationError"){
-        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
-        res.render('pages/register' , {errors : error.errors})
+        return res.render('auth/register' , {errors : error.errors})
       }
-
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+      
+      console.log('holaa')
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
       return next(error);
     }
   

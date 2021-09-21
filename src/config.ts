@@ -34,6 +34,10 @@ export async function startServer(){
     
     res.locals.message = req.session['message']
     delete req.session['message']
+    console.log('*********************** MENSAJE GUARDADO ***********************')
+    console.log(res.locals.message)
+    // console.log(req.headers.referer)
+    console.log(req.url)
 
     res.locals.form = req.session['form']
     delete req.session['form']

@@ -10,7 +10,7 @@ class HomeController{
   }
   public getMyDrive = async function (req : any, res:Response , next:NextFunction){
     try{
-      
+
       const userId = res.locals.user._id;
       const user =res.locals.user;
       const folders = await FolderModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
@@ -20,7 +20,7 @@ class HomeController{
 
       return res.render('pages/index' , {folders , notes ,recentNotes, user})
     }catch(error){
-      req.flash("res" , {type : 'error' ,  msg: 'An error occurred, please try again!' })
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
       res.redirect('back')
       return next(error);
     }

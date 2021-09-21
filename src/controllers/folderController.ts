@@ -23,7 +23,7 @@ class NoteController{
       const newFolder = new FolderModel(folder);
       await newFolder.save();
 
-      req.flash('res' , { type : 'success' , msg:'Folder created successfully'})
+      req.session['message'] = {res : { type : 'success' , msg:`Folder created successfully`}}
       if(folderId == '0'){
         return res.redirect('/mydrive')
       }else{
@@ -31,11 +31,11 @@ class NoteController{
       }
       
 
-    }catch(error){
+    }catch(error:any){
       if(error.name === "ValidationError"){
-        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
+        req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
       }else{
-        req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       }
       res.redirect('back')
       return next(error)
@@ -47,14 +47,14 @@ class NoteController{
     try{
       let folderId = req.params.folderId;
       await FolderModel.findByIdAndUpdate(folderId , { name : req.body.newName})
-      req.flash('res' , { type : 'success' , msg:'Folder update successfully'})
+      req.session['message'] = {res : { type : 'success' , msg:`Folder update successfully`}}
       return res.redirect('back')
       
-    }catch(error){
+    }catch(error:any){
       if(error.name === "ValidationError"){
-        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
+        req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
       }else{
-        req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       }
       res.redirect('back')
       return next(error)
@@ -75,11 +75,12 @@ class NoteController{
           return res.render('pages/folder' , {folders , notes , folder})
           
         }else{
+          req.session['message'] = {res : { type : 'error' , msg:`Folder not found`}}
           return res.redirect('back')
         }
       }      
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       res.redirect('back')
       return next(error)
     }
@@ -99,7 +100,7 @@ class NoteController{
         
       }      
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       res.redirect('back')
       return next(error)
     }
@@ -113,13 +114,13 @@ class NoteController{
       if(folderId != '0'){
         const folder = await FolderModel.findOne({_id : folderId})
         if(!folder){
-          req.flash('res' , { type : 'error' , msg:'Folder not found'})
+          req.session['message'] = {res : { type : 'error' , msg:`Folder not found`}}
           return res.redirect('back')
         }
       }
       return res.render('pages/createNote' , {folderId})
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       res.redirect('back');
       return next(error);
     }
@@ -137,7 +138,7 @@ class NoteController{
       }else{
         const folder = await FolderModel.findOne({_id : folderId})
         if(!folder){
-          req.flas('res' , { type : 'error' , msg:'An error occurred, please try again!'})
+          req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
           return res.redirect('back')
         }
       }
@@ -150,8 +151,7 @@ class NoteController{
       }
       
       await NoteModel.create(note);
-      req.flash("res" , {type : 'success' ,  msg: `A note was created successfully` })
-
+      req.session['message'] = {res : { type : 'success' , msg:`A note was created successfully`}}
       if(req.params.folderId == '0'){
         return res.redirect(`/mydrive`);
       }else{
@@ -159,14 +159,13 @@ class NoteController{
       }
 
 
-    }catch(error){
+    }catch(error:any){
       
       if(error.name == "ValidationError"){
-        req.flash("res" , {type : 'error' ,  msg: 'You must enter all the data' })
         res.render('pages/createNote' , {errors : error.errors , folderId : req.params.folderId})
       }
       else{
-        req.flash("res" , {type : 'error' ,  msg: 'An error occurred, please try again!' })
+        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
         res.redirect('back')
         
       }
@@ -189,11 +188,12 @@ class NoteController{
         return res.render('pages/noteDetail' , {note , folderId})
       }
       
-      req.flash('res' , { type : 'error' , msg:'Note not found , please try again'})
-      return res.redirect('/')
+      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+      return res.redirect('/mydrive')
+      
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
-      res.redirect('/')
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
+      res.redirect('/mydrive')
       return next(error) ;
     }
   }
@@ -207,12 +207,12 @@ class NoteController{
         return res.render('pages/updateNote' , {note})
       }
       
-      req.flash('res' , { type : 'error' , msg:'Note not found , please try again!'})
-      return res.redirect('/')
+      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+      return res.redirect('/mydrive')
     
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
-      res.redirect('/')
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
+      res.redirect('/mydrive')
       return next(error)
     }
   }
@@ -228,16 +228,16 @@ class NoteController{
         note.body = body;
         note.save();
 
-        req.flash('res' , { type : 'success' , msg:'Note updated successfully'})
+        req.session['message'] = {res : { type : 'success' , msg:`Note updated successfully`}}
         return res.redirect(`/note/detail/${note._id}`)
       }
       
-      req.flash('res' , { type : 'error' , msg:'Note not found , please try again!'})
-      return res.redirect('/')
+      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+      return res.redirect('/mydrive')
     
     }catch(error){
-      req.flash('res' , { type : 'error' , msg:'An error occurred, please try again!'})
-      res.redirect('/')
+      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+      res.redirect('/mydrive')
       return next(error)
     }
 
@@ -248,14 +248,14 @@ class NoteController{
     try{
       let noteId = req.params.id;
       await NoteModel.findByIdAndUpdate(noteId , { title : req.body.newName})
-      req.flash('res' , { type : 'success' , msg:'Note update successfully'})
+      req.session['message'] = {res : { type : 'success' , msg:`Note updated successfully`}}
       return res.redirect('back')
       
-    }catch(error){
+    }catch(error:any){
       if(error.name === "ValidationError"){
-        req.flash('res' , { type : 'error' , msg:'You must enter all the data'})
+        req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
       }else{
-        req.flash('res' , { type : 'error' , msg:'An error occurred, please try again'})
+        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       }
       res.redirect('back')
       return next(error)
