@@ -6,8 +6,9 @@ import mongoose from 'mongoose';
 class NoteController{
   
   public postFolder = async function(req : any, res:Response , next:NextFunction){
-
+  
     try{
+
       var ObjectId = mongoose.Types.ObjectId; 
       let folderId = req.params.folderId;
       let folderIdAux = folderId
@@ -85,7 +86,8 @@ class NoteController{
     }
 
   }
-
+  
+  /** revisar el eror al eliminar */
   public deleteFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
@@ -96,7 +98,6 @@ class NoteController{
       }else{
         await FolderModel.deleteOne({ _id : folderId})
         return res.json({flag : true, msg : 'Folder deleted successfully'});
-        
       }      
     }catch(error){
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
@@ -119,9 +120,8 @@ class NoteController{
       }
       return res.render('pages/createNote' , {folderId})
     }catch(error){
-      console.log('holaaa123')
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      res.redirect('mydrive');
+      res.redirect('/mydrive');
       return next(error);
     }
     
@@ -139,7 +139,7 @@ class NoteController{
         const folder = await FolderModel.findOne({_id : folderId})
         if(!folder){
           req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
-          return res.redirect('back')
+          return res.redirect('/mydrive')
         }
       }
 
@@ -167,7 +167,6 @@ class NoteController{
       else{
         req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
         res.redirect('back')
-        
       }
 
       return next(error)
@@ -178,19 +177,18 @@ class NoteController{
     try{
       let noteId = req.params.id
       const note = await NoteModel.findOne({_id : noteId});
-      if(note){
-        let folderId
-        if(note.folder_id == '000000000000000000000000'){
-          folderId= '0';
-        }else{
-          folderId = note.folder_id;
-        }
-        return res.render('pages/noteDetail' , {note , folderId})
+      if(!note){
+        req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+        return res.redirect('/mydrive')
       }
-      
-      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
-      return res.redirect('/mydrive')
-      
+
+      let folderId
+      if(note.folder_id == '000000000000000000000000'){
+        folderId= '0';
+      }else{
+        folderId = note.folder_id;
+      }
+      return res.render('pages/noteDetail' , {note , folderId})   
     }catch(error){
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       res.redirect('/mydrive')
@@ -202,14 +200,14 @@ class NoteController{
     try{
       const noteId = req.params.id;
       const note = await NoteModel.findOne({ _id : noteId})
-      
-      if(note){
-        return res.render('pages/updateNote' , {note})
+
+      if(!note){
+        req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+        return res.redirect('/mydrive')
       }
       
-      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
-      return res.redirect('/mydrive')
-    
+      return res.render('pages/updateNote' , {note})
+      
     }catch(error){
       req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
       res.redirect('/mydrive')
@@ -222,19 +220,20 @@ class NoteController{
       const {title , body}  =req.body;
       const noteId = req.params.id;
       const note = await NoteModel.findOne({ _id : noteId})
-      
-      if(note){
-        note.title = title;
-        note.body = body;
-        note.save();
 
-        req.session['message'] = {res : { type : 'success' , msg:`Note updated successfully`}}
-        return res.redirect(`/note/detail/${note._id}`)
+
+      if(!note){
+        req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
+        return res.redirect('/mydrive')
       }
       
-      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
-      return res.redirect('/mydrive')
-    
+      note.title = title;
+      note.body = body;
+      note.save();
+
+      req.session['message'] = {res : { type : 'success' , msg:`Note updated successfully`}}
+      return res.redirect(`/note/detail/${note._id}`)
+      
     }catch(error){
       req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
       res.redirect('/mydrive')
@@ -265,15 +264,18 @@ class NoteController{
   public getDeleteNote = async function(req:any , res:Response , next : NextFunction){
     try{
       const note = await NoteModel.findOne({_id : req.params.id});
-      if(note){
-        const folderId = note.folder_id;
-        await note.delete();
-        return res.json({flag : true, msg : 'Note deleted successfully'});
-      }
       
-      return res.json({flag : false, msg : 'Note not found'});
+      if(!note){
+        return res.json({flag : false, msg : 'Note not found'});
+      }
+
+      const folderId = note.folder_id;
+      await note.delete();
+      return res.json({flag : true, msg : 'Note deleted successfully'});
+      
     }catch(error){
-      res.json({ flag : false, msg : 'An error occurred, please try again!'});
+      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
+      res.redirect('back')
       return next(error)
     }
   }
