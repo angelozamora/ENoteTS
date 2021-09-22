@@ -8,7 +8,6 @@ class NoteController{
   public postFolder = async function(req : any, res:Response , next:NextFunction){
   
     try{
-
       var ObjectId = mongoose.Types.ObjectId; 
       let folderId = req.params.folderId;
       let folderIdAux = folderId
@@ -84,24 +83,26 @@ class NoteController{
       res.redirect('/mydrive') //redirecciona a la pagina
       return next(error) // envia el error al midleware, aqui se puede hacer algo o reenviar a otro lado, revisar
     }
-
   }
-  
-  /** revisar el eror al eliminar */
+
   public deleteFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
       const folderId = req.params.folderId;
-
       if(folderId == '0'){
         return res.redirect('/mydrive')
-      }else{
-        await FolderModel.deleteOne({ _id : folderId})
-        return res.json({flag : true, msg : 'Folder deleted successfully'});
-      }      
+      }
+
+      const folder = await FolderModel.findOne({_id : folderId});
+      if(!folder){
+        return res.json({flag : false, msg : 'Folder not found'});
+      }
+      
+      await folder.delete()
+      return res.json({flag : true, msg : 'Folder deleted successfully'});
+            
     }catch(error){
-      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      res.redirect('back')
+      res.status(500).send({flag : false, msg : 'An error occurred, please try again'})
       return next(error)
     }
 
@@ -264,22 +265,18 @@ class NoteController{
   public getDeleteNote = async function(req:any , res:Response , next : NextFunction){
     try{
       const note = await NoteModel.findOne({_id : req.params.id});
-      
       if(!note){
         return res.json({flag : false, msg : 'Note not found'});
       }
 
-      const folderId = note.folder_id;
       await note.delete();
       return res.json({flag : true, msg : 'Note deleted successfully'});
       
     }catch(error){
-      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      res.redirect('back')
+      res.status(500).send({flag : false, msg : 'An error occurred, please try again'})
       return next(error)
     }
   }
-  
 }
 
 const noteController = new NoteController();
