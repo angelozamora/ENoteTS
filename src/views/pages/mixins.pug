@@ -4,18 +4,16 @@ mixin errors(errors , field)
   
 
 mixin buttonNew(folderId)
-  div.buttonDiv.buttonDiv--left
-    button(type="button" id="asda" class="button buttonDiv_new " data-bs-toggle="dropdown" aria-expanded="false") 
-      <i class="fas fa-plus me-2"></i>  New  
-
-    div(id="modalNew-div" class="dropdown-menu modalNew-div" aria-labelledby="asda" )
-        .modalNew-folder 
-          h1(class="modalNew-folder-title"  data-bs-toggle="modal" data-bs-target="#modalNewFolder") 
-            <i class="fas fa-folder me-2"></i> Folder 
-
-        .modalNew-file
-          a(href=`/note/create/${folderId}` class="d-block modalNew-note") 
-            <i class="far fa-file-alt me-2"></i> Note 
+  .droplog.buttonDiv.buttonDiv--left
+    button(type="button"  class="button buttonDiv_new dropbutton-action" data-dropmenu="dropmenuButtonNew") 
+      <i class="fas fa-plus me-2 dropbutton-hidden"></i>  New 
+    div(id="dropmenuButtonNew").dropmenu.dropmenu--animated.dropmenu--t.dropmenu--l.dropmenu--bradius.modalNew-div
+      .dropmenu__option.dropmenu-item(data-bs-toggle="modal" data-bs-target="#modalNewFolder")
+        span.dropmenu__text.dropmenu-item.modalNew-folder-title  
+          <i class="fas fa-folder icon--standar me-1"></i> Folder
+      .dropmenu__option.dropmenu-item
+        a(href=`/note/create/${folderId}` class="dropmenu__url dropmenu-item modalNew-note" target="_blank") 
+          <i class="far fa-file-alt icon--standar me-1"></i> Note
 
 mixin modalNewFolder(folderId)
   <div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -23,7 +21,7 @@ mixin modalNewFolder(folderId)
       <div class="modal-content modal-dark">
         <div class="modal-body p-4">
           div.d-flex.justify-content-between
-            <h5 class="modal-title text-white" id="exampleModalLabel">New Folder</h5>
+            <h5 class="modal-title" id="exampleModalLabel">New Folder</h5>
             <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
           form(action=`/folder/create/${folderId}` method="POST" autocomplete="off").mt-4 
             div.mb-4  
@@ -33,7 +31,34 @@ mixin modalNewFolder(folderId)
               <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel </button>
               <button type="submit" class="button button-primary">Create </button>
         </div>
-          
       </div>
     </div>
   </div>
+
+
+
+mixin modalChangeName(fileId, fileName , typeFile , modalId)
+  div(class="modal fade" id=modalId tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true")
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-dark">
+        <div class="modal-body p-4">
+          div.d-flex.justify-content-between
+            <h5 class="modal-title" id="exampleModalLabel">Change Name</h5>
+            <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+          if(typeFile=="folder") 
+            form(action=`/folder/change-name/${fileId}` method="POST" autocomplete="off").mt-4
+              div.mb-4  
+                input(type="text" id="newName" name="newName" placeholder="Enter new name" class="input-text input-text-medium "  required autofocus="autofocus" value=fileName onfocus="this.select()")
+              .mb-1.d-flex.justify-content-between 
+                <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                <button type="submit" class="button button-primary">Accept</button>
+          else
+            form(action=`/note/change-name/${fileId}` method="POST" autocomplete="off").mt-4
+              div.mb-4  
+                input(type="text" id="newName" name="newName" placeholder="Enter new name" class="input-text input-text-medium "  required autofocus="autofocus" value=fileName onfocus="this.select()")
+              .mb-1.d-flex.justify-content-between 
+                <button type="button" class="button button-transparent" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                <button type="submit" class="button button-primary">Accept</button>
+        </div>
+      </div>
+    </div>

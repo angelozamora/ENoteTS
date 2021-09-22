@@ -1,13 +1,17 @@
 extends  ../layout/layout
 
+block meta-link
+  link(rel="stylesheet", href="/public/css/droplog.css")
+
 block  header 
   include ../partials/header
 
 block  footer 
-  //- include ../templates/footer 
+  //- include ../templates/footer  
 
 block script
-  script(src="/public/js/menuResponsive-function.js") 
+  script(src="/public/js/menuResponsive-function.js")
+  script(src="/public/js/droplog.js") 
 
 block main 
   include ./mixins
@@ -49,8 +53,17 @@ block main
           .container-lg#div-container
             div.content-title
               h1.content-title-text My unit
-            .row.mt-4.mb-2.mx-0 
-              .col-12.px-0#carpeta-container
+
+            if(recentNotes)
+              h1.content-title-text Sugerida
+              .row 
+                each note in recentNotes
+                  div.col-2 
+                    h3=note.title
+
+
+            .row.my-2.mx-0 
+              .col-12.col-lg-11.px-0#carpeta-container
                 //- each folder in folders
                 //-   a(class="carpeta" href=`/note/all-notes/${folder._id}`)  
                 //-     span.carpeta-titulo= folder.name
@@ -59,34 +72,66 @@ block main
                     tr
                       th(scope="col" class="table-th text-color") Name
                       th(scope="col" class="table-th table-th-web text-color") Owner
-                      th(scope="col" class="table-th table-th-web text-color") Creation date
+                      th(scope="col" class="table-th table-th-web text-color") Last modification
                       th(scope="col" class="table-th table-th-action text-color") Action
                     
                   
                   tbody
                     if((folders && folders.length) || (notes && notes.length))
-                      each folder in folders
+                      each folder,index in folders
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToFolder('${folder._id}')`)
                             div.d-flex.justify-content-start
-                              <i class="fas fa-folder table-td-icon"></i>
+                              <i class="fas fa-folder table__icon table__icon--folder icon--standar"></i>
                               span= folder.truncateName()
                           td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) Yo
-                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`) 17-05-2021
+                          td.table-td.table-td-web(onclick=`goToFolder('${folder._id}')`)= folder.getDate()
                           td.table-td
-                            <i class="fas fa-ellipsis-v table-td-icon"></i>
-
-                      each note in notes
+                            div.table__options
+                              .droplog
+                                button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenufolder${index}`)
+                                  i.fas.fa-ellipsis-v.table-td-button.dropbutton-hidden
+                                div(id=`dropmenufolder${index}`).dropmenu.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="far fa-folder-open icon--standar me-1"></i> Move to
+                                  .dropmenu__option.dropmenu-item(data-bs-toggle="modal" data-bs-target=`#modalChangeFolder${index}`)
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="far fa-edit icon--standar me-1"></i> Change name 
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu_-text.dropmenu-item(onclick=`deleteFolder('${folder._id}')`)
+                                      <i class="far fa-trash-alt icon--standar me-1"></i> Delete
+                            +modalChangeName(folder._id , folder.name,'folder' , `modalChangeFolder${index}`)
+                      each note,index in notes
                         tr.text-color.table-tr-hover
                           td.table-td(onclick=`goToDetail('${note._id}')`)
                             div.d-flex.justify-content-start
-                              <i class="fas fa-file-alt table-td-icon"></i>
+                              <i class="fas fa-file-alt table__icon table__icon--document icon--standar"></i>
                               span= note.truncateTitle()
                           td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) Yo
-                          td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`) 17-05-2021
+                          td.table-td.table-td-web(onclick=`goToDetail('${note._id}')`)= note.getDate()
                           td.table-td
-                            <i class="fas fa-ellipsis-v table-td-icon"></i>
-                        
+                            div.table__options
+                              .droplog
+                                button.droplog__button.dropbutton-action(type='button' data-dropmenu=`dropmenunote${index}`)
+                                  i.fas.fa-ellipsis-v.table-td-button.dropbutton-hidden
+                                div(id=`dropmenunote${index}`).dropmenu.dropmenu--enote.dropmenu--t.dropmenu--r100.dropmenu--bradius
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="far fa-folder-open icon--standar me-1"></i> Move to
+                                  .dropmenu__option.dropmenu-item(data-bs-toggle="modal" data-bs-target=`#modalChangeNote${index}`)
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="far fa-edit icon--standar me-1"></i> Change name 
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu__text.dropmenu-item  
+                                      <i class="fas fa-info-circle icon--standar me-1"></i> See detail 
+                                  .dropmenu__option.dropmenu-item
+                                    span.dropmenu_-text.dropmenu-item(onclick=`deleteNote('${note._id}')`) 
+                                      <i class="far fa-trash-alt icon--standar me-1"></i> Delete
+                            +modalChangeName(note._id , note.title ,'note' , `modalChangeNote${index}`)
                     else 
                       tr 
                         td(colspan="3" class="border-bottom-0") 
@@ -94,6 +139,7 @@ block main
 
         block modal
           +modalNewFolder('0') 
+  
   script. 
     function goToFolder(id){
       return window.location.href = '/folder/' + id;
@@ -104,3 +150,78 @@ block main
       return window.open('/note/detail/'+ id, '_blank');
     }
     
+      
+    function deleteFolder(folderId){
+      Swal.fire({
+        title: '¿Are you sure you want to delete the folder?',
+        icon: 'error',
+
+        showCancelButton: true,
+        confirmButtonColor:  '#E74C3C',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText : 'No',
+        confirmButtonText: 'Yes, delete!',
+        reverseButtons: true,
+        background: backgroundColor,
+        customClass: {
+            title: 'text-color',
+        }
+      }).then((result) => {
+          if (result.isConfirmed) {
+            loadForm();
+            fetch(`/folder/delete/${folderId}`, {
+              method: "DELETE"
+            }).then(res => {
+              return res.json();
+            })
+            .then( data => {
+              if(data.flag){
+                confirmMessage(data.msg)
+              }else{
+                swalMessage('error',data.msg)
+              }
+              setTimeout( function(){
+                  window.location.reload()
+                },2500)
+            });
+          } 
+      })
+    }
+
+
+    function deleteNote(noteId){
+      Swal.fire({
+        title: '¿Are you sure you want to delete the note?',
+        icon: 'error',
+
+        showCancelButton: true,
+        confirmButtonColor:  '#E74C3C',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText : 'No',
+        confirmButtonText: 'Yes, delete!',
+        reverseButtons: true,
+        background: backgroundColor,
+        customClass: {
+            title: 'text-color',
+        }
+      }).then((result) => {
+          if (result.isConfirmed) {
+            loadForm();
+            fetch(`/note/delete/${noteId}`, {
+              method: "DELETE"
+            }).then(res => {
+              return res.json();
+            })
+            .then( data => {
+              if(data.flag){
+                confirmMessage(data.msg)
+              }else{
+                swalMessage('error',data.msg)
+              }
+              setTimeout( function(){
+                  window.location.reload()
+                },2500)
+            });
+          } 
+      })
+    }

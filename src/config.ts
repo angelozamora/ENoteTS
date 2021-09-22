@@ -23,7 +23,6 @@ export async function startServer(){
   app.use(express.urlencoded({ extended: true }))
   app.use(express.json())
   app.use(flash());
-  app.use(express.json())
   
   app.use('/public', express.static(path.join(__dirname, '../public')))
   app.use(cookieSession({
@@ -31,10 +30,21 @@ export async function startServer(){
     maxAge: 24 * 60 * 60 * 1000
   }))
 
+  app.use( ( req : any , res:any , next : any )=>{
+    
+    res.locals.message = req.session['message']
+    delete req.session['message']
+    console.log('*********************** RUTA ***********************')
+    console.log(req.url)
+
+    res.locals.form = req.session['form']
+    delete req.session['form']
+
+    next()
+  })
 
   /**********ROUTER***********/
   app.use('/' , router())
-
 
 
   app.use( (err:any , req:any ,res:any , next:any)=>{

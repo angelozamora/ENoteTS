@@ -14,12 +14,12 @@ block content
 
           div.mb-5.col-12
             label(for="body" class="form-label") Description 
-            input(type="text" name="body" id="body" value=`${note.body}` required).input-text.input-text-medium
+            //- input(type="text" name="body" id="body" value=`${note.body}` required).input-text.input-text-medium
+            textarea#tiny-body(type="text" name="body"  ).input-text.input-text-medium 
+              =  note.body
             +errors(errors , "body")
         
           div.mb-3.col-12
             .d-flex.justify-content-between   
               a(class="button button-transparent" href=`/note/detail/${note._id}`) Cancel
               button(class="button button-primary" type="submit") Save
-          
-    

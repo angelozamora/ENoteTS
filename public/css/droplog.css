@@ -1,0 +1,115 @@
+.droplog {
+  position: relative;
+  display: inline-block;
+}
+
+.droplog__button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  min-width: 10px;
+  padding: 0 7px;
+}
+
+.dropbutton-hidden {
+  pointer-events: none;
+}
+
+.dropmenu {
+  position: absolute;
+  background-color: var(--background-color);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.192);
+  min-width: 150px;
+  min-height: 50px;
+  padding: 10px 5px;
+  display: none;
+}
+
+.dropmenu--animated {
+  max-height: 0;
+  height: auto;
+  min-height: 0;
+  overflow-y: hidden;
+  box-shadow: none;
+  pointer-events: none;
+  padding: 0 5px;
+  display: block;
+  transition: all 0.5s ease-in-out;
+}
+
+.dropmenu.show {
+  display: block;
+}
+
+.dropmenu--animated.show {
+  padding: 10px 5px;
+  pointer-events: initial;
+  max-height: 1550px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.192);
+}
+
+.dropmenu__option {
+  padding: 5px 10px;
+  /* border-top: 1px solid rgba(0, 0, 0, 0.301); */
+  cursor: pointer;
+}
+
+.dropmenu__option:nth-child(1) {
+  border-top: none;
+}
+
+.dropmenu__option:hover {
+  background-color: var(--hover-color);
+  color: var(--primary-color);
+}
+
+.dropmenu__text {
+  font-size: 1rem;
+  display: block;
+}
+
+.dropmenu__url {
+  display: block;
+  text-decoration: none;
+  color: unset;
+  outline: none;
+}
+
+
+/********* TRANSFORM DROPMENU*************/
+
+.dropmenu--bradius {
+  border-radius: 5px;
+}
+
+.dropmenu--t {
+  top: 0;
+}
+
+.dropmenu--t100 {
+  top: 100%;
+}
+
+.dropmenu--b {
+  bottom: 0;
+}
+
+.dropmenu--b100 {
+  top: 100%;
+}
+
+.dropmenu--r {
+  right: 0;
+}
+
+.dropmenu--r100 {
+  right: 100%;
+}
+
+.dropmenu--l {
+  left: 0;
+}
+
+.dropmenu--l100 {
+  left: 100%;
+}

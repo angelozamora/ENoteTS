@@ -1,10 +1,10 @@
 import {Router} from 'express'
 import HomeController from '../controllers/homeController'
 import { getUser } from '../midleware/getUser';
-import { isLoged } from '../midleware/isLoged';
+import { isLogged } from '../midleware/isLogged';
 
 
 export default (router : Router)=>{
-  router.get('/', [getUser , isLoged] ,  HomeController.redirectMyDrive);
-  router.get('/mydrive', [getUser , isLoged] ,  HomeController.getMyDrive)
+  router.get('/', [getUser , isLogged] ,  HomeController.redirectMyDrive);
+  router.get('/mydrive', [getUser , isLogged] ,  HomeController.getMyDrive)
 }
