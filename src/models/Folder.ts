@@ -24,9 +24,6 @@ const folderSchema = new Schema<IFolder>({
     type : Schema.Types.ObjectId,
     ref  : 'Folder'
   }
-  // folder_id : {
-  //   type : String
-  // }
 
 },{ timestamps: true})
 

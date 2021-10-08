@@ -1,5 +1,6 @@
 import {Router} from 'express'
 import AuthController from '../controllers/authController'
+import AuthApiController from '../apiControllers/authApiController'
 import { isEmail } from '../midleware/isEmail';
 import { getUser } from '../midleware/getUser';
 import { isLogged } from '../midleware/isLogged';
@@ -14,7 +15,11 @@ export default (router : Router)=>{
   router.post('/auth/register' , AuthController.postRegister)
 
   // router.get('/auth/recover/passwordt' )
-
   router.get('/auth/logout' ,[getUser , isLogged], AuthController.postLogout)
+
+  
+  /********** RUTAS API **********/
+  router.post('/api/auth/login' , AuthApiController.postLogin)
+  router.post('/api/auth/register' , AuthApiController.postRegister)
   
 };

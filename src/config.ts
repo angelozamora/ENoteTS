@@ -4,7 +4,6 @@ import { resolve } from "path";
 import router from "./routes"
 import * as dotenv from "dotenv";
 import cookieSession from 'cookie-session';
-import flash from 'express-flash';
 
 dotenv.config({ path:resolve(__dirname, "../.env") });
 
@@ -22,7 +21,6 @@ export async function startServer(){
   /*********MIDLEWARE*******/
   app.use(express.urlencoded({ extended: true }))
   app.use(express.json())
-  app.use(flash());
   
   app.use('/public', express.static(path.join(__dirname, '../public')))
   app.use(cookieSession({
