@@ -9,8 +9,8 @@ block main
             h1.text-center#title-login Login 
           
             form(action="/auth/login"  method="POST" id="form-login")
-              if messages.errors
-                span.span-error=messages.errors
+              //- if messages.errors
+              //-   span.span-error=messages.errors
               div.mb-4   
                 label EMAIL 
                 input(type="text" class=" input-text" name="email" placeholder="Enter your email")

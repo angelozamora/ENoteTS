@@ -14,12 +14,15 @@ export default (router : Router)=>{
   router.get('/auth/register', AuthController.getRegister)
   router.post('/auth/register' , AuthController.postRegister)
 
-  // router.get('/auth/recover/passwordt' )
+  // router.get('/auth/recover/password' )
   router.get('/auth/logout' ,[getUser , isLogged], AuthController.postLogout)
 
   
   /********** RUTAS API **********/
   router.post('/api/auth/login' , AuthApiController.postLogin)
   router.post('/api/auth/register' , AuthApiController.postRegister)
+
+  router.post('/api/auth/forgot-password' , AuthApiController.postForgotPassword)
+  router.post('/api/auth/new-password' , AuthApiController.postNewPassword)
   
 };

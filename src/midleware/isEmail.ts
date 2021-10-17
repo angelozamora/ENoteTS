@@ -9,7 +9,8 @@ export function isEmail( req : any, res:any ,next:any){
     }
     next()
   }catch(err){
-    req.flash('errors' , err)
+    console.log(err)
+    req.session['message'] = {res : { type : 'error' , msg:err}} 
     res.redirect('back')
   }
   

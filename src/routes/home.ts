@@ -3,6 +3,7 @@ import HomeApiController from '../apiControllers/homeApiController';
 import HomeController from '../controllers/homeController'
 import { getUser } from '../midleware/getUser';
 import { isLogged } from '../midleware/isLogged';
+import { verifyToken } from '../midleware/verifyToken';
 
 
 export default (router : Router)=>{
@@ -11,5 +12,5 @@ export default (router : Router)=>{
 
 
   /********** RUTAS API **********/
-  router.get('/api/mydrive' , HomeApiController.getMyDrive)
+  router.get('/api/mydrive' ,[verifyToken] ,  HomeApiController.getMyDrive)
 }

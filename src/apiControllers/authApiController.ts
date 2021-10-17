@@ -1,5 +1,6 @@
 import UserModel from '../models/user'
 import jwt from 'jsonwebtoken'
+import { Request, Response } from 'express';
 class AuthApiController{
 
 
@@ -11,6 +12,7 @@ class AuthApiController{
       if(user){
         const isMatch = await user.comparePassword(password);
         if(isMatch){
+          
           const token = jwt.sign({ id: user._id }, `${process.env.PRIVATE_KEY}` , {
             expiresIn : 60 * 60 * 24
           });
@@ -54,7 +56,54 @@ class AuthApiController{
     }
   
   }
+
+  public postForgotPassword =  async(req:Request , res : Response)=>{
+    try{
+      const {email} = req.body
+      let user:any = await UserModel.findOne({email : email})
+      
+      if(!user){
+        res.status(400).json({msg : "An error ocurred"})
+      }
+
+      const resetToken = jwt.sign({id:user._id , email : user.email} , `${process.env.SECRET_RESET}` , {
+        expiresIn : 60 * 60 
+      })
+
+      const verificationLink = `http://localhost:8080/api/auth/new-password/${resetToken}`
+      await user.updateOne( {resetToken : resetToken})
+
+      res.status(200).json({verificationLink})
+
+    }catch(error){
+      console.log(error)
+    }
+  }
   
+
+  public postNewPassword = async (req:Request , res :Response)=>{
+    try{
+      const resetToken:any = req.headers['reset']
+      const {password} = req.body
+      
+      if(!resetToken){
+        res.status(400).json({msg : "An error ocurred"})
+      }
+
+      const decoded:any = jwt.verify(resetToken , `${process.env.SECRET_RESET}`)
+
+      let user:any = await UserModel.findById(decoded.id)
+      if(!user){
+        res.status(400).json({msg : "An error ocurred"})
+      }
+      
+      const newPassword = await user.encryptPassword(password);
+      await user.updateOne({password : newPassword})
+      res.status(200).json({msg : "Se logro"})
+    }catch(error){
+
+    }
+  }
 
 
 

@@ -5,6 +5,7 @@ export interface IUser extends Document{
   email : string;
   password : string;
   fullname : string;
+  resetToken : string;
   comparePassword : ( password : string) => Promise<Boolean>;
 };
 
@@ -31,6 +32,9 @@ const UserSchema  = new Schema<IUser>({
   fullname : {
     type : String,
     required : [true , 'is required']
+  },
+  resetToken : {
+    type : String
   }
 
 },{ timestamps: true})
@@ -44,6 +48,11 @@ UserSchema.methods.comparePassword = async function(password : string ) : Promis
     return false
   }
 
+}
+
+UserSchema.methods.encryptPassword =  async function(password : string ){
+    const hash = Buffer.from(encodeURIComponent(password)).toString('base64');
+    return hash
 }
 
 
