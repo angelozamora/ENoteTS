@@ -91,7 +91,6 @@ class AuthApiController{
       }
 
       const decoded:any = jwt.verify(resetToken , `${process.env.SECRET_RESET}`)
-
       let user:any = await UserModel.findById(decoded.id)
       if(!user){
         res.status(400).json({msg : "An error ocurred"})
@@ -101,7 +100,7 @@ class AuthApiController{
       await user.updateOne({password : newPassword})
       res.status(200).json({msg : "Se logro"})
     }catch(error){
-
+      res.status(400).json({msg : error})
     }
   }
 
