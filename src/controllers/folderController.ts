@@ -2,6 +2,8 @@ import FolderModel from '../models/Folder';
 import  NoteModel  from '../models/Note';
 import { NextFunction, Request , Response} from 'express';
 import mongoose from 'mongoose';
+import { getFolder } from '../services/Folder/UseCase/getFolder';
+import { managmentError } from '../loaders/error';
 
 class NoteController{
   
@@ -31,7 +33,7 @@ class NoteController{
       }
       
 
-    }catch(error:any){
+    }catch(error:any){ 
       if(error.name === "ValidationError"){
         req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
       }else{
@@ -64,24 +66,19 @@ class NoteController{
     try{
 
       const folderId = req.params.folderId;
-
       if(folderId == '0'){
         return res.redirect('/mydrive')
-      }else{
-        const folder = await FolderModel.findOne({ _id : folderId})
-        if(!folder){
-          req.session['message'] = {res : { type : 'error' , msg:`Folder not found`}}
-          return res.redirect('/mydrive')
-        }
+      }
+      
+      const result = await getFolder(folderId)
+      if(!result){
+        req.session['message'] = {res : { type : 'error' , msg:`Folder not found`}}
+        return res.redirect('/mydrive')
+      }
 
-        const folders = await FolderModel.find({folder_id : folderId}).sort({createdAt : -1})
-        const notes = await NoteModel.find({folder_id : folderId}).sort({createdAt : -1})
-        return res.render('pages/folder' , {folders , notes , folder})
-      }      
+      return res.render('pages/folder' , result)
     }catch(error){
-      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      res.redirect('/mydrive') //redirecciona a la pagina
-      return next(error) // envia el error al midleware, aqui se puede hacer algo o reenviar a otro lado, revisar
+      managmentError(error, req, res)
     }
   }
 

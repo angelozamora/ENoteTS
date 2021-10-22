@@ -1,7 +1,6 @@
-import FolderModel from '../models/Folder';
-import  NoteModel  from '../models/Note';
-
 import { NextFunction, Request , Response} from 'express';
+import { managmentError } from '../loaders/error';
+import { getDrive } from '../services/Folder/UseCase/getDrive';
 
 class HomeController{
   
@@ -12,16 +11,11 @@ class HomeController{
     try{
       const userId = res.locals.user._id;
       const user =res.locals.user;
-      const folders = await FolderModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
-      const notes = await NoteModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({createdAt : -1});
-      const recentNotes = await NoteModel.find({user_id : userId , folder_id : '000000000000000000000000' }).sort({updatedAt : -1});
-      
+      let result = await getDrive(userId)
+      return res.render('pages/index' , {...result,user})
 
-      return res.render('pages/index' , {folders , notes ,recentNotes, user})
     }catch(error){
-      req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again!`}}
-      res.redirect('/auth/logout')
-      return next(error);
+      managmentError(error, req, res)
     }
   } 
 }

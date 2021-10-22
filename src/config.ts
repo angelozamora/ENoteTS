@@ -37,7 +37,6 @@ export async function startServer(){
 
     res.locals.form = req.session['form']
     delete req.session['form']
-
     next()
   })
 
@@ -45,13 +44,14 @@ export async function startServer(){
   app.use('/' , router())
 
 
-  app.use( (err:any , req:any ,res:any , next:any)=>{
+  app.use( (error:any , req:any ,res:any , next:any)=>{
     
+    // Se encuentra un error cuando se ha estado enviado la respuesta
     if (res.headersSent) {
       console.log('ERROR AFTER SENT HEADERS TO THE CLIENTE')
-      return next(err);
+      return next(error);
     }
-    console.log(err)
+    console.log(error)
     console.log('ERROR BEFORE SENT HEADERS TO THE CLIENTE')
     res.status(500).send('SORRY, AN ERROR HAPPENED')
 
