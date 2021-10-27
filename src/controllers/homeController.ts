@@ -1,6 +1,6 @@
 import { NextFunction, Request , Response} from 'express';
 import { managmentError } from '../loaders/error';
-import { getDrive } from '../services/Folder/UseCase/getDrive';
+import { getMyUnit } from '../services/Folder/UseCase/getMyUnit';
 
 class HomeController{
   
@@ -11,7 +11,7 @@ class HomeController{
     try{
       const userId = res.locals.user._id;
       const user =res.locals.user;
-      let result = await getDrive(userId)
+      let result = await getMyUnit(userId)
       return res.render('pages/index' , {...result,user})
 
     }catch(error){

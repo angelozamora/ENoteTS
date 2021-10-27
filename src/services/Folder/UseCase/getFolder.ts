@@ -7,13 +7,14 @@ export async function getFolder(
     let filter={
       _id : id
     }
-      const folder = await repository.getFolder(filter)
-      if(!folder){
-        return null
-      }
-      const folders = await repository.getFolders(filter)
-      const notes = await repository.getNotes(filter)
-      return {folders , notes , folder}
+
+    const folder = await repository.getFolder(filter)
+    if(!folder){
+      return null
+    }
+    const folders = await repository.getFolders({folder_id : id})
+    const notes = await repository.getNotes({folder_id : id})
+    return {folders , notes , folder}
 
   }catch(error){
     throw JSON.stringify({

@@ -1,7 +1,6 @@
 import { repository } from "../Domain/repository";
-import mongoose from 'mongoose';
 
-export async function getDrive(
+export async function getMyUnit(
   userId:string
 ):Promise<any>{
   try{

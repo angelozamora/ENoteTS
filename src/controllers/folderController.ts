@@ -4,68 +4,48 @@ import { NextFunction, Request , Response} from 'express';
 import mongoose from 'mongoose';
 import { getFolder } from '../services/Folder/UseCase/getFolder';
 import { managmentError } from '../loaders/error';
+import { postFolder } from '../services/Folder/UseCase/postFolder';
+import { updateFolder } from '../services/Folder/UseCase/updateFolder';
+import { deleteFolder } from '../services/Folder/UseCase/deleteFolder';
+
+
 
 class NoteController{
   
   public postFolder = async function(req : any, res:Response , next:NextFunction){
   
     try{
-      var ObjectId = mongoose.Types.ObjectId; 
+      let {name} = req.body 
       let folderId = req.params.folderId;
-      let folderIdAux = folderId
-      if(folderId == '0'){
-        folderIdAux = new ObjectId('000000000000000000000000')
-      }
-      const folder = {
-        name : req.body.name,
-        user_id : res.locals.user._id,
-        folder_id : folderIdAux
-      }
-      
-      const newFolder = new FolderModel(folder);
-      await newFolder.save();
-
+      await postFolder(name ,res.locals.user._id , folderId)
       req.session['message'] = {res : { type : 'success' , msg:`Folder created successfully`}}
+      
       if(folderId == '0'){
         return res.redirect('/mydrive')
-      }else{
-        return res.redirect(`/folder/${folderId}`)
       }
-      
-
+      return res.redirect(`/folder/${folderId}`)
     }catch(error:any){ 
-      if(error.name === "ValidationError"){
-        req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
-      }else{
-        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      }
-      res.redirect('back')
-      return next(error)
+      managmentError(error, req, res)
     }
     
   }
   public postUpdateFolderName = async function(req : any, res:Response , next:NextFunction){
 
     try{
+      let {newName} = req.body
       let folderId = req.params.folderId;
-      await FolderModel.findByIdAndUpdate(folderId , { name : req.body.newName})
+      await updateFolder(newName, folderId)
       req.session['message'] = {res : { type : 'success' , msg:`Folder update successfully`}}
       return res.redirect('back')
       
     }catch(error:any){
-      if(error.name === "ValidationError"){
-        req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
-      }else{
-        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      }
-      res.redirect('back')
-      return next(error)
+      managmentError(error, req, res)
     }
   }
   public getFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
-      const folderId = req.params.folderId;
+      const folderId:string = req.params.folderId;
       if(folderId == '0'){
         return res.redirect('/mydrive')
       }
@@ -85,26 +65,25 @@ class NoteController{
   public deleteFolder = async function(req : any, res:Response , next:NextFunction){
     try{
 
-      const folderId = req.params.folderId;
+      const folderId:string = req.params.folderId;
       if(folderId == '0'){
         return res.redirect('/mydrive')
       }
-
-      const folder = await FolderModel.findOne({_id : folderId});
-      if(!folder){
-        return res.json({flag : false, msg : 'Folder not found'});
-      }
       
-      await folder.delete()
-      return res.json({flag : true, msg : 'Folder deleted successfully'});
-            
+      let result = await deleteFolder(folderId)
+      if(!result){
+        return res.json({flag : false, msg : 'Folder not found'});
+      } 
+      
+      return res.json({flag : true, msg : 'Folder deleted successfully'});    
     }catch(error){
       res.status(500).send({flag : false, msg : 'An error occurred, please try again'})
       return next(error)
     }
 
   }
-
+  
+  /***************************** FALTA CAMBIAR ***********************/
 
   public getCreateNote = async function(req : any, res:Response , next:NextFunction){
     try{

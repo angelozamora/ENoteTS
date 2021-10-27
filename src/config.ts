@@ -45,7 +45,7 @@ export async function startServer(){
 
 
   app.use( (error:any , req:any ,res:any , next:any)=>{
-    
+    console.log('******************************************************')
     // Se encuentra un error cuando se ha estado enviado la respuesta
     if (res.headersSent) {
       console.log('ERROR AFTER SENT HEADERS TO THE CLIENTE')
@@ -54,8 +54,7 @@ export async function startServer(){
     console.log(error)
     console.log('ERROR BEFORE SENT HEADERS TO THE CLIENTE')
     res.status(500).send('SORRY, AN ERROR HAPPENED')
-
-
+    console.log('******************************************************')
   })
 
 
