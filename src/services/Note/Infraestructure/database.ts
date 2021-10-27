@@ -1,7 +1,6 @@
 import FolderModel from '../../../models/Folder';
 import  NoteModel  from '../../../models/Note';
 
-import mongoose from 'mongoose';
 
 export class DataBase{
 
@@ -14,18 +13,29 @@ export class DataBase{
     }
   }
 
-  public async postFolder(folder:any):Promise<any>{
+  public async getNote(filter:any):Promise<any>{
     try{
-      const newFolder = new FolderModel(folder);
-      await newFolder.save();
+      return await NoteModel.findOne(filter)
+    }catch(error){
+      throw "Error interno al intentar obtener una Nota"
+    }
+  }
+
+
+
+  public async postNote(note:any):Promise<any>{
+    try{
+      await NoteModel.create(note);
     }catch(error : any){
       if(error.name === "ValidationError"){
         throw `You must enter all the data`
       }else{
-        throw "Error interno al intentar guardar un Folder"
+        throw "Error interno al intentar guardar una Nota"
       }
     }
   }
+
+  /****************************** */
   public async getFolders(filter:any):Promise<any>{
     try{
       let folders= await FolderModel.find(filter).sort({createdAt : -1})

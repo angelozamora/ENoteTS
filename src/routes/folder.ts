@@ -1,16 +1,16 @@
 import {Router} from 'express'
-import NoteController from '../controllers/folderController';
+import FolderController from '../controllers/folderController';
+import NoteController from '../controllers/noteController';
 import { getUser } from '../midleware/getUser';
 import { isLogged } from '../midleware/isLogged';
 
 
 
 export default (router : Router)=>{
-  router.post('/folder/create/:folderId',[getUser , isLogged], NoteController.postFolder)
-  router.post('/folder/change-name/:folderId',[getUser , isLogged], NoteController.postUpdateFolderName)
-  router.get('/folder/:folderId',[getUser , isLogged], NoteController.getFolder)
-  router.delete('/folder/delete/:folderId',[getUser , isLogged], NoteController.deleteFolder)
-
+  router.post('/folder/create/:folderId',[getUser , isLogged], FolderController.postFolder)
+  router.post('/folder/change-name/:folderId',[getUser , isLogged], FolderController.postUpdateFolderName)
+  router.get('/folder/:folderId',[getUser , isLogged], FolderController.getFolder)
+  router.delete('/folder/delete/:folderId',[getUser , isLogged], FolderController.deleteFolder)
 
   router.get('/note/create/:folderId',[getUser , isLogged],NoteController.getCreateNote )
   router.post('/note/create/:folderId',[getUser , isLogged],NoteController.postCreateNote )
