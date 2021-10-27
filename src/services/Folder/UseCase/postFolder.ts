@@ -2,15 +2,17 @@
 import { repository } from "../Domain/repository";
 import mongoose from 'mongoose';
 
+type mongoId = string | mongoose.Types.ObjectId
+
 interface Folder {
   name : string,
-  user_id : string,
-  folder_id : string
+  user_id : mongoId,
+  folder_id : mongoId
 }
 export async function postFolder(
   name : string,
-  userId : any,
-  folderId : any
+  userId : mongoId,
+  folderId : mongoId
 ):Promise<any>{
   try{
     let ObjectId = mongoose.Types.ObjectId;

@@ -6,6 +6,9 @@ import { getCreateNote } from '../services/Note/UseCase/getCreateNote';
 import { postCreateNote } from '../services/Note/UseCase/postCreateNote';
 import { getNoteDetail } from '../services/Note/UseCase/getNoteDetail';
 import { getUpdateNote } from '../services/Note/UseCase/getUpdateNote';
+import { updateNote } from '../services/Note/UseCase/updateNote';
+import { updateNoteName } from '../services/Note/UseCase/updateNoteName';
+import { deleteNote } from '../services/Note/UseCase/deleteNote';
 
 class NoteController{
   public getCreateNote = async function(req : any, res:Response , next:NextFunction){
@@ -70,25 +73,12 @@ class NoteController{
     try{
       const {title , body}  =req.body;
       const noteId = req.params.id;
-      const note = await NoteModel.findOne({ _id : noteId})
-
-
-      if(!note){
-        req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
-        return res.redirect('/mydrive')
-      }
-      
-      note.title = title;
-      note.body = body;
-      note.save();
-
+      await updateNote(title , body, noteId)
       req.session['message'] = {res : { type : 'success' , msg:`Note updated successfully`}}
-      return res.redirect(`/note/detail/${note._id}`)
+      return res.redirect(`/note/detail/${noteId}`)
       
     }catch(error){
-      req.session['message'] = {res : { type : 'error' , msg:`Note not found , please try again`}}
-      res.redirect('/mydrive')
-      return next(error)
+      managmentError(error, req, res)
     }
 
   }
@@ -97,29 +87,22 @@ class NoteController{
 
     try{
       let noteId = req.params.id;
-      await NoteModel.findByIdAndUpdate(noteId , { title : req.body.newName})
+      let {newName}= req.body
+      await updateNoteName(newName , noteId)
       req.session['message'] = {res : { type : 'success' , msg:`Note updated successfully`}}
       return res.redirect('back')
-      
     }catch(error:any){
-      if(error.name === "ValidationError"){
-        req.session['message'] = {res : { type : 'error' , msg:`You must enter all the data`}}
-      }else{
-        req.session['message'] = {res : { type : 'error' , msg:`An error occurred, please try again`}}
-      }
-      res.redirect('back')
-      return next(error)
+      managmentError(error, req, res)
     }
   }
 
-  public getDeleteNote = async function(req:any , res:Response , next : NextFunction){
+  public deleteNote = async function(req:any , res:Response , next : NextFunction){
     try{
-      const note = await NoteModel.findOne({_id : req.params.id});
-      if(!note){
+      const nodeId:string = req.params.id;
+      let result = await deleteNote(nodeId)
+      if(!result){
         return res.json({flag : false, msg : 'Note not found'});
-      }
-
-      await note.delete();
+      } 
       return res.json({flag : true, msg : 'Note deleted successfully'});
       
     }catch(error){

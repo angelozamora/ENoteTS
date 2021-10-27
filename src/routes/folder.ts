@@ -18,7 +18,7 @@ export default (router : Router)=>{
   router.get('/note/detail/:id', [getUser , isLogged],NoteController.getNoteDetail)
   router.get('/note/update/:id', [getUser , isLogged],NoteController.getUpdateNote)
   router.post('/note/update/:id', [getUser , isLogged],NoteController.postUpdateNote)
-  router.delete('/note/delete/:id', [getUser , isLogged],NoteController.getDeleteNote)
+  router.delete('/note/delete/:id', [getUser , isLogged],NoteController.deleteNote)
   
   
 }

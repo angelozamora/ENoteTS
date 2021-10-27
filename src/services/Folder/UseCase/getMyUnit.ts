@@ -1,7 +1,9 @@
 import { repository } from "../Domain/repository";
+import mongoose from 'mongoose';
 
+type mongoId = string | mongoose.Types.ObjectId
 export async function getMyUnit(
-  userId:string
+  userId:mongoId
 ):Promise<any>{
   try{
       const filter = {

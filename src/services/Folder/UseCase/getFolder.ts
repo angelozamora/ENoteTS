@@ -1,19 +1,21 @@
 import { repository } from "../Domain/repository";
+import mongoose from 'mongoose';
 
+type mongoId = string | mongoose.Types.ObjectId
 export async function getFolder(
-  id:string
+  folderId:mongoId
 ):Promise<any>{
   try{
     let filter={
-      _id : id
+      _id : folderId
     }
 
     const folder = await repository.getFolder(filter)
     if(!folder){
       return null
     }
-    const folders = await repository.getFolders({folder_id : id})
-    const notes = await repository.getNotes({folder_id : id})
+    const folders = await repository.getFolders({folder_id : folderId})
+    const notes = await repository.getNotes({folder_id : folderId})
     return {folders , notes , folder}
 
   }catch(error){

@@ -3,6 +3,8 @@ import  NoteModel  from '../../../models/Note';
 
 import mongoose from 'mongoose';
 
+type mongoId = string | mongoose.Types.ObjectId
+
 export class DataBase{
 
 
@@ -37,7 +39,7 @@ export class DataBase{
   
   public async updateFolder(
     name : string,
-    folderId:string  
+    folderId:mongoId  
   ):Promise<any>{
     try{
       await FolderModel.findByIdAndUpdate(folderId , { name : name})
